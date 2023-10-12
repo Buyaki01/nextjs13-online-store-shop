@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJs 13 Ecommerce Retail Store
 
-## Getting Started
+## Overview
+This is an ecommerce app for clients.
 
-First, run the development server:
+## Technologies Used
+- **NextJs 13**
+- **next-auth**
+- **React**
+- **MongoDB**
+- **Styled Components**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Getting Started
+To get started with this app, follow these steps:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone this repository: 
+    ```bash 
+    git clone git@github.com:Buyaki01/nextjs13-ecommerce-retail-store.git
+    ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+2. Open the repository: 
+    ```bash 
+    cd nextjs13-ecommerce-retail-store
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Install dependencies: 
+    ```bash 
+    npm i
+    npm i next
+    ```
 
-## Learn More
+4. Configure environment variables:
+    Set up your `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` and include them in your `.env` file. 
+    You can obtain these from [Google Cloud Console](https://console.cloud.google.com).
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Set up MongoDB:
+    Configure your MongoDB connection by adding your `MONGODB_URI` to your `.env` file.
+     
+6. Start the app: 
+    ```bash 
+    npm run dev
+    ``` 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Configuration
 
-## Deploy on Vercel
+Here are the environment variables you need to configure in your `.env` file:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `GOOGLE_CLIENT_ID`: Your Google Client ID.
+- `GOOGLE_CLIENT_SECRET`: Your Google Client Secret.
+- `MONGODB_URI`: Your MongoDB connection URI.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Author
+👤 **Ritta Sweta**
+
+- Linkedin: [@ritta-sweta](https://www.linkedin.com/in/ritta-sweta/)
+- Github: [@Buyaki01](https://github.com/Buyaki01)
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/Buyaki01/nextjs13-ecommerce-retail-store/issues)
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+I would like to acknowledge the following sources and individuals for their contributions, inspiration, and resources that helped in the development of this project:
+
+- Inspiration: [Dave Gray](https://www.youtube.com/@DaveGrayTeachesCode)
+- Inspiration: [Coding with Dawid](https://www.youtube.com/@CodingWithDawid)
+
+These sources have been instrumental in shaping and enhancing the features of this project.
