@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import PrimaryBtn from "./PrimaryBtn";
 
 const StyledDiv = styled.div`
   background-color: rgb(146, 212, 59);
@@ -22,11 +23,15 @@ const StyledDescription = styled.h4`
   color: #eee;
 `;
 
-const StyledButton = styled.button`
-  background-color: #d40d9a;
-  padding: 10px 15px;
+const StyledDivButtons = styled.div`
+  display: flex;
+  gap: 5px; 
+`;
+
+const ViewMoreButton = styled.button`
   border: none;
   box-shadow: none;
+  border-radius: 5px;
 `;
 
 const StyledTitleDescriptionGrid = styled.div`
@@ -56,7 +61,10 @@ const Featured = () => {
       <StyledTitleDescriptionGrid>
         <StyledTitle>Leather Travelling Bag</StyledTitle>
         <StyledDescription>Quality handbag just for you</StyledDescription>
-        <StyledButton>View More</StyledButton>
+          <StyledDivButtons>
+            <ViewMoreButton>View More</ViewMoreButton>
+            <PrimaryBtn>Add to Cart</PrimaryBtn>
+          </StyledDivButtons>
       </StyledTitleDescriptionGrid>
       <StyledImageGrid>
         <StyledImage src="http://localhost:3000/images/featuredProductHandbag.png" />
