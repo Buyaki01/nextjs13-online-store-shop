@@ -15,6 +15,8 @@
     "styled-components": "^6.0.9"
   },
   "devDependencies": {
+    "@swc/plugin-styled-components": "^1.5.87",
+    "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8",
     "eslint-config-next": "13.5.4"
   }

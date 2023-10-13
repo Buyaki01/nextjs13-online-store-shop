@@ -1,8 +1,13 @@
+import styled from "styled-components"
 import Link from "next/link"
+
+const StyledHeader = styled.header`
+  background-color: rgb(146, 212, 59);
+`;
 
 const Header = () => {
   return (
-    <div>
+    <StyledHeader>
       <Link href={'/'}>Pearls Collections</Link>
       <nav>
         <Link href={'/'}>Home</Link>
@@ -15,7 +20,7 @@ const Header = () => {
           </svg>
         </Link>
       </nav>
-    </div>
+    </StyledHeader>
   )
 }
 
