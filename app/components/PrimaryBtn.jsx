@@ -6,6 +6,11 @@ const StyledButton = styled.button`
   border: none;
   box-shadow: none;
   border-radius: 5px;
+  font-size: 1.0rem;
+
+  &:hover {
+    background-color: white;
+  }
 `;
 
 const PrimaryBtn = ({children}) => {

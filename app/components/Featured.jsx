@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import PrimaryBtn from "./PrimaryBtn";
+import PrimaryBtn from "./PrimaryBtn"
 
 const StyledDiv = styled.div`
   background-color: rgb(146, 212, 59);
@@ -12,7 +12,7 @@ const StyledDiv = styled.div`
 
 const StyledTitle = styled.h2`
   white-space: nowrap;
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 10px;
   font-weight: normal;
 `;
@@ -32,6 +32,11 @@ const ViewMoreButton = styled.button`
   border: none;
   box-shadow: none;
   border-radius: 5px;
+  font-size: 1.0rem;
+
+  &:hover {
+    background-color: rgb(146, 212, 59);
+  }
 `;
 
 const StyledTitleDescriptionGrid = styled.div`
@@ -63,7 +68,9 @@ const Featured = () => {
         <StyledDescription>Quality handbag just for you</StyledDescription>
           <StyledDivButtons>
             <ViewMoreButton>View More</ViewMoreButton>
-            <PrimaryBtn>Add to Cart</PrimaryBtn>
+            <PrimaryBtn>
+              Add to Cart
+            </PrimaryBtn>
           </StyledDivButtons>
       </StyledTitleDescriptionGrid>
       <StyledImageGrid>
