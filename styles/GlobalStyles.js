@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
 
   body{
     padding: 0;
-    margin: 0;
+    margin: 0 15px;
     font-family: 'Poppins', sans-serif;
   }
 `;

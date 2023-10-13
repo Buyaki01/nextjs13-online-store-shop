@@ -7,7 +7,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 20px;
 `;
 
 const Logo = styled(Link)`
