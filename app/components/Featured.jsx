@@ -1,5 +1,10 @@
+'use client'
+
 import styled from "styled-components"
 import PrimaryBtn from "./PrimaryBtn"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import Link from "next/link"
 
 const StyledDiv = styled.div`
   background-color: rgb(146, 212, 59);
@@ -28,11 +33,15 @@ const StyledDivButtons = styled.div`
   gap: 5px; 
 `;
 
-const ViewMoreButton = styled.button`
+const ViewMoreButton = styled(Link)`
+  text-decoration: none;
+  display: inline-block; // Make it a block element
+  padding: 10px 20px; // Adjust padding as needed
+  background-color: white;
   border: none;
-  box-shadow: none;
   border-radius: 5px;
   font-size: 1.0rem;
+  color: black;
 
   &:hover {
     background-color: rgb(146, 212, 59);
@@ -61,13 +70,27 @@ const StyledImage = styled.img`
 `;
 
 const Featured = () => {
+
+  const [featuredProduct, setFeaturedProduct] = useState(null)
+  //const [loading, setLoading] = useState(true)
+
+
+  useEffect(() => {
+    const fetchFeaturedProduct = async () => {
+      const response = await axios.get('/api/featuredProduct')
+      setFeaturedProduct(response.data.featuredProduct)
+      //setLoading(false)
+    }
+    fetchFeaturedProduct()
+  }, [])
+
   return (
     <StyledDiv>
       <StyledTitleDescriptionGrid>
         <StyledTitle>Leather Travelling Bag</StyledTitle>
         <StyledDescription>Quality handbag just for you</StyledDescription>
           <StyledDivButtons>
-            <ViewMoreButton>View More</ViewMoreButton>
+            <ViewMoreButton href={"/product/id"}>View More</ViewMoreButton>
             <PrimaryBtn>
               Add to Cart
             </PrimaryBtn>
