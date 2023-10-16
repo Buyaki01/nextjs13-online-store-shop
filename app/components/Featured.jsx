@@ -19,13 +19,15 @@ const StyledTitle = styled.h2`
   white-space: nowrap;
   font-size: 2rem;
   margin-bottom: 10px;
-  font-weight: normal;
+  font-weight: bold;
+  color: #333;
 `;
 
-const StyledDescription = styled.h4`
-  font-size: 1rem;
-  margin-top: 5px;
-  color: #eee;
+const StyledDescription = styled.p`
+  font-weight: normal;
+  margin-top: 10px; 
+  color: #504e4e;
+  font-size: 1.2rem;
 `;
 
 const StyledDivButtons = styled.div`
@@ -35,8 +37,8 @@ const StyledDivButtons = styled.div`
 
 const ViewMoreButton = styled(Link)`
   text-decoration: none;
-  display: inline-block; // Make it a block element
-  padding: 10px 20px; // Adjust padding as needed
+  display: inline-block;
+  padding: 10px 20px;
   background-color: white;
   border: none;
   border-radius: 5px;
@@ -44,7 +46,7 @@ const ViewMoreButton = styled(Link)`
   color: black;
 
   &:hover {
-    background-color: rgb(146, 212, 59);
+    background-color: white;
   }
 `;
 
@@ -72,33 +74,46 @@ const StyledImage = styled.img`
 const Featured = () => {
 
   const [featuredProduct, setFeaturedProduct] = useState(null)
-  //const [loading, setLoading] = useState(true)
-
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchFeaturedProduct = async () => {
-      const response = await axios.get('/api/featuredProduct')
+      const featuredProductId = '651e93a9bbd864c78bbac92d'
+      const response = await axios.get(`/api/featuredProduct/${featuredProductId}`)
       setFeaturedProduct(response.data.featuredProduct)
-      //setLoading(false)
+      setLoading(false)
     }
+
     fetchFeaturedProduct()
   }, [])
 
   return (
     <StyledDiv>
-      <StyledTitleDescriptionGrid>
-        <StyledTitle>Leather Travelling Bag</StyledTitle>
-        <StyledDescription>Quality handbag just for you</StyledDescription>
-          <StyledDivButtons>
-            <ViewMoreButton href={"/product/id"}>View More</ViewMoreButton>
-            <PrimaryBtn>
-              Add to Cart
-            </PrimaryBtn>
-          </StyledDivButtons>
-      </StyledTitleDescriptionGrid>
-      <StyledImageGrid>
-        <StyledImage src="http://localhost:3000/images/featuredProductHandbag.png" />
-      </StyledImageGrid>
+      {loading 
+        ? ( <p>Loading...</p> ) 
+        : featuredProduct 
+          ? (
+              <>
+                <StyledTitleDescriptionGrid>
+                  <StyledTitle>{featuredProduct.productName}</StyledTitle>
+                  <StyledDescription>{featuredProduct.description}</StyledDescription>
+                  <StyledDivButtons>
+                    <ViewMoreButton href={`/featuredProduct/${featuredProduct.id}`}>View More</ViewMoreButton>
+                    <PrimaryBtn>Add to Cart</PrimaryBtn>
+                  </StyledDivButtons>
+                </StyledTitleDescriptionGrid>
+                <StyledImageGrid>
+                  {featuredProduct.uploadedImagePaths.length > 0 && (
+                    <StyledImage
+                      src={`${featuredProduct.uploadedImagePaths[0]}`}
+                      alt={featuredProduct.productName}
+                    />
+                  )}
+                </StyledImageGrid>
+              </>
+            ) 
+          : ( <p>No featured product available.</p> )
+      }
     </StyledDiv>
   )
 }
