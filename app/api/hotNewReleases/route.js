@@ -8,7 +8,7 @@ export async function GET() {
 
     const hotNewReleaseProducts = await Product.find({}, null, {sort: {'_id': -1}, limit: 3})
 
-    return NextResponse.json(hotNewReleaseProducts)
+    return NextResponse.json({ hotNewReleaseProducts })
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch hot new releases" }, 500)
   }
