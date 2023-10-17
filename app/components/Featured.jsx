@@ -12,6 +12,7 @@ const StyledDiv = styled.div`
   color: white;
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-rows: 500px;
   gap: 20px;
 `;
 
@@ -20,13 +21,13 @@ const StyledTitle = styled.h2`
   font-size: 2rem;
   margin-bottom: 10px;
   font-weight: bold;
-  color: #333;
+  color: #FAFAFA;
 `;
 
 const StyledDescription = styled.p`
   font-weight: normal;
   margin-top: 10px; 
-  color: #504e4e;
+  color: #F8F8FF;
   font-size: 1.2rem;
 `;
 
@@ -78,9 +79,8 @@ const Featured = () => {
 
   useEffect(() => {
     const fetchFeaturedProduct = async () => {
-      const featuredProductId = '651e93a9bbd864c78bbac92d'
-      const response = await axios.get(`/api/featuredProduct/${featuredProductId}`)
-      setFeaturedProduct(response.data.featuredProduct)
+      const response = await axios.get('/api/featuredProduct')
+      setFeaturedProduct(response.data)
       setLoading(false)
     }
 
@@ -95,18 +95,18 @@ const Featured = () => {
           ? (
               <>
                 <StyledTitleDescriptionGrid>
-                  <StyledTitle>{featuredProduct.productName}</StyledTitle>
-                  <StyledDescription>{featuredProduct.description}</StyledDescription>
+                  <StyledTitle>{featuredProduct[0].productName}</StyledTitle>
+                  <StyledDescription>{featuredProduct[0].description}</StyledDescription>
                   <StyledDivButtons>
-                    <ViewMoreButton href={`/featuredProduct/${featuredProduct.id}`}>View More</ViewMoreButton>
+                    <ViewMoreButton href={`/featuredProduct/${featuredProduct[0]._id}`}>View More</ViewMoreButton>
                     <PrimaryBtn>Add to Cart</PrimaryBtn>
                   </StyledDivButtons>
                 </StyledTitleDescriptionGrid>
                 <StyledImageGrid>
-                  {featuredProduct.uploadedImagePaths.length > 0 && (
+                  {featuredProduct[0].uploadedImagePaths.length > 0 && (
                     <StyledImage
-                      src={`${featuredProduct.uploadedImagePaths[0]}`}
-                      alt={featuredProduct.productName}
+                      src={`${featuredProduct[0].uploadedImagePaths[0]}`}
+                      alt={featuredProduct[0].productName}
                     />
                   )}
                 </StyledImageGrid>
