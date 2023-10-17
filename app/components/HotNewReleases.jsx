@@ -90,13 +90,25 @@ const NewReleasesLinks = styled(Link)`
   color: #212529;
 `
 
+const LoadingMessage = styled.p`
+  display: flex;
+  justify-content: center;
+`;
+
+const NoItemFoundMessage = styled.p`
+  display: flex;
+  justify-content: center;
+`;
+
 const HotNewReleases = () => {
   const [newReleases, setNewReleases] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchNewReleases = async () => {
       const response = await axios.get('/api/hotNewReleases')
       setNewReleases(response.data)
+      setLoading(false)
     }
 
     fetchNewReleases()
@@ -108,54 +120,56 @@ const HotNewReleases = () => {
         <h3>Hot new releases</h3>
       </HotNewReleasesHeading>
 
-      <HotNewReleaseOne>
-        <>
-          <div>
-            <NewReleasesLinks href={`/hotNewReleases/id`}>
-              <img src='http://localhost:3000/images/DesignerBag.png' alt='productName' />
-            </NewReleasesLinks>
-          </div>
-          <div>
-            <h4>price</h4>
-            <NewReleasesLinks href={`/hotNewReleases/id`}>
-              <p>productName</p>
-            </NewReleasesLinks>
-          </div>
-        </>
-      </HotNewReleaseOne>
+      {loading 
+        ? ( <LoadingMessage>Loading...</LoadingMessage> ) 
+        : newReleases 
+          ? (
+              <>
+                <HotNewReleaseOne>
+                  <div>
+                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[0]._id}`}>
+                      <img src={newReleases[0].uploadedImagePaths} alt={newReleases[0].productName} />
+                    </NewReleasesLinks>
+                  </div>
+                  <div>
+                    <h4>${newReleases[0].price}</h4>
+                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[0]._id}`}>
+                      <p>{newReleases[0].productName}</p>
+                    </NewReleasesLinks>
+                  </div>
+                </HotNewReleaseOne>
   
-      <HotNewReleaseTwo>
-        <>
-          <div>
-            <NewReleasesLinks href={`/hotNewReleases/id`}>
-              <img src='http://localhost:3000/images/ElegantLeatherHandbag.png' alt='productName' />
-            </NewReleasesLinks>
-          </div>
-          <div>
-            <h4>price</h4>
-            <NewReleasesLinks href={`/hotNewReleases/id`}>
-              <p>productName</p>
-            </NewReleasesLinks>
-          </div>
-        </>
-      </HotNewReleaseTwo>
+                <HotNewReleaseTwo>
+                    <div>
+                      <NewReleasesLinks href={`/hotNewReleases/${newReleases[1]._id}`}>
+                        <img src={newReleases[1].uploadedImagePaths} alt={newReleases[1].productName} />
+                      </NewReleasesLinks>
+                    </div>
+                    <div>
+                      <h4>${newReleases[1].price}</h4>
+                      <NewReleasesLinks href={`/hotNewReleases/${newReleases[1]._id}`}>
+                        <p>{newReleases[1].productName}</p>
+                      </NewReleasesLinks>
+                    </div>
+                </HotNewReleaseTwo>
 
-      <HotNewReleaseThree>
-        <>
-          <div>
-            <NewReleasesLinks href={`/hotNewReleases/id`}>
-              <img src='http://localhost:3000/images/LeatherDesignerBag.png' alt='productName' />
-            </NewReleasesLinks>
-          </div>
-          <div>
-            <h4>price</h4>
-            <NewReleasesLinks href={`/hotNewReleases/id`}>
-              <p>productName</p>
-            </NewReleasesLinks>
-          </div>
-        </>
-      </HotNewReleaseThree>
-      
+                <HotNewReleaseThree>
+                  <div>
+                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[2]._id}`}>
+                      <img src={newReleases[2].uploadedImagePaths} alt={newReleases[2].productName} />
+                    </NewReleasesLinks>
+                  </div>
+                  <div>
+                    <h4>${newReleases[2].price}</h4>
+                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[2]._id}`}>
+                      <p>{newReleases[2].productName}</p>
+                    </NewReleasesLinks>
+                  </div>
+                </HotNewReleaseThree>
+              </>
+            )
+          : ( <NoItemFoundMessage>No hot new releases.</NoItemFoundMessage> )
+      }  
     </HotNewReleasesGrid>
   )
 }
