@@ -9,7 +9,7 @@ const HotNewReleasesGrid = styled.article`
   grid-template-rows: 50px 300px 300px;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
-  margin: 10px;
+  margin: 10px 10px 50px;
 
   h4{
     color: #d40d9a;
