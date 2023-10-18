@@ -6,7 +6,7 @@ import styled from "styled-components"
 const HotNewReleasesGrid = styled.article`
   display: grid;
   grid-template-columns: 1fr 3fr 2fr 1fr;
-  grid-template-rows: 50px 400px 400px;
+  grid-template-rows: 50px 300px 300px;
   grid-column-gap: 20px;
   grid-row-gap: 20px;
   margin: 10px;
@@ -42,7 +42,7 @@ const HotNewReleaseOne = styled.div`
 
   img{
     max-width: 100%;
-    max-height: 400px;
+    max-height: 300px;
   }
 `
 
@@ -61,7 +61,7 @@ const HotNewReleaseTwo = styled.div`
 
   img{
     max-width: 100%;
-    max-height: 250px;
+    max-height: 150px;
   }
 `;
 
@@ -80,7 +80,7 @@ const HotNewReleaseThree = styled.div`
 
   img{
     max-width: 100%;
-    max-height: 250px;
+    max-height: 150px;
   }
 `;
 
