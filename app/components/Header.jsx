@@ -26,8 +26,8 @@ const NavLinks = styled(Link)`
 `;
 
 const SearchInput = styled.input`
-  padding: 10px 25px;
-  border: none;
+  padding: 10px 15px;
+  border: 2px solid #ccc;
   border-radius: 4px;
   margin-right: 10px;
   width: 200px;
@@ -36,9 +36,26 @@ const SearchInput = styled.input`
   background-position: 10px center;
   background-size: 20px 20px;
   padding-left: 35px;
+  font-size: 1.2rem;
+  color: #333;
+  width: 300px;
 
   ::placeholder {
     font-size: 1.2rem;
+  }
+`;
+
+const SearchButton = styled.button`
+  padding: 10px 15px;
+  background-color: #d40d9a;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.0rem;
+  color: black;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: #a00a7c;
   }
 `;
 
@@ -60,7 +77,7 @@ const Header = () => {
 
       <SearchInputContainer>
         <SearchInput type="text" placeholder="Search products and categories" />
-        <button>Search</button>
+        <SearchButton>Search</SearchButton>
       </SearchInputContainer>
 
       <nav>
