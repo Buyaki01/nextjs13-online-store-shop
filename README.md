@@ -9,6 +9,8 @@ This is an ecommerce app for clients.
 - **React**
 - **MongoDB**
 - **Styled Components**
+- **Stripe**
+- **Stripe Webhooks**
 
 ### Getting Started
 To get started with this app, follow these steps:

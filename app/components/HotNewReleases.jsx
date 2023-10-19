@@ -91,13 +91,15 @@ const NewReleasesLinks = styled(Link)`
 `
 
 const LoadingMessage = styled.p`
+  grid-column: 1 / span 4;
   display: flex;
   justify-content: center;
-`;
-
-const NoItemFoundMessage = styled.p`
-  display: flex;
-  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #F8F8FF;
+  padding: 15px;
+  margin: 0;
+  min-height: 450px;
 `;
 
 const HotNewReleases = () => {
@@ -168,7 +170,7 @@ const HotNewReleases = () => {
                 </HotNewReleaseThree>
               </>
             )
-          : ( <NoItemFoundMessage>No hot new releases.</NoItemFoundMessage> )
+          : ( <LoadingMessage>No hot new releases.</LoadingMessage> )
       }  
     </HotNewReleasesGrid>
   )
