@@ -56,7 +56,7 @@ const ViewMoreButton = styled(Link)`
   color: black;
 
   &:hover {
-   background-color: #a00a7c;;
+   background-color: #a00a7c;
   }
 `;
 
