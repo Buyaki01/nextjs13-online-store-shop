@@ -9,7 +9,7 @@ const StyledButton = styled.button`
   font-size: 1.0rem;
 
   &:hover {
-    background-color: white;
+    background-color: #a00a7c;
   }
 `;
 
