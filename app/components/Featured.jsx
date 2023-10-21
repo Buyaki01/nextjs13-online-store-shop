@@ -88,7 +88,6 @@ const LoadingMessage = styled.p`
 `;
 
 const Featured = () => {
-
   const [featuredProduct, setFeaturedProduct] = useState(null)
   const [loading, setLoading] = useState(true)
 
