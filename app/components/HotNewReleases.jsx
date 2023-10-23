@@ -13,6 +13,11 @@ const HotNewReleasesGrid = styled.article`
 
   h4{
     color: #d40d9a;
+    text-align: center;
+  }
+
+  p{
+    margin: 5px 0px 10px;
   }
 `;
 
