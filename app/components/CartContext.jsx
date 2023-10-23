@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation"
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
 const CartContext = createContext()
 
@@ -8,8 +8,20 @@ export const CartContextProvider = ({ children }) => {
 
   const router = useRouter()
 
+  useEffect(() => {
+    setCartProductsToState()
+  }, [])
+
+  const setCartProductsToState = () => {
+    setCartProducts(
+      localStorage.getItem('cartProducts') 
+      ? JSON.parse(localStorage.getItem('cartProducts'))
+      : []
+    )
+  }
+
   const addItemToCart = async ({
-    _id,
+    id,
     productName,
     description,
     price,
@@ -19,7 +31,7 @@ export const CartContextProvider = ({ children }) => {
     isFeatured
   }) => {
     const item = {
-      _id,
+      id,
       productName,
       description,
       price,
@@ -40,11 +52,15 @@ export const CartContextProvider = ({ children }) => {
     }
 
     localStorage.setItem("cartProducts", JSON.stringify({ newCartItems }))
+
+    setCartProductsToState()
   }
 
   return <CartContext.Provider
-    value={{ cartProducts }}
+    value={{ cartProducts, addItemToCart }}
   >
     {children}
   </CartContext.Provider>
 }
+
+export default CartContext

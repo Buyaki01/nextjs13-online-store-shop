@@ -4,7 +4,7 @@ import CartIcon from "@/app/components/CartIcon"
 import axios from "axios"
 import { useParams } from "next/navigation"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import styled from "styled-components"
 import AddToCartBtn from "@/app/components/AddToCartBtn"
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -14,7 +14,7 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-import Image from "next/image"
+import CartContext from "@/app/components/CartContext"
 
 const Wrapper = styled.div`
   margin: 50px 0px;
@@ -42,6 +42,8 @@ const FeaturedProduct = () => {
   const [loading, setLoading] = useState(true)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
+  const { addItemToCart } = useContext(CartContext)
+
   const params = useParams()
   const { id } = params
 
@@ -58,6 +60,19 @@ const FeaturedProduct = () => {
 
     fetchFeaturedProduct()
   }, [id])
+
+  const addToCartHandler = () => {
+    addItemToCart({
+      id: featuredProductInfo._id,
+      productName: featuredProductInfo.productName,
+      description: featuredProductInfo.description,
+      price: featuredProductInfo.price,
+      uploadedImagePaths: featuredProductInfo.uploadedImagePaths,
+      selectedCategory: featuredProductInfo.selectedCategory,
+      properties: featuredProductInfo.properties,
+      isFeatured: featuredProductInfo.isFeatured
+    })
+  }
 
   return (
     <Wrapper>
@@ -123,7 +138,9 @@ const FeaturedProduct = () => {
               <p>{featuredProductInfo.description}</p>
               <PriceAddToCartButtonDiv>
                 <h4 className="font-bold p-3">shs. {featuredProductInfo.price}</h4>
-                <AddToCartBtn>
+                <AddToCartBtn
+                  onClick={addToCartHandler}
+                >
                   <NavLinks href={'/cart'}>
                     <div className="flex items-center whitespace-nowrap">
                       <CartIcon/>&nbsp;Add to cart
