@@ -84,35 +84,19 @@ const FeaturedProduct = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className='h-96 w-full rounded-lg'
               >
-                {/* {featuredProductInfo.uploadedImagePaths.length > 0 && featuredProductInfo.uploadedImagePaths.map((imagePath, index) => ( */}
-                  <SwiperSlide>
+                {featuredProductInfo.uploadedImagePaths.length > 0 && featuredProductInfo.uploadedImagePaths.map((imagePath, index) => (
+                  <SwiperSlide key={index}>
                     <div className='flex h-full w-full items-center justify-center'>
                       <img
-                        src="http://localhost:3000/images/featuredProductHandbag.png"
-                        alt="featured product"
+                        src={imagePath}
+                        alt={featuredProductInfo.productName}
                         width={300}
                         height={200}
                         className='flex justify-center'
                       />
                     </div>
                   </SwiperSlide>
-
-                  <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDuffleBag.png" width={300} height={200} className='flex justify-center'/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDuffleLeatherBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDuffleLuisBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredRedSupremeBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDruffleVuitonBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                {/* ))} */}
+                ))}
               </Swiper>
               
               {/* Thumbnail */}
@@ -125,32 +109,20 @@ const FeaturedProduct = () => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiper"
               >
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredProductHandbag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDuffleBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDuffleLeatherBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDuffleLuisBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredRedSupremeBag.png" width={300} height={200}/>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <img src="http://localhost:3000/images/featuredDruffleVuitonBag.png" width={300} height={200}/>
-                </SwiperSlide>
+                {featuredProductInfo.uploadedImagePaths.length > 0 && featuredProductInfo.uploadedImagePaths.map((imagePath, index) => (
+                  <SwiperSlide key={index}>
+                    <div className='flex h-full w-full items-center justify-center'>
+                      <img
+                        src={imagePath}
+                        alt={featuredProductInfo.productName}
+                        width={300}
+                        height={200}
+                        className='flex justify-center'
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
               </Swiper>
-
-              {/* {featuredProductInfo.uploadedImagePaths.length > 0 && (
-                <img
-                  src={`${featuredProductInfo.uploadedImagePaths[0]}`}
-                  alt={featuredProductInfo.productName}
-                />
-              )} */}
             </div>
 
             <div className="flex flex-col items-center justify-center h-full p-5">
