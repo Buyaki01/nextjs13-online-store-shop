@@ -14,12 +14,16 @@
     "next": "13.5.4",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.0.9"
+    "styled-components": "^6.0.9",
+    "swiper": "^10.3.1"
   },
   "devDependencies": {
     "@swc/plugin-styled-components": "^1.5.87",
+    "autoprefixer": "^10.4.16",
     "babel-plugin-styled-components": "^2.1.4",
     "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "eslint-config-next": "13.5.4",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.3"
   }
 }

@@ -7,6 +7,14 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import AddToCartBtn from "@/app/components/AddToCartBtn"
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
+
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
+import Image from "next/image"
 
 const Wrapper = styled.div`
   margin-bottom: 50px;
@@ -31,6 +39,7 @@ const NavLinks = styled(Link)`
 const FeaturedProduct = () => {
   const [featuredProductInfo, setFeaturedProductInfo] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   const params = useParams()
   const { id } = params
@@ -58,12 +67,84 @@ const FeaturedProduct = () => {
         : (
           <div>
             <div>
-              {featuredProductInfo.uploadedImagePaths.length > 0 && (
+              <Swiper
+                loop={true}
+                spaceBetween={10}
+                navigation={true}
+                thumbs={{
+                  swiper:
+                    thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null
+                }}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className='h-96 w-full rounded-lg'
+              >
+                {/* {featuredProductInfo.uploadedImagePaths.length > 0 && featuredProductInfo.uploadedImagePaths.map((imagePath, index) => ( */}
+                  <SwiperSlide>
+                    <div className='flex h-full w-full items-center justify-center'>
+                      <img
+                        src="http://localhost:3000/images/featuredProductHandbag.png"
+                        alt="featured product"
+                        width={300}
+                        height={200}
+                        className='flex justify-center'
+                      />
+                    </div>
+                  </SwiperSlide>
+
+                  <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDuffleBag.png" width={300} height={200} className='flex justify-center'/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDuffleLeatherBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDuffleLuisBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredRedSupremeBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDruffleVuitonBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                {/* ))} */}
+              </Swiper>
+              
+              {/* Thumbnail */}
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={10}
+                slidesPerView={4}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredProductHandbag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDuffleBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDuffleLeatherBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDuffleLuisBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredRedSupremeBag.png" width={300} height={200}/>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <img src="http://localhost:3000/images/featuredDruffleVuitonBag.png" width={300} height={200}/>
+                </SwiperSlide>
+              </Swiper>
+
+              {/* {featuredProductInfo.uploadedImagePaths.length > 0 && (
                 <img
                   src={`${featuredProductInfo.uploadedImagePaths[0]}`}
                   alt={featuredProductInfo.productName}
                 />
-              )}
+              )} */}
             </div>
 
             <div>
