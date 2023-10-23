@@ -7,30 +7,45 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 import AddToCartBtn from "@/app/components/AddToCartBtn"
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
+
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
+import Image from "next/image"
 
 const Wrapper = styled.div`
-  margin-bottom: 50px;
+  margin: 50px 0px;
 
   img{
     max-width: 100%;
     max-height: 350px;
+  }
+  
+  h4{
+    color: #d40d9a;
   }
 `;
 
 const PriceAddToCartButtonDiv = styled.div`
   display: flex;
   gap: 10px;
+  margin-top: 10px;
 `;
 
 const NavLinks = styled(Link)`
   text-decoration: none;
   font-size: 1.0rem;
   color: black;
+  white-space: nowrap;
 `;
 
 const FeaturedProduct = () => {
   const [featuredProductInfo, setFeaturedProductInfo] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
   const params = useParams()
   const { id } = params
@@ -56,24 +71,70 @@ const FeaturedProduct = () => {
             <h1 className="mt-3 text-xl text-center">Loading...</h1>
           ) 
         : (
-          <div>
-            <div>
-              {featuredProductInfo.uploadedImagePaths.length > 0 && (
-                <img
-                  src={`${featuredProductInfo.uploadedImagePaths[0]}`}
-                  alt={featuredProductInfo.productName}
-                />
-              )}
+          <div className="grid grid-cols-2 gap-4 p-5">
+            <div className="border-solid border border-gray-200 rounded-sm">
+              <Swiper
+                loop={true}
+                spaceBetween={10}
+                navigation={true}
+                thumbs={{
+                  swiper:
+                    thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null
+                }}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className='h-96 w-full rounded-lg'
+              >
+                {featuredProductInfo.uploadedImagePaths.length > 0 && featuredProductInfo.uploadedImagePaths.map((imagePath, index) => (
+                  <SwiperSlide key={index}>
+                    <div className='flex h-full w-full items-center justify-center'>
+                      <img
+                        src={imagePath}
+                        alt={featuredProductInfo.productName}
+                        width={300}
+                        height={200}
+                        className='flex justify-center'
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              
+              {/* Thumbnail */}
+              <Swiper
+                onSwiper={setThumbsSwiper}
+                spaceBetween={10}
+                slidesPerView={4}
+                freeMode={true}
+                watchSlidesProgress={true}
+                modules={[FreeMode, Navigation, Thumbs]}
+                className="mySwiper"
+              >
+                {featuredProductInfo.uploadedImagePaths.length > 0 && featuredProductInfo.uploadedImagePaths.map((imagePath, index) => (
+                  <SwiperSlide key={index}>
+                    <div className='flex h-full w-full items-center justify-center'>
+                      <img
+                        src={imagePath}
+                        alt={featuredProductInfo.productName}
+                        width={300}
+                        height={200}
+                        className='flex justify-center'
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
 
-            <div>
-              <h2>{featuredProductInfo.productName}</h2>
+            <div className="flex flex-col items-center justify-center h-full p-5">
+              <h2 className="text-2xl mb-3">{featuredProductInfo.productName}</h2>
               <p>{featuredProductInfo.description}</p>
               <PriceAddToCartButtonDiv>
-                <h4>shs. {featuredProductInfo.price}</h4>
+                <h4 className="font-bold p-3">shs. {featuredProductInfo.price}</h4>
                 <AddToCartBtn>
                   <NavLinks href={'/cart'}>
-                    <CartIcon/> Add to cart
+                    <div className="flex items-center whitespace-nowrap">
+                      <CartIcon/>&nbsp;Add to cart
+                    </div>
                   </NavLinks>
                 </AddToCartBtn>
               </PriceAddToCartButtonDiv>

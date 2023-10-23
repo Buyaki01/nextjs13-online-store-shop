@@ -49,6 +49,7 @@ const ViewMoreButton = styled(Link)`
   text-decoration: none;
   display: inline-block;
   padding: 10px 20px;
+  margin-top: 10px;
   background-color: #d40d9a;
   border: none;
   border-radius: 5px;

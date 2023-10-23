@@ -1,5 +1,6 @@
 import StyledComponentsRegistry from "@/lib/registry"
 import GlobalStyles from "@/styles/GlobalStyles"
+import './globals.css'
 
 export const metadata = {
   title: 'Ecommerce Retail Store',
