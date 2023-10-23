@@ -19,11 +19,6 @@ import Image from "next/image"
 const Wrapper = styled.div`
   margin: 50px 0px;
 
-  img{
-    max-width: 100%;
-    max-height: 350px;
-  }
-  
   h4{
     color: #d40d9a;
   }
@@ -90,8 +85,6 @@ const FeaturedProduct = () => {
                       <img
                         src={imagePath}
                         alt={featuredProductInfo.productName}
-                        width={300}
-                        height={200}
                         className='flex justify-center'
                       />
                     </div>
@@ -115,8 +108,8 @@ const FeaturedProduct = () => {
                       <img
                         src={imagePath}
                         alt={featuredProductInfo.productName}
-                        width={300}
-                        height={200}
+                        // width={300}
+                        // height={200}
                         className='flex justify-center'
                       />
                     </div>
