@@ -17,23 +17,29 @@ import 'swiper/css/thumbs'
 import Image from "next/image"
 
 const Wrapper = styled.div`
-  margin-bottom: 50px;
+  margin: 50px 0px;
 
   img{
     max-width: 100%;
     max-height: 350px;
+  }
+  
+  h4{
+    color: #d40d9a;
   }
 `;
 
 const PriceAddToCartButtonDiv = styled.div`
   display: flex;
   gap: 10px;
+  margin-top: 10px;
 `;
 
 const NavLinks = styled(Link)`
   text-decoration: none;
   font-size: 1.0rem;
   color: black;
+  white-space: nowrap;
 `;
 
 const FeaturedProduct = () => {
@@ -65,8 +71,8 @@ const FeaturedProduct = () => {
             <h1 className="mt-3 text-xl text-center">Loading...</h1>
           ) 
         : (
-          <div>
-            <div>
+          <div className="grid grid-cols-2 gap-4 p-5">
+            <div className="border-solid border border-gray-200 rounded-sm">
               <Swiper
                 loop={true}
                 spaceBetween={10}
@@ -147,14 +153,16 @@ const FeaturedProduct = () => {
               )} */}
             </div>
 
-            <div>
-              <h2>{featuredProductInfo.productName}</h2>
+            <div className="flex flex-col items-center justify-center h-full p-5">
+              <h2 className="text-2xl mb-3">{featuredProductInfo.productName}</h2>
               <p>{featuredProductInfo.description}</p>
               <PriceAddToCartButtonDiv>
-                <h4>shs. {featuredProductInfo.price}</h4>
+                <h4 className="font-bold p-3">shs. {featuredProductInfo.price}</h4>
                 <AddToCartBtn>
                   <NavLinks href={'/cart'}>
-                    <CartIcon/> Add to cart
+                    <div className="flex items-center whitespace-nowrap">
+                      <CartIcon/>&nbsp;Add to cart
+                    </div>
                   </NavLinks>
                 </AddToCartBtn>
               </PriceAddToCartButtonDiv>
