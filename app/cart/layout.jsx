@@ -2,7 +2,7 @@
 
 import Header from "../components/Header"
 
-const FeaturedProductsLayout = ({ children }) => {
+const CartLayout = ({ children }) => {
   return (
     <>
       <Header />
@@ -11,4 +11,4 @@ const FeaturedProductsLayout = ({ children }) => {
   )
 }
 
-export default FeaturedProductsLayout
+export default CartLayout

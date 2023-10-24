@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import Link from "next/link"
-import CartIcon from "./CartIcon";
+import CartIcon from "./CartIcon"
+import { useContext } from "react"
+import CartContext from "./CartContext"
 
 const StyledHeader = styled.header`
   background-color: rgb(146, 212, 59);
@@ -73,7 +75,21 @@ const SearchInputContainer = styled.div`
   align-items: center;
 `;
 
+const CartItemsCount = styled.span`
+  background-color: #d40d9a;
+  color: white;
+  padding: 1px 6px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  position: absolute;
+  top: 25px;
+  right: 73px;
+  z-index: 1;
+`;
+
 const Header = () => {
+  const { cartProducts } = useContext(CartContext)
+
   return (
     <StyledHeader>
       <Logo href={'/'}>Pearls Collections</Logo>
@@ -90,7 +106,7 @@ const Header = () => {
           </Icons>Account
         </NavLinks>
         <NavLinks href={'/cart'}>
-          <CartIcon/>Cart
+          <CartIcon/><CartItemsCount>{cartProducts?.length}</CartItemsCount> Cart
         </NavLinks>
       </nav>
     </StyledHeader>
