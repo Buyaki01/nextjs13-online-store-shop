@@ -87,4 +87,17 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .addToCartButton {
+    background-color: #d40d9a;
+    padding: 5px 10px;
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    font-size: 1.0rem;
+  }
+
+  .addToCartButton:hover {
+    background-color: #a00a7c;
+  }
   

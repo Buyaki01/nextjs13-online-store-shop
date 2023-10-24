@@ -6,7 +6,6 @@ import { useParams } from "next/navigation"
 import Link from "next/link"
 import { useEffect, useState, useContext } from "react"
 import styled from "styled-components"
-import AddToCartBtn from "@/app/components/AddToCartBtn"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 
@@ -28,6 +27,7 @@ const PriceAddToCartButtonDiv = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  font-size: 1.0rem;
 `;
 
 const NavLinks = styled(Link)`
@@ -60,19 +60,6 @@ const FeaturedProduct = () => {
 
     fetchFeaturedProduct()
   }, [id])
-
-  const addToCartHandler = () => {
-    addItemToCart({
-      id: featuredProductInfo._id,
-      productName: featuredProductInfo.productName,
-      description: featuredProductInfo.description,
-      price: featuredProductInfo.price,
-      uploadedImagePaths: featuredProductInfo.uploadedImagePaths,
-      selectedCategory: featuredProductInfo.selectedCategory,
-      properties: featuredProductInfo.properties,
-      isFeatured: featuredProductInfo.isFeatured
-    })
-  }
 
   return (
     <Wrapper>
@@ -123,8 +110,6 @@ const FeaturedProduct = () => {
                       <img
                         src={imagePath}
                         alt={featuredProductInfo.productName}
-                        // width={300}
-                        // height={200}
                         className='flex justify-center'
                       />
                     </div>
@@ -138,15 +123,19 @@ const FeaturedProduct = () => {
               <p>{featuredProductInfo.description}</p>
               <PriceAddToCartButtonDiv>
                 <h4 className="font-bold p-3">shs. {featuredProductInfo.price}</h4>
-                <AddToCartBtn
-                  onClick={addToCartHandler}
+                <button
+                  className="addToCartButton"
+                  onClick={() => {
+                    console.log('Adding item to cart:', featuredProductInfo._id);
+                    addItemToCart(featuredProductInfo._id);
+                  }}
                 >
-                  <NavLinks href={'/cart'}>
+                  {/* <NavLinks href={'/cart'}> */}
                     <div className="flex items-center whitespace-nowrap">
                       <CartIcon/>&nbsp;Add to cart
                     </div>
-                  </NavLinks>
-                </AddToCartBtn>
+                  {/* </NavLinks> */}
+                </button>
               </PriceAddToCartButtonDiv>
             </div>
           </div>

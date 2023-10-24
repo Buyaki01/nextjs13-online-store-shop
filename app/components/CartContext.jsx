@@ -1,3 +1,5 @@
+'use client'
+
 import { useRouter } from "next/navigation"
 import { createContext, useEffect, useState } from "react"
 
@@ -8,52 +10,24 @@ export const CartContextProvider = ({ children }) => {
 
   const router = useRouter()
 
-  useEffect(() => {
-    setCartProductsToState()
-  }, [])
+  // useEffect(() => {
+  //   setCartProductsToState()
+  // }, [])
 
-  const setCartProductsToState = () => {
-    setCartProducts(
-      localStorage.getItem('cartProducts') 
-      ? JSON.parse(localStorage.getItem('cartProducts'))
-      : []
-    )
-  }
+  // const setCartProductsToState = () => {
+  //   setCartProducts(
+  //     localStorage.getItem('cartProducts') 
+  //     ? JSON.parse(localStorage.getItem('cartProducts'))
+  //     : []
+  //   )
+  // }
 
-  const addItemToCart = async ({
-    id,
-    productName,
-    description,
-    price,
-    uploadedImagePaths,
-    selectedCategory,
-    properties,
-    isFeatured
-  }) => {
-    const item = {
-      id,
-      productName,
-      description,
-      price,
-      uploadedImagePaths,
-      selectedCategory,
-      properties,
-      isFeatured
-    }
+  const addItemToCart = async (productId) => {
+    setCartProducts(prev => [...prev, productId])
 
-    const itemExists = cartProducts?.find((cartItem) => cartItem._id === item._id)
-    
-    let newCartItems
+    // localStorage.setItem("cartProducts", JSON.stringify({ newCartItems }))
 
-    if (itemExists) {
-      newCartItems = cart?.map((cartItem) => cartItem._id === itemExists._id ? item: cartItem) //If item exists, give old item data otherwise give new cart item in the loop
-    } else {
-      newCartItems = [...(cart || []), item]
-    }
-
-    localStorage.setItem("cartProducts", JSON.stringify({ newCartItems }))
-
-    setCartProductsToState()
+    // setCartProductsToState()
   }
 
   return <CartContext.Provider
