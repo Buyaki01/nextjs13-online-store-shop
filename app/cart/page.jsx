@@ -53,7 +53,7 @@ const Cart = () => {
           </div>
         ) 
         : (
-          <p className="mt-3 text-2xl text-center">No cart Item</p>
+          <p className="mt-5 text-2xl text-center">No cart Item</p>
         )
       }
     </>

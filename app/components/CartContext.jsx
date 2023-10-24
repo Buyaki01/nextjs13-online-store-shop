@@ -1,27 +1,21 @@
 'use client'
 
-import { createContext, useEffect, useState } from "react"
+import { createContext, useState } from "react"
 
 const CartContext = createContext()
 
 export const CartContextProvider = ({ children }) => {
-  const [cartProducts, setCartProducts] = useState([])
-
-  useEffect(() => {
-    // Load the cart from localStorage when the component mounts
+  const [cartProducts, setCartProducts] = useState(() => {
     const storedCart = localStorage.getItem('cart')
-    if (storedCart) {
-      setCartProducts(JSON.parse(storedCart))
-    }
-  }, [])
+    return storedCart ? JSON.parse(storedCart) : []
+  })
 
-  const addItemToCart = (productId) => {
-    setCartProducts((prevCart) => [...prevCart, productId]);
+  const addItemToCart = async (productId) => {
+    const updatedCart = [...cartProducts, productId]
+    console.log(updatedCart)
+    setCartProducts(updatedCart)
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
   }
-
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cartProducts));
-  }, [cartProducts])
 
   return <CartContext.Provider
     value={{ cartProducts, addItemToCart }}
