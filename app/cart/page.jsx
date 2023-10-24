@@ -1,3 +1,5 @@
+'use client'
+
 import { useContext } from "react"
 import CartContext from "../components/CartContext"
 
@@ -11,15 +13,14 @@ const Cart = () => {
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3 mt-3 border border-solid border-gray-300 rounded-sm p-3">
               <h2 className="text-2xl font-bold mb-3">Cart (2)</h2>
-              {cartProducts.map(productId => (
-                <div key={productId} className="mt-3 p-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 mb-5">
+              {/* {fetchedCartProductsIds.map(productId => ( */}
+                <div className="mt-3 p-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 mb-5">
                   <div className="mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
                     <img 
                       src="http://localhost:3000/images/featuredProductHandbag.png" 
                       alt="product name" 
                       className="w-32 h-32 object-contain"
                     />
-                    {productId} 
                   </div>
                   <div className="mr-3 whitespace-nowrap flex items-center justify-center font-bold text-xl">Product Name</div>
                   <div className="mr-3 flex items-center justify-center">
@@ -39,7 +40,7 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-              ))}
+              {/* ))} */}
             </div>
        
             <div className="col-span-1 mt-3 border border-solid border-gray-200 rounded-sm p-3">
@@ -52,7 +53,7 @@ const Cart = () => {
           </div>
         ) 
         : (
-          <p>No cart Item</p>
+          <p className="mt-3 text-2xl text-center">No cart Item</p>
         )
       }
     </>

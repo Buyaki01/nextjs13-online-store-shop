@@ -126,8 +126,7 @@ const FeaturedProduct = () => {
                 <button
                   className="addToCartButton"
                   onClick={() => {
-                    console.log('Adding item to cart:', featuredProductInfo._id);
-                    addItemToCart(featuredProductInfo._id);
+                    addItemToCart(featuredProductInfo._id)
                   }}
                 >
                   {/* <NavLinks href={'/cart'}> */}
