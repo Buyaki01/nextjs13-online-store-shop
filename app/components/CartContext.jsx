@@ -6,28 +6,17 @@ import { createContext, useEffect, useState } from "react"
 const CartContext = createContext()
 
 export const CartContextProvider = ({ children }) => {
-  const [cartProducts, setCartProducts] = useState([])
+  const [cartProducts, setCartProducts] = useState(() => {
+    const storedCart = localStorage.getItem('cart')
+    return storedCart ? JSON.parse(storedCart) : []
+  })
 
   const router = useRouter()
 
-  // useEffect(() => {
-  //   setCartProductsToState()
-  // }, [])
-
-  // const setCartProductsToState = () => {
-  //   setCartProducts(
-  //     localStorage.getItem('cartProducts') 
-  //     ? JSON.parse(localStorage.getItem('cartProducts'))
-  //     : []
-  //   )
-  // }
-
   const addItemToCart = async (productId) => {
-    setCartProducts(prev => [...prev, productId])
-
-    // localStorage.setItem("cartProducts", JSON.stringify({ newCartItems }))
-
-    // setCartProductsToState()
+    const updatedCart = [...cartProducts, productId]
+    setCartProducts(updatedCart)
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
   }
 
   return <CartContext.Provider
