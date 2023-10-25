@@ -4,7 +4,7 @@ import './globals.css'
 import { CartContextProvider } from "./components/CartContext"
 
 export const metadata = {
-  title: 'Ecommerce Retail Store',
+  title: 'Online Store Shop',
   description: 'Created by Ritta Sweta',
 }
 
