@@ -1,10 +1,28 @@
 'use client'
 
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import CartContext from "../components/CartContext"
+import axios from "axios"
 
 const Cart = () => {
   const { cartProducts } = useContext(CartContext)
+  const [fetchedCartProductsInfo, setFetchedCartProductsInfo] = useState([])
+
+  useEffect(() => {
+    const fetchProductData = async (productId) => {
+      try {
+        const response = await axios(`/api/products/${productId}`)
+        setFetchedCartProductsInfo((prevProducts) => [...prevProducts, response.data.product])
+      } catch (error) {
+        console.error("Error fetching product data:", error)
+      }
+    }
+
+    // Fetch product id for each item in the cart
+    cartProducts.forEach((productId) => {
+      fetchProductData(productId)
+    })
+  }, [cartProducts])
 
   return (
     <>
@@ -13,7 +31,7 @@ const Cart = () => {
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3 mt-3 border border-solid border-gray-300 rounded-sm p-3">
               <h2 className="text-2xl font-bold mb-3">Cart (2)</h2>
-              {/* {fetchedCartProductsIds.map(productId => ( */}
+              {fetchedCartProductsInfo.map(product => (
                 <div className="mt-3 p-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 mb-5">
                   <div className="mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
                     <img 
@@ -22,7 +40,7 @@ const Cart = () => {
                       className="w-32 h-32 object-contain"
                     />
                   </div>
-                  <div className="mr-3 whitespace-nowrap flex items-center justify-center font-bold text-xl">Product Name</div>
+                  <div className="mr-3 whitespace-nowrap flex items-center justify-center font-bold text-xl">{product.productName}</div>
                   <div className="mr-3 flex items-center justify-center">
                     <button className="border border-none bg-gray-300 text-xl">-</button>
                     <span className="text-xl mx-2">1</span>
@@ -40,7 +58,7 @@ const Cart = () => {
                     </button>
                   </div>
                 </div>
-              {/* ))} */}
+              ))}
             </div>
        
             <div className="col-span-1 mt-3 border border-solid border-gray-200 rounded-sm p-3">

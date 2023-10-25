@@ -1,27 +1,45 @@
 'use client'
 
-import { createContext, useState } from "react"
+import { createContext, useState, useEffect } from "react"
 
 const CartContext = createContext()
 
 export const CartContextProvider = ({ children }) => {
-  const [cartProducts, setCartProducts] = useState(() => {
-    const storedCart = localStorage.getItem('cart')
-    return storedCart ? JSON.parse(storedCart) : []
-  })
+  const [cartProducts, setCartProducts] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const addItemToCart = async (productId) => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedCart = localStorage.getItem('cart')
+      if (storedCart) {
+        setCartProducts(JSON.parse(storedCart))
+      }
+
+      setLoading(false)
+    }
+  }, [])
+
+  const addItemToCart = (productId) => {
     const updatedCart = [...cartProducts, productId]
-    console.log(updatedCart)
+
     setCartProducts(updatedCart)
-    localStorage.setItem('cart', JSON.stringify(updatedCart))
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cart', JSON.stringify(updatedCart))
+    }
   }
 
-  return <CartContext.Provider
-    value={{ cartProducts, addItemToCart }}
-  >
-    {children}
-  </CartContext.Provider>
+  return (
+    <CartContext.Provider value={{ cartProducts, addItemToCart }}>
+      {loading ? (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
+        </div>
+      ) : (
+        children
+      )}
+    </CartContext.Provider>
+  )
 }
 
 export default CartContext
