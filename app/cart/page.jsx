@@ -1,7 +1,7 @@
 'use client'
 
 import { useContext, useEffect, useState } from "react"
-import CartContext from "../components/CartContext"
+import { CartContext } from "../components/CartContext"
 import axios from "axios"
 
 const Cart = () => {
@@ -12,14 +12,23 @@ const Cart = () => {
     const fetchProductData = async (productId) => {
       try {
         const response = await axios(`/api/products/${productId}`)
-        setFetchedCartProductsInfo((prevProducts) => [...prevProducts, response.data.product])
+        const product = response.data.product
+
+        // Check if the product with the same ID already exists in the state
+        const productExists = fetchedCartProductsInfo.some(
+          (existingProduct) => existingProduct.id === product.id
+        )
+
+        if (!productExists) {
+          setFetchedCartProductsInfo((prevProducts) => [...prevProducts, product])
+        }
       } catch (error) {
         console.error("Error fetching product data:", error)
       }
     }
 
-    // Fetch product id for each item in the cart
-    cartProducts.forEach((productId) => {
+    const uniqueProductIds = [...new Set(cartProducts)]
+    uniqueProductIds.forEach((productId) => {
       fetchProductData(productId)
     })
   }, [cartProducts])
@@ -30,15 +39,17 @@ const Cart = () => {
         ? (
           <div className="grid grid-cols-4 gap-4">
             <div className="col-span-3 mt-3 border border-solid border-gray-300 rounded-sm p-3">
-              <h2 className="text-2xl font-bold mb-3">Cart (2)</h2>
+              <h2 className="text-2xl font-bold mb-3">Cart ({cartProducts?.length})</h2>
               {fetchedCartProductsInfo.map(product => (
                 <div className="mt-3 p-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 mb-5">
                   <div className="mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
-                    <img 
-                      src="http://localhost:3000/images/featuredProductHandbag.png" 
-                      alt="product name" 
-                      className="w-32 h-32 object-contain"
-                    />
+                    {product.uploadedImagePaths.length > 0 && (
+                      <img
+                        src={`${product.uploadedImagePaths[0]}`}
+                        alt={product.productName}
+                        className="w-32 h-32 object-contain"
+                      />
+                    )}
                   </div>
                   <div className="mr-3 whitespace-nowrap flex items-center justify-center font-bold text-xl">{product.productName}</div>
                   <div className="mr-3 flex items-center justify-center">
@@ -47,8 +58,8 @@ const Cart = () => {
                     <button className="border border-none bg-gray-300 text-xl">+</button>
                   </div>
                   <div className="mr-3 flex flex-col items-center justify-center">
-                    <h4 className="text-2xl font-bold">Sh.349</h4>
-                    <p className="text-sm whitespace-nowrap">Sh.349/per item</p>
+                    <h4 className="text-2xl font-bold">{product.price}</h4>
+                    <p className="text-sm whitespace-nowrap">{product.price}/per item</p>
                   </div>
                   <div className="flex items-center justify-center">
                     <button className="bg-red-500 text-white py-2 px-4 rounded-full flex gap-2">
@@ -61,7 +72,7 @@ const Cart = () => {
               ))}
             </div>
        
-            <div className="col-span-1 mt-3 border border-solid border-gray-200 rounded-sm p-3">
+            <div className="col-span-1 mt-3 border border-solid border-gray-200 rounded-sm p-3 h-52">
               <h2 className="text-2xl font-bold mb-3">Cart Summary</h2>
               <p className="text-lg mb-3">Subtotal: ksh. 1119</p>
               <button className="text-xl text-white mt-3 py-2 px-4 rounded-full">

@@ -13,7 +13,7 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-import CartContext from "@/app/components/CartContext"
+import { CartContext } from "@/app/components/CartContext"
 
 const Wrapper = styled.div`
   margin: 50px 0px;
