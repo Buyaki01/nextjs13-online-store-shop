@@ -1,7 +1,7 @@
-# NextJs 13 Ecommerce Retail Store
+# NextJs 13 Online Store Shop
 
 ## Overview
-Welcome to the NextJs 13 Ecommerce Retail Store, an e-commerce web application designed to cater to your clients' shopping needs. Whether you're a small business owner, a retailer, or an entrepreneur looking to establish an online presence, this application provides a powerful platform to showcase and sell your products to a global audience.
+Welcome to the NextJs 13  Online Store Shop, an e-commerce web application designed to cater to your clients' shopping needs. Whether you're a small business owner, a retailer, or an entrepreneur looking to establish an online presence, this application provides a powerful platform to showcase and sell your products to a global audience.
 
 ### Key Features
 
@@ -30,6 +30,7 @@ Check out our live demo [here](link-to-demo) to explore the features and functio
 - **React**
 - **MongoDB**
 - **Styled Components**
+- **Taiwind CSS**
 - **Stripe**
 - **Stripe Webhooks**
 
@@ -38,12 +39,12 @@ To get started with this app, follow these steps:
 
 1. Clone this repository: 
     ```bash 
-    git clone git@github.com:Buyaki01/nextjs13-ecommerce-retail-store.git
+    git clone git@github.com:Buyaki01/nextjs13-online-store-shop.git
     ```
 
 2. Open the repository: 
     ```bash 
-    cd nextjs13-ecommerce-retail-store
+    cd nextjs13-online-store-shop
     ```
 
 3. Install dependencies: 
@@ -83,7 +84,7 @@ Here are the environment variables you need to configure in your `.env` file:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/Buyaki01/nextjs13-ecommerce-retail-store/issues)
+Feel free to check the [issues page](https://github.com/Buyaki01/nextjs13-online-store-shop/issues)
 
 ## Show your support
 
