@@ -1,11 +1,23 @@
 'use client'
 
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CartContext } from "../components/CartContext"
+import axios from "axios"
 
 const Cart = () => {
   const { cartProducts } = useContext(CartContext)
-  console.log(cartProducts)
+  const [fetchCartProductInfo, setFetchCartProductInfo] = useState()
+  
+  useEffect(() => {
+    const fetchCartProduct = async (productId) => {
+      const response = await axios.get(`/api/product/${productId}`)
+      setFetchCartProductInfo((prevProducts) => [...prevProducts, response.data.product])
+    }
+
+    cartProducts.forEach((productId) => {
+      fetchCartProduct(productId)
+    })
+  }, [cartProducts])
 
   return (
     <>

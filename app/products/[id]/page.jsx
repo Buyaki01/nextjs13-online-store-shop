@@ -20,6 +20,7 @@ const Product = () => {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [addedToCart, setAddedToCart] = useState(false)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -91,18 +92,30 @@ const Product = () => {
             <div className="flex flex-col items-center justify-center h-full p-5">
               <h2 className="text-2xl mb-3">{product.productName}</h2>
               <p>{product.description}</p>
-              <div>
+              <div className="priceAddToCartButton">
                 <h4 className="font-bold p-3">shs. {product.price}</h4>
-                <button
-                  className="addToCartButton"
-                  onClick={() => {
-                    addItemToCart(product._id)
-                  }}
-                >
-                  <div className="flex items-center whitespace-nowrap">
-                    <CartIcon/>&nbsp;Add to cart
-                  </div>
-                </button>
+                {addedToCart 
+                  ? (
+                    <div className="mr-3 flex items-center justify-center">
+                      <button className="border border-none text-xl text-white">-</button>
+                      <span className="text-xl mx-2">1</span>
+                      <button className="border border-none text-xl text-white">+</button>
+                    </div>
+                  ) 
+                  : (
+                    <button
+                      className="addToCartButton"
+                      onClick={() => {
+                        setAddedToCart(true)
+                        addItemToCart(featuredProductInfo._id)
+                      }}
+                    >
+                      <div className="flex items-center whitespace-nowrap">
+                        <CartIcon/>&nbsp;Add to cart
+                      </div>
+                    </button>
+                  )
+                }
               </div>
             </div>
           </div>

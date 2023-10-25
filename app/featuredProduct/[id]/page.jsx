@@ -3,7 +3,6 @@
 import CartIcon from "@/app/components/CartIcon"
 import axios from "axios"
 import { useParams } from "next/navigation"
-import Link from "next/link"
 import { useEffect, useState, useContext } from "react"
 import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -23,17 +22,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const PriceAddToCartButtonDiv = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-  font-size: 1.0rem;
-`;
-
 const FeaturedProduct = () => {
   const [featuredProductInfo, setFeaturedProductInfo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [addedToCart, setAddedToCart] = useState(false)
 
   const { addItemToCart } = useContext(CartContext)
 
@@ -114,19 +107,30 @@ const FeaturedProduct = () => {
             <div className="flex flex-col items-center justify-center h-full p-5">
               <h2 className="text-2xl mb-3">{featuredProductInfo.productName}</h2>
               <p>{featuredProductInfo.description}</p>
-              <PriceAddToCartButtonDiv>
-                <h4 className="font-bold p-3">shs. {featuredProductInfo.price}</h4>
-                <button
-                  className="addToCartButton"
-                  onClick={() => {
-                    addItemToCart(featuredProductInfo._id)
-                  }}
-                >
-                  <div className="flex items-center whitespace-nowrap">
-                    <CartIcon/>&nbsp;Add to cart
+
+              <div className="priceAddToCartButton">
+                <h4 className="font-bold p-3">Ksh. {featuredProductInfo.price}</h4>
+                {addedToCart ? (
+                  // If addedToCart is true, display the new div
+                  <div className="mr-3 flex items-center justify-center">
+                    <button className="border border-none text-xl text-white">-</button>
+                    <span className="text-xl mx-2">1</span>
+                    <button className="border border-none text-xl text-white">+</button>
                   </div>
-                </button>
-              </PriceAddToCartButtonDiv>
+                ) : (
+                  <button
+                    className="addToCartButton"
+                    onClick={() => {
+                      setAddedToCart(true)
+                      addItemToCart(featuredProductInfo._id)
+                    }}
+                  >
+                    <div className="flex items-center whitespace-nowrap">
+                      <CartIcon/>&nbsp;Add to cart
+                    </div>
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         )
