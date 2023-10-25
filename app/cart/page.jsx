@@ -1,10 +1,11 @@
 'use client'
 
 import { useContext } from "react"
-import CartContext from "../components/CartContext"
+import { CartContext } from "../components/CartContext"
 
 const Cart = () => {
   const { cartProducts } = useContext(CartContext)
+  console.log(cartProducts)
 
   return (
     <>

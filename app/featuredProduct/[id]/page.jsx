@@ -13,7 +13,7 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-import CartContext from "@/app/components/CartContext"
+import { CartContext } from "@/app/components/CartContext"
 
 const Wrapper = styled.div`
   margin: 50px 0px;
@@ -28,13 +28,6 @@ const PriceAddToCartButtonDiv = styled.div`
   gap: 10px;
   margin-top: 10px;
   font-size: 1.0rem;
-`;
-
-const NavLinks = styled(Link)`
-  text-decoration: none;
-  font-size: 1.0rem;
-  color: black;
-  white-space: nowrap;
 `;
 
 const FeaturedProduct = () => {
@@ -129,11 +122,9 @@ const FeaturedProduct = () => {
                     addItemToCart(featuredProductInfo._id)
                   }}
                 >
-                  {/* <NavLinks href={'/cart'}> */}
-                    <div className="flex items-center whitespace-nowrap">
-                      <CartIcon/>&nbsp;Add to cart
-                    </div>
-                  {/* </NavLinks> */}
+                  <div className="flex items-center whitespace-nowrap">
+                    <CartIcon/>&nbsp;Add to cart
+                  </div>
                 </button>
               </PriceAddToCartButtonDiv>
             </div>

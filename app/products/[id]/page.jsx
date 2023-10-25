@@ -3,17 +3,19 @@
 import CartIcon from "@/app/components/CartIcon"
 import axios from "axios"
 import { useParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
+import { CartContext } from "@/app/components/CartContext"
 
 const Product = () => {
   const params = useParams()
   const { id } = params
+  const { addItemToCart } = useContext(CartContext)
 
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
