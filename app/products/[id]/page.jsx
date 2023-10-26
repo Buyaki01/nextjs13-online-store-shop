@@ -107,7 +107,7 @@ const Product = () => {
                       className="addToCartButton"
                       onClick={() => {
                         setAddedToCart(true)
-                        addItemToCart(featuredProductInfo._id)
+                        addItemToCart(product._id)
                       }}
                     >
                       <div className="flex items-center whitespace-nowrap">
