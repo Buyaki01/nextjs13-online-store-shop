@@ -6,7 +6,7 @@ import axios from "axios"
 import Link from "next/link"
 
 const Cart = () => {
-  const { cartProducts, addItemToCart } = useContext(CartContext) //The cartProducts will have: productId and quantity
+  const { cartProducts, addItemToCart, decrementItemInCart } = useContext(CartContext) //The cartProducts will have: productId and quantity
   const [fetchCartProductInfo, setFetchCartProductInfo] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [totalPrice, setTotalPrice] = useState(0)
@@ -87,8 +87,15 @@ const Cart = () => {
                       </Link>
                       
                       <div className="w-32 mr-3 flex items-center justify-center">
-                        <button className="border border-none bg-gray-300 text-xl">-</button>
-                        <span className="text-xl mx-2">{cartProducts.find(item => item.productId === product._id).quantity}</span>
+                        <button 
+                          className="border border-none bg-gray-300 text-xl"
+                          onClick={() => {
+                            decrementItemInCart(product._id)
+                          }}
+                        >
+                          -
+                        </button>
+                        <span className="text-xl mx-2">{cartProducts.find(item => item.productId === product._id)?.quantity || 0}</span>
                         <button 
                           className="border border-none bg-gray-300 text-xl"
                           onClick={() => {
@@ -99,7 +106,7 @@ const Cart = () => {
                         </button>
                       </div>
                       <div className="w-32 mr-3 flex flex-col items-center justify-center">
-                        <h4 className="text-2xl font-bold">Ksh.{product.price * cartProducts.find((item) => item.productId === product._id).quantity}</h4>
+                        <h4 className="text-2xl font-bold">Ksh.{product.price * cartProducts.find((item) => item.productId === product._id)?.quantity || 0}</h4>
                         <p className="text-sm whitespace-nowrap"><span className="font-bold">Ksh.{product.price}</span>/per item</p>
                       </div>
                       <div className="w-32 flex items-center justify-center">
@@ -123,7 +130,12 @@ const Cart = () => {
               </div>
             ) 
             : (
-              <p className="mt-5 text-2xl text-center">Your cart is empty!</p>
+              <div className="flex flex-col items-center justify-center">
+                <p className="mt-5 text-2xl">Your cart is empty!</p>
+                <div className="mt-5">
+                  <Link href={'/'}><button className="text-xl">Start Shopping</button></Link>
+                </div>
+              </div>
             )
           )
         }

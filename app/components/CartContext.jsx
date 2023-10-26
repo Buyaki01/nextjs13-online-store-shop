@@ -33,9 +33,25 @@ export function CartContextProvider({children}) {
       setCartProducts([...cartProducts, { productId, quantity: 1 }])
     }
   }
+
+  function decrementItemInCart(productId) {
+    const existingProductIndex = cartProducts.findIndex((item) => item.productId === productId)
+
+    if (existingProductIndex !== -1) {
+      const updatedCart = [...cartProducts]
+      updatedCart[existingProductIndex].quantity -= 1
+
+      if (updatedCart[existingProductIndex].quantity <= 0) {
+        // If quantity reaches zero, remove the product from the cart
+        updatedCart.splice(existingProductIndex, 1)
+      }
+
+      setCartProducts(updatedCart)
+    }
+  }
   
   return (
-    <CartContext.Provider value={{ cartProducts, addItemToCart }}>
+    <CartContext.Provider value={{ cartProducts, addItemToCart, decrementItemInCart }}>
       {children}
     </CartContext.Provider>
   );

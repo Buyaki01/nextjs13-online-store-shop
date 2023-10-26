@@ -15,7 +15,7 @@ import { CartContext } from "@/app/components/CartContext"
 const Product = () => {
   const params = useParams()
   const { id } = params
-  const { cartProducts, addItemToCart } = useContext(CartContext)
+  const { cartProducts, addItemToCart, decrementItemInCart } = useContext(CartContext)
 
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -103,8 +103,15 @@ const Product = () => {
                 {addedToCart 
                   ? (
                     <div className="mr-3 flex items-center justify-center">
-                      <button className="border border-none text-xl text-white">-</button>
-                      <span className="text-xl mx-2">{cartProducts.find(item => item.productId === product._id).quantity}</span>
+                      <button 
+                        className="border border-none text-xl text-white"
+                        onClick={() => {
+                          decrementItemInCart(product._id)
+                        }}
+                      >
+                        -
+                      </button>
+                      <span className="text-xl mx-2">{cartProducts.find(item => item.productId === product._id)?.quantity || 0}</span>
                       <button 
                         className="border border-none text-xl text-white"
                         onClick={() => {
