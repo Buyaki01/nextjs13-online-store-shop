@@ -139,7 +139,7 @@ const Cart = () => {
               <div className="flex flex-col items-center justify-center">
                 <p className="mt-5 text-2xl">Your cart is empty!</p>
                 <div className="mt-5">
-                  <Link href={'/'}><button className="text-xl">Start Shopping</button></Link>
+                  <Link href={'/'}><button className="text-xl text-white rounded-lg">Start Shopping</button></Link>
                 </div>
               </div>
             )

@@ -107,7 +107,8 @@ const Header = () => {
           </Icons>Account
         </NavLinks>
         <NavLinks href={'/cart'}>
-          <CartIcon/><CartItemsCount>{totalQuantity}</CartItemsCount> Cart
+          <CartIcon/>
+          {totalQuantity > 0 && <CartItemsCount>{totalQuantity}</CartItemsCount>} Cart
         </NavLinks>
       </nav>
     </StyledHeader>
