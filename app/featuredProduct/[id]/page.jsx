@@ -113,22 +113,23 @@ const FeaturedProduct = () => {
 
             <div className="flex flex-col items-center justify-center h-full p-5">
               <h2 className="text-2xl mb-3">{featuredProductInfo.productName}</h2>
-              <p>{featuredProductInfo.description}</p>
-              <div><h4 className="text-xl font-bold p-3">Ksh. {featuredProductInfo.price}</h4></div>
+              <p className="text-base">{featuredProductInfo.description}</p>
+              
               {addedToCart ? (
                 <>
-                  <div className="mr-3 flex items-center justify-center">
+                  <div className="flex items-center justify-center space-x-2 mt-3">
+                    <div><h4 className="text-xl font-bold">Ksh.{featuredProductInfo.price}</h4></div>
                     <button 
-                      className="border border-none text-xl text-white"
+                      className="border text-xl text-white"
                       onClick={() => {
                         decrementItemInCart(featuredProductInfo._id)
                       }}
                     >
                       -
                     </button>
-                    <span className="text-xl mx-2">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity }</span>
+                    <span className="text-xl">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity }</span>
                     <button 
-                      className="border border-none text-xl text-white"
+                      className="border text-xl text-white"
                       onClick={() => {
                         addItemToCart(featuredProductInfo._id)
                       }}
@@ -137,23 +138,26 @@ const FeaturedProduct = () => {
                     </button>
                   </div>
 
-                  <div className="mt-3">
-                    <Link href={'/'}><button className="text-xl">Continue Shopping</button></Link>
-                    <Link href={'/'}><button className="text-xl">Proceed to Checkout</button></Link>
+                  <div className="mt-3 flex gap-2 text-white">
+                    <Link href={'/'}><button className="text-xl rounded-lg">Continue Shopping</button></Link>
+                    <Link href={'/'}><button className="text-xl rounded-lg">Proceed to Checkout</button></Link>
                   </div>
                 </>
               ) : (
-                <button
-                  className="addToCartButton"
-                  onClick={() => {
-                    setAddedToCart(true)
-                    addItemToCart(featuredProductInfo._id)
-                  }}
-                >
-                  <div className="flex items-center whitespace-nowrap">
-                    <CartIcon/>&nbsp;Add to cart
-                  </div>
-                </button>
+                <>
+                  <div className="m-3"><h4 className="text-xl font-bold">shs. {featuredProductInfo.price}</h4></div>
+                  <button
+                    className="addToCartButton text-xl rounded-lg text-white"
+                    onClick={() => {
+                      setAddedToCart(true)
+                      addItemToCart(featuredProductInfo._id)
+                    }}
+                  >
+                    <div className="flex items-center">
+                      <CartIcon className="w-5 h-5 text-white"/>&nbsp;Add to cart
+                    </div>
+                  </button>
+                </>
               )}
             </div>
           </div>

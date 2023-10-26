@@ -104,8 +104,7 @@ const Product = () => {
                 ? (
                   <div> 
                     <div className="flex items-center justify-center space-x-2 mt-3">
-
-                      <div><h4 className="text-xl font-bold">shs. {product.price}</h4></div>
+                      <div><h4 className="text-xl font-bold">shs.{product.price}</h4></div>
                       <button 
                         className="border text-xl text-white"
                         onClick={() => {
