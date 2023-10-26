@@ -6,21 +6,52 @@ import axios from "axios"
 import Link from "next/link"
 
 const Cart = () => {
-  const { cartProducts } = useContext(CartContext) //The cartProducts will have: productId and quantity
+  const { cartProducts, addItemToCart } = useContext(CartContext) //The cartProducts will have: productId and quantity
   const [fetchCartProductInfo, setFetchCartProductInfo] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [totalPrice, setTotalPrice] = useState(0)
   
   useEffect(() => {
-    const fetchCartProduct = async (quantityProductId) => {
-      const response = await axios.get(`/api/products/${quantityProductId.productId}`)
-      setFetchCartProductInfo((prevProducts) => [...prevProducts, response.data.product])
+    // Create an array to store the fetched products
+    const fetchedProducts = []
+
+    const fetchProducts = async () => {
+      try {
+        // Use Promise.all to fetch product data for all product IDs in cartProducts
+        const productPromises = cartProducts.map((item) => axios.get(`/api/products/${item.productId}`))
+
+        const responses = await Promise.all(productPromises);
+        const productsData = responses.map((response) => response.data.product)
+
+        fetchedProducts.push(...productsData)
+        setFetchCartProductInfo(fetchedProducts)
+        setIsLoading(false)
+      } catch (error) {
+        console.error("Error fetching product data:", error)
+        setIsLoading(false)
+      }
+    }
+
+    if (cartProducts.length > 0) {
+      fetchProducts()
+    } else {
       setIsLoading(false)
     }
 
-    cartProducts.forEach((qp) => {
-      fetchCartProduct(qp)
-    })
-  }, [cartProducts])
+    let cartTotalPrice = 0
+
+    if (fetchCartProductInfo && fetchCartProductInfo.length > 0) {
+      fetchCartProductInfo.forEach(product => {
+        const cartItem = cartProducts.find(item => item.productId === product._id)
+        if (cartItem) {
+          const itemPrice = product.price * cartItem.quantity
+          cartTotalPrice += itemPrice
+        }
+      })
+    }
+
+    setTotalPrice(cartTotalPrice)
+  }, [cartProducts, fetchCartProductInfo])
 
   return (
     <div className="mb-5">
@@ -35,33 +66,43 @@ const Cart = () => {
                 <div className="col-span-3 mt-3 border border-solid border-gray-300 rounded-sm p-3">
                   <h2 className="text-2xl font-bold mb-3">Cart</h2>
                   {fetchCartProductInfo && fetchCartProductInfo.length > 0 && fetchCartProductInfo.map(product => (
-                    <div className="mt-3 p-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 mb-5">
-                      <div className="mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
+                    <div className="mt-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 pb-3 mb-1">
+                      <div className="p-3 mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
                         <Link href={`/products/${product._id}`}>
                           <img 
                             src={product.uploadedImagePaths[0]} 
                             alt={product.productName} 
-                            className="w-32 h-32 object-contain"
+                            className="w-full h-32 object-contain"
                           />
                         </Link>
                       </div>
-
-                      <div className="mr-3 flex items-center justify-center">
-                        <Link href={`/products/${product._id}`}>
-                          <h3 className="font-bold text-xl overflow-hidden max-w-xs truncate">{product.productName}</h3>
-                        </Link>
-                      </div>
+                     
+                      <Link 
+                        href={`/products/${product._id}`}
+                        className="w-44 mr-3 flex items-center justify-center"
+                      >
+                        <h3 className="font-bold text-xl truncate px-1">
+                          {product.productName}
+                        </h3>
+                      </Link>
                       
-                      <div className="mr-3 flex items-center justify-center">
+                      <div className="w-32 mr-3 flex items-center justify-center">
                         <button className="border border-none bg-gray-300 text-xl">-</button>
-                        <span className="text-xl mx-2">1</span>
-                        <button className="border border-none bg-gray-300 text-xl">+</button>
+                        <span className="text-xl mx-2">{cartProducts.find(item => item.productId === product._id).quantity}</span>
+                        <button 
+                          className="border border-none bg-gray-300 text-xl"
+                          onClick={() => {
+                            addItemToCart(product._id)
+                          }}
+                        >
+                          +
+                        </button>
                       </div>
-                      <div className="mr-3 flex flex-col items-center justify-center">
-                        <h4 className="text-2xl font-bold">{product.price}</h4>
-                        <p className="text-sm whitespace-nowrap"><span className="font-bold">{product.price}</span>/per item</p>
+                      <div className="w-32 mr-3 flex flex-col items-center justify-center">
+                        <h4 className="text-2xl font-bold">Ksh.{product.price * cartProducts.find((item) => item.productId === product._id).quantity}</h4>
+                        <p className="text-sm whitespace-nowrap"><span className="font-bold">Ksh.{product.price}</span>/per item</p>
                       </div>
-                      <div className="flex items-center justify-center">
+                      <div className="w-32 flex items-center justify-center">
                         <button className="bg-red-500 text-white py-2 px-4 rounded-full flex gap-2">
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -74,9 +115,9 @@ const Cart = () => {
            
                 <div className="col-span-1 mt-3 border border-solid border-gray-200 rounded-sm p-3 h-52">
                   <h2 className="text-2xl font-bold mb-3">Cart Summary</h2>
-                  <p className="text-lg mb-3">Subtotal: ksh. 1119</p>
-                  <button className="text-xl text-white mt-3 py-2 px-4 rounded-full">
-                    Checkout (ksh. 1119)
+                  <p className="text-lg mb-3">Subtotal: ksh. <span className="font-bold">{totalPrice}</span></p>
+                  <button className="text-xl mt-3 py-3 text-white px-4 rounded-full">
+                    Checkout <span className="text-2xl">(ksh.{totalPrice})</span>
                   </button>
                 </div>
               </div>
