@@ -3,7 +3,6 @@
 import CartIcon from "@/app/components/CartIcon"
 import axios from "axios"
 import { useParams } from "next/navigation"
-import Link from "next/link"
 import { useEffect, useState, useContext } from "react"
 import styled from "styled-components"
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -13,7 +12,8 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-import CartContext from "@/app/components/CartContext"
+import { CartContext } from "@/app/components/CartContext"
+import Link from "next/link"
 
 const Wrapper = styled.div`
   margin: 50px 0px;
@@ -23,26 +23,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const PriceAddToCartButtonDiv = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-  font-size: 1.0rem;
-`;
-
-const NavLinks = styled(Link)`
-  text-decoration: none;
-  font-size: 1.0rem;
-  color: black;
-  white-space: nowrap;
-`;
-
 const FeaturedProduct = () => {
   const [featuredProductInfo, setFeaturedProductInfo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
+  const [addedToCart, setAddedToCart] = useState(false)
 
-  const { addItemToCart } = useContext(CartContext)
+  const { cartProducts, addItemToCart, decrementItemInCart } = useContext(CartContext)
 
   const params = useParams()
   const { id } = params
@@ -61,6 +48,12 @@ const FeaturedProduct = () => {
     fetchFeaturedProduct()
   }, [id])
 
+  useEffect(() => {
+    const isProductInCart = cartProducts.some((item) => item.productId === id)
+    setAddedToCart(isProductInCart)
+
+  }, [cartProducts, id])
+
   return (
     <Wrapper>
       {loading 
@@ -69,7 +62,7 @@ const FeaturedProduct = () => {
           ) 
         : (
           <div className="grid grid-cols-2 gap-4 p-5">
-            <div className="border-solid border border-gray-200 rounded-sm">
+            <div className="border-solid border border-gray-400 rounded-sm">
               <Swiper
                 loop={true}
                 spaceBetween={10}
@@ -120,22 +113,52 @@ const FeaturedProduct = () => {
 
             <div className="flex flex-col items-center justify-center h-full p-5">
               <h2 className="text-2xl mb-3">{featuredProductInfo.productName}</h2>
-              <p>{featuredProductInfo.description}</p>
-              <PriceAddToCartButtonDiv>
-                <h4 className="font-bold p-3">shs. {featuredProductInfo.price}</h4>
-                <button
-                  className="addToCartButton"
-                  onClick={() => {
-                    addItemToCart(featuredProductInfo._id)
-                  }}
-                >
-                  {/* <NavLinks href={'/cart'}> */}
-                    <div className="flex items-center whitespace-nowrap">
-                      <CartIcon/>&nbsp;Add to cart
+              <p className="text-base">{featuredProductInfo.description}</p>
+              
+              {addedToCart ? (
+                <>
+                  <div className="flex items-center justify-center space-x-2 mt-3">
+                    <div><h4 className="text-xl font-bold">Ksh.{featuredProductInfo.price}</h4></div>
+                    <button 
+                      className="border text-xl text-white"
+                      onClick={() => {
+                        decrementItemInCart(featuredProductInfo._id)
+                      }}
+                    >
+                      -
+                    </button>
+                    <span className="text-xl">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity }</span>
+                    <button 
+                      className="border text-xl text-white"
+                      onClick={() => {
+                        addItemToCart(featuredProductInfo._id)
+                      }}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <div className="mt-3 flex gap-2 text-white">
+                    <Link href={'/'}><button className="text-xl rounded-lg">Continue Shopping</button></Link>
+                    <Link href={'/'}><button className="text-xl rounded-lg">Proceed to Checkout</button></Link>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="m-3"><h4 className="text-xl font-bold">shs. {featuredProductInfo.price}</h4></div>
+                  <button
+                    className="addToCartButton text-xl rounded-lg text-white"
+                    onClick={() => {
+                      setAddedToCart(true)
+                      addItemToCart(featuredProductInfo._id)
+                    }}
+                  >
+                    <div className="flex items-center">
+                      <CartIcon className="w-5 h-5 text-white"/>&nbsp;Add to cart
                     </div>
-                  {/* </NavLinks> */}
-                </button>
-              </PriceAddToCartButtonDiv>
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )

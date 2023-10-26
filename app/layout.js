@@ -1,7 +1,7 @@
 import StyledComponentsRegistry from "@/lib/registry"
 import GlobalStyles from "@/styles/GlobalStyles"
 import './globals.css'
-import { CartContextProvider } from "./components/CartContext"
+import CartContextProvider from "./components/CartContext"
 
 export const metadata = {
   title: 'Online Store Shop',
