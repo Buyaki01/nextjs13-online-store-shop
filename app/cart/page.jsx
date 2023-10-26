@@ -3,28 +3,27 @@
 import { useContext, useEffect, useState } from "react"
 import { CartContext } from "../components/CartContext"
 import axios from "axios"
+import Link from "next/link"
 
 const Cart = () => {
-  const { cartProducts } = useContext(CartContext)
+  const { cartProducts } = useContext(CartContext) //The cartProducts will have: productId and quantity
   const [fetchCartProductInfo, setFetchCartProductInfo] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   
   useEffect(() => {
-    const fetchCartProduct = async (productId) => {
-      const response = await axios.get(`/api/products/${productId}`)
+    const fetchCartProduct = async (quantityProductId) => {
+      const response = await axios.get(`/api/products/${quantityProductId.productId}`)
       setFetchCartProductInfo((prevProducts) => [...prevProducts, response.data.product])
       setIsLoading(false)
     }
 
-    cartProducts.forEach((productId) => {
-      fetchCartProduct(productId)
+    cartProducts.forEach((qp) => {
+      fetchCartProduct(qp)
     })
   }, [cartProducts])
 
-  console.log(fetchCartProductInfo)
-
   return (
-    <>
+    <div className="mb-5">
       {isLoading 
         ? (
             <p className="mt-5 text-2xl text-center">Loading...</p>
@@ -32,19 +31,27 @@ const Cart = () => {
         : (
           cartProducts?.length > 0 
             ? (
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-4 gap-4 mb-5">
                 <div className="col-span-3 mt-3 border border-solid border-gray-300 rounded-sm p-3">
                   <h2 className="text-2xl font-bold mb-3">Cart</h2>
                   {fetchCartProductInfo && fetchCartProductInfo.length > 0 && fetchCartProductInfo.map(product => (
                     <div className="mt-3 p-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 mb-5">
                       <div className="mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
-                        <img 
-                          src={product.uploadedImagePaths[0]} 
-                          alt={product.productName} 
-                          className="w-32 h-32 object-contain"
-                        />
+                        <Link href={`/products/${product._id}`}>
+                          <img 
+                            src={product.uploadedImagePaths[0]} 
+                            alt={product.productName} 
+                            className="w-32 h-32 object-contain"
+                          />
+                        </Link>
                       </div>
-                      <div className="mr-3 whitespace-nowrap flex items-center justify-center font-bold text-xl">{product.productName}</div>
+
+                      <div className="mr-3 flex items-center justify-center">
+                        <Link href={`/products/${product._id}`}>
+                          <h3 className="font-bold text-xl overflow-hidden max-w-xs truncate">{product.productName}</h3>
+                        </Link>
+                      </div>
+                      
                       <div className="mr-3 flex items-center justify-center">
                         <button className="border border-none bg-gray-300 text-xl">-</button>
                         <span className="text-xl mx-2">1</span>
@@ -77,9 +84,9 @@ const Cart = () => {
             : (
               <p className="mt-5 text-2xl text-center">Your cart is empty!</p>
             )
-        )
-      }
-    </>
+          )
+        }
+    </div>
   )
 }
 export default Cart

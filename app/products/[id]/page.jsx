@@ -99,7 +99,14 @@ const Product = () => {
                     <div className="mr-3 flex items-center justify-center">
                       <button className="border border-none text-xl text-white">-</button>
                       <span className="text-xl mx-2">1</span>
-                      <button className="border border-none text-xl text-white">+</button>
+                      <button 
+                        className="border border-none text-xl text-white"
+                        onClick={() => {
+                          addItemToCart(product._id)
+                        }}
+                      >
+                        +
+                      </button>
                     </div>
                   ) 
                   : (

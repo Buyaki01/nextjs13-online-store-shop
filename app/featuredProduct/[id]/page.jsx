@@ -111,11 +111,17 @@ const FeaturedProduct = () => {
               <div className="priceAddToCartButton">
                 <h4 className="font-bold p-3">Ksh. {featuredProductInfo.price}</h4>
                 {addedToCart ? (
-                  // If addedToCart is true, display the new div
                   <div className="mr-3 flex items-center justify-center">
                     <button className="border border-none text-xl text-white">-</button>
                     <span className="text-xl mx-2">1</span>
-                    <button className="border border-none text-xl text-white">+</button>
+                    <button 
+                      className="border border-none text-xl text-white"
+                      onClick={() => {
+                        addItemToCart(featuredProductInfo._id)
+                      }}
+                    >
+                      +
+                    </button>
                   </div>
                 ) : (
                   <button

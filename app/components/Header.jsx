@@ -89,6 +89,7 @@ const CartItemsCount = styled.span`
 
 const Header = () => {
   const { cartProducts } = useContext(CartContext)
+  const totalQuantity = cartProducts.reduce((total, item) => total + item.quantity, 0)
 
   return (
     <StyledHeader>
@@ -106,7 +107,7 @@ const Header = () => {
           </Icons>Account
         </NavLinks>
         <NavLinks href={'/cart'}>
-          <CartIcon/><CartItemsCount>{cartProducts?.length}</CartItemsCount> Cart
+          <CartIcon/><CartItemsCount>{totalQuantity}</CartItemsCount> Cart
         </NavLinks>
       </nav>
     </StyledHeader>

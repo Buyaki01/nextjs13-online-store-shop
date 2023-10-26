@@ -21,7 +21,17 @@ export function CartContextProvider({children}) {
   }, [])
 
   function addItemToCart(productId) {
-    setCartProducts(prev => [...prev,productId])
+    const existingProductIndex = cartProducts.findIndex((item) => item.productId === productId)
+
+    if (existingProductIndex !== -1) {
+      // If it's in the cart, update the quantity
+      const updatedCart = [...cartProducts]
+      updatedCart[existingProductIndex].quantity += 1
+      setCartProducts(updatedCart)
+    } else {
+      // If it's not in the cart, add it
+      setCartProducts([...cartProducts, { productId, quantity: 1 }])
+    }
   }
   
   return (
