@@ -36,7 +36,7 @@ const Product = () => {
     const isProductInCart = cartProducts.some((item) => item.productId === id)
     setAddedToCart(isProductInCart)
 
-  }, [cartProducts, product])
+  }, [cartProducts, id])
 
   return (
     <div>

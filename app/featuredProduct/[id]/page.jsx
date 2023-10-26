@@ -28,7 +28,7 @@ const FeaturedProduct = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [addedToCart, setAddedToCart] = useState(false)
 
-  const { addItemToCart } = useContext(CartContext)
+  const { cartProducts, addItemToCart } = useContext(CartContext)
 
   const params = useParams()
   const { id } = params
@@ -46,6 +46,12 @@ const FeaturedProduct = () => {
 
     fetchFeaturedProduct()
   }, [id])
+
+  useEffect(() => {
+    const isProductInCart = cartProducts.some((item) => item.productId === id)
+    setAddedToCart(isProductInCart)
+
+  }, [cartProducts, id])
 
   return (
     <Wrapper>
@@ -113,7 +119,7 @@ const FeaturedProduct = () => {
                 {addedToCart ? (
                   <div className="mr-3 flex items-center justify-center">
                     <button className="border border-none text-xl text-white">-</button>
-                    <span className="text-xl mx-2">1</span>
+                    <span className="text-xl mx-2">{cartProducts.find(item => item.productId === featuredProductInfo._id).quantity}</span>
                     <button 
                       className="border border-none text-xl text-white"
                       onClick={() => {

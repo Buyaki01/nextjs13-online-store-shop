@@ -115,7 +115,7 @@ const Cart = () => {
            
                 <div className="col-span-1 mt-3 border border-solid border-gray-400 rounded-sm p-3 h-52">
                   <h2 className="text-2xl font-bold mb-3">Cart Summary</h2>
-                  <p className="text-xl mb-3">Subtotal: ksh. <span className="font-bold text-2xl">{totalPrice}</span></p>
+                  <p className="text-xl mb-3">Total Amount: <span className="font-bold text-2xl">ksh.{totalPrice}</span></p>
                   <button className="text-xl mt-3 py-2 text-white px-4 rounded-full">
                     Checkout (ksh.{totalPrice})
                   </button>
