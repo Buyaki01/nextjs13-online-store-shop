@@ -32,6 +32,12 @@ const Product = () => {
     fetchProduct()
   }, [id])
 
+  useEffect(() => {
+    const isProductInCart = cartProducts.some((item) => item.productId === id)
+    setAddedToCart(isProductInCart)
+
+  }, [cartProducts, product])
+
   return (
     <div>
       {loading 

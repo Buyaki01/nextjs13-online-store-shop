@@ -63,10 +63,10 @@ const Cart = () => {
           cartProducts?.length > 0 
             ? (
               <div className="grid grid-cols-4 gap-4 mb-5">
-                <div className="col-span-3 mt-3 border border-solid border-gray-300 rounded-sm p-3">
+                <div className="col-span-3 mt-3 border border-solid border-gray-400 rounded-sm p-3">
                   <h2 className="text-2xl font-bold mb-3">Cart</h2>
                   {fetchCartProductInfo && fetchCartProductInfo.length > 0 && fetchCartProductInfo.map(product => (
-                    <div className="mt-3 grid grid-cols-5 gap-4 border-b-2 border-gray-200 pb-3 mb-1">
+                    <div className="mt-3 grid grid-cols-5 gap-4 border-b-2 border-gray-400 pb-3 mb-1">
                       <div className="p-3 mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
                         <Link href={`/products/${product._id}`}>
                           <img 
@@ -113,11 +113,11 @@ const Cart = () => {
                   ))}
                 </div>
            
-                <div className="col-span-1 mt-3 border border-solid border-gray-200 rounded-sm p-3 h-52">
+                <div className="col-span-1 mt-3 border border-solid border-gray-400 rounded-sm p-3 h-52">
                   <h2 className="text-2xl font-bold mb-3">Cart Summary</h2>
-                  <p className="text-lg mb-3">Subtotal: ksh. <span className="font-bold">{totalPrice}</span></p>
-                  <button className="text-xl mt-3 py-3 text-white px-4 rounded-full">
-                    Checkout <span className="text-2xl">(ksh.{totalPrice})</span>
+                  <p className="text-xl mb-3">Subtotal: ksh. <span className="font-bold text-2xl">{totalPrice}</span></p>
+                  <button className="text-xl mt-3 py-2 text-white px-4 rounded-full">
+                    Checkout (ksh.{totalPrice})
                   </button>
                 </div>
               </div>
