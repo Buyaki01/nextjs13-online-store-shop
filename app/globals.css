@@ -3,125 +3,130 @@
 @tailwind utilities;
 
 #app {
-    height: 100%;
-  }
-  html,
-  body {
-    position: relative;
-    height: 100%;
-  }
-  
-  body {
-    background: #eee;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #000;
-    margin: 0;
-    padding: 0;
-  }
+  height: 100%;
+}
 
-  button{
-    background-color: #d40d9a;
-    padding: 5px 10px;
-    border: none;
-    box-shadow: none;
-    border-radius: 5px;
-    font-size: 1.0rem;
-  }
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+  
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
 
-  button:hover{
-    background-color: #a00a7c;
-  }
+button {
+  @apply rounded-lg;
+}
 
-  h4{
-    color: #d40d9a;
-  }
-  
-  .swiper {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-  
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  body {
-    background: #000;
-    color: #000;
-  }
-  
-  .swiper {
-    width: 100%;
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .mySwiper2 {
-    height: 80%;
-    width: 100%;
-  }
-  
-  .mySwiper {
-    height: 20%;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-  
-  .mySwiper .swiper-slide {
-    width: 25%;
-    height: 100%;
-    opacity: 0.4;
-  }
-  
-  .mySwiper .swiper-slide-thumb-active {
-    opacity: 1;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+button{
+  background-color: #d40d9a;
+  padding: 5px 10px;
+  border: none;
+  box-shadow: none;
+  border-radius: 5px;
+  font-size: 1.0rem;
+}
 
-  .priceAddToCartButton{
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-    font-size: 1.0rem;
-  }
+button:hover{
+  background-color: #a00a7c;
+}
 
-  .addToCartButton {
-    background-color: #d40d9a;
-    padding: 5px 10px;
-    border: none;
-    box-shadow: none;
-    border-radius: 5px;
-    font-size: 1.0rem;
-  }
+h4{
+  color: #d40d9a;
+}
 
-  .addToCartButton:hover {
-    background-color: #a00a7c;
-  }
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body {
+  background: #000;
+  color: #000;
+}
+
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.mySwiper2 {
+  height: 80%;
+  width: 100%;
+}
+
+.mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.priceAddToCartButton{
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 1.0rem;
+}
+
+.addToCartButton {
+  background-color: #d40d9a;
+  padding: 5px 10px;
+  border: none;
+  box-shadow: none;
+  border-radius: 5px;
+  font-size: 1.0rem;
+}
+
+.addToCartButton:hover {
+  background-color: #a00a7c;
+}
   

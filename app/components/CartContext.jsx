@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react"
 
 export const CartContext = createContext({})
 
-export function CartContextProvider({children}) {
+const CartContextProvider = ({ children }) => {
   const ls = typeof window !== "undefined" ? window.localStorage : null
   const [cartProducts,setCartProducts] = useState([])
 
@@ -20,7 +20,7 @@ export function CartContextProvider({children}) {
     }
   }, [])
 
-  function addItemToCart(productId) {
+  const addItemToCart = (productId) => {
     const existingProductIndex = cartProducts.findIndex((item) => item.productId === productId)
 
     if (existingProductIndex !== -1) {
@@ -35,24 +35,36 @@ export function CartContextProvider({children}) {
   }
 
   function decrementItemInCart(productId) {
-    const existingProductIndex = cartProducts.findIndex((item) => item.productId === productId)
-
+    const existingProductIndex = cartProducts.findIndex((item) => item.productId === productId);
+  
     if (existingProductIndex !== -1) {
-      const updatedCart = [...cartProducts]
-      updatedCart[existingProductIndex].quantity -= 1
-
+      const updatedCart = [...cartProducts];
+      updatedCart[existingProductIndex].quantity -= 1;
+  
       if (updatedCart[existingProductIndex].quantity <= 0) {
         // If quantity reaches zero, remove the product from the cart
-        updatedCart.splice(existingProductIndex, 1)
+        updatedCart.splice(existingProductIndex, 1);
       }
-
-      setCartProducts(updatedCart)
+  
+      setCartProducts(updatedCart);
+  
+      // Update local storage to reflect the changes
+      ls?.setItem('cart', JSON.stringify(updatedCart))
     }
+  }  
+
+  const removeItemFromCart = (productId) => {
+    const updatedCart = cartProducts.filter((item) => item.productId !== productId)
+    setCartProducts(updatedCart)
+
+    ls?.removeItem('cart')
   }
   
   return (
-    <CartContext.Provider value={{ cartProducts, addItemToCart, decrementItemInCart }}>
+    <CartContext.Provider value={{ cartProducts, addItemToCart, decrementItemInCart, removeItemFromCart }}>
       {children}
     </CartContext.Provider>
-  );
+  )
 }
+
+export default CartContextProvider

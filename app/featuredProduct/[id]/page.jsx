@@ -13,6 +13,7 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 import { CartContext } from "@/app/components/CartContext"
+import Link from "next/link"
 
 const Wrapper = styled.div`
   margin: 50px 0px;
@@ -61,7 +62,7 @@ const FeaturedProduct = () => {
           ) 
         : (
           <div className="grid grid-cols-2 gap-4 p-5">
-            <div className="border-solid border border-gray-200 rounded-sm">
+            <div className="border-solid border border-gray-400 rounded-sm">
               <Swiper
                 loop={true}
                 spaceBetween={10}
@@ -113,10 +114,9 @@ const FeaturedProduct = () => {
             <div className="flex flex-col items-center justify-center h-full p-5">
               <h2 className="text-2xl mb-3">{featuredProductInfo.productName}</h2>
               <p>{featuredProductInfo.description}</p>
-
-              <div className="priceAddToCartButton">
-                <h4 className="font-bold p-3">Ksh. {featuredProductInfo.price}</h4>
-                {addedToCart ? (
+              <div><h4 className="text-xl font-bold p-3">Ksh. {featuredProductInfo.price}</h4></div>
+              {addedToCart ? (
+                <>
                   <div className="mr-3 flex items-center justify-center">
                     <button 
                       className="border border-none text-xl text-white"
@@ -126,7 +126,7 @@ const FeaturedProduct = () => {
                     >
                       -
                     </button>
-                    <span className="text-xl mx-2">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity || 0}</span>
+                    <span className="text-xl mx-2">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity }</span>
                     <button 
                       className="border border-none text-xl text-white"
                       onClick={() => {
@@ -136,20 +136,25 @@ const FeaturedProduct = () => {
                       +
                     </button>
                   </div>
-                ) : (
-                  <button
-                    className="addToCartButton"
-                    onClick={() => {
-                      setAddedToCart(true)
-                      addItemToCart(featuredProductInfo._id)
-                    }}
-                  >
-                    <div className="flex items-center whitespace-nowrap">
-                      <CartIcon/>&nbsp;Add to cart
-                    </div>
-                  </button>
-                )}
-              </div>
+
+                  <div className="mt-3">
+                    <Link href={'/'}><button className="text-xl">Continue Shopping</button></Link>
+                    <Link href={'/'}><button className="text-xl">Proceed to Checkout</button></Link>
+                  </div>
+                </>
+              ) : (
+                <button
+                  className="addToCartButton"
+                  onClick={() => {
+                    setAddedToCart(true)
+                    addItemToCart(featuredProductInfo._id)
+                  }}
+                >
+                  <div className="flex items-center whitespace-nowrap">
+                    <CartIcon/>&nbsp;Add to cart
+                  </div>
+                </button>
+              )}
             </div>
           </div>
         )
