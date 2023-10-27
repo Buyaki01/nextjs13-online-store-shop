@@ -113,11 +113,11 @@ const FeaturedProduct = () => {
 
             <div className="flex flex-col items-center justify-center h-full p-5">
               <h2 className="text-3xl mb-4 font-semibold">{featuredProductInfo.productName}</h2>
-              <p className="text-base text-gray-600 mb-6">{featuredProductInfo.description}</p>
+              <p className="text-base text-gray-600 mb-5">{featuredProductInfo.description}</p>
               
               {addedToCart ? (
                 <>
-                  <div className="flex items-center justify-center space-x-4 mb-6">
+                  <div className="flex items-center justify-center space-x-4 mb-5">
                     <div><h4 className="text-2xl font-bold">Ksh.{featuredProductInfo.price}</h4></div>
                     <button 
                       className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
@@ -128,7 +128,7 @@ const FeaturedProduct = () => {
                     </button>
                     <span className="text-2xl">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity }</span>
                     <button 
-                      className="border text-2xl px-2 text-white w-10 h-10 flex justify-center rounded-md"
+                      className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
                       onClick={() => {
                         addItemToCart(featuredProductInfo._id)
                       }}
@@ -142,7 +142,7 @@ const FeaturedProduct = () => {
 
                   <Link 
                     href={'/'}
-                    className="text-lg font-semibold text-green-600 flex gap-2 items-center hover:underline hover:text-green-800 transition duration-300"
+                    className="text-lg font-semibold text-green-600 flex gap-2 items-center hover:underline hover:text-green-800"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
@@ -160,8 +160,8 @@ const FeaturedProduct = () => {
                       addItemToCart(featuredProductInfo._id)
                     }}
                   >
-                    <div className="flex items-center justify-center">
-                      <CartIcon className="w-6 h-6 text-white mr-2" />&nbsp;Add to cart
+                    <div className="flex items-center justify-center gap-1">
+                      <CartIcon className="w-6 h-6 text-white"/>&nbsp;Add to cart
                     </div>
                   </button>
                 </>

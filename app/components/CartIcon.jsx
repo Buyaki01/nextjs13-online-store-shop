@@ -1,9 +1,6 @@
 import styled from "styled-components"
 
 const Icons = styled.svg`
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
   margin-bottom: 0px;
 `;
 
