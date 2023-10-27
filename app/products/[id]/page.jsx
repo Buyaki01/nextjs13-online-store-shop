@@ -134,7 +134,7 @@ const Product = () => {
                   <>
                     <div className="m-3"><h4 className="text-xl font-bold">shs. {product.price}</h4></div>
                     <button
-                      className="addToCartButton text-xl rounded-lg text-white"
+                      className="text-xl rounded-lg text-white"
                       onClick={() => {
                         setAddedToCart(true)
                         addItemToCart(product._id)

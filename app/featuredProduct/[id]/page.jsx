@@ -112,49 +112,56 @@ const FeaturedProduct = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center h-full p-5">
-              <h2 className="text-2xl mb-3">{featuredProductInfo.productName}</h2>
-              <p className="text-base">{featuredProductInfo.description}</p>
+              <h2 className="text-3xl mb-4 font-semibold">{featuredProductInfo.productName}</h2>
+              <p className="text-base text-gray-600 mb-6">{featuredProductInfo.description}</p>
               
               {addedToCart ? (
                 <>
-                  <div className="flex items-center justify-center space-x-2 mt-3">
-                    <div><h4 className="text-xl font-bold">Ksh.{featuredProductInfo.price}</h4></div>
+                  <div className="flex items-center justify-center space-x-4 mb-6">
+                    <div><h4 className="text-2xl font-bold">Ksh.{featuredProductInfo.price}</h4></div>
                     <button 
-                      className="border text-xl text-white"
+                      className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
                       onClick={() => {
                         decrementItemInCart(featuredProductInfo._id)
                       }}
-                    >
-                      -
+                    >-
                     </button>
-                    <span className="text-xl">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity }</span>
+                    <span className="text-2xl">{cartProducts.find(item => item.productId === featuredProductInfo._id)?.quantity }</span>
                     <button 
-                      className="border text-xl text-white"
+                      className="border text-2xl px-2 text-white w-10 h-10 flex justify-center rounded-md"
                       onClick={() => {
                         addItemToCart(featuredProductInfo._id)
                       }}
-                    >
-                      +
+                    >+
                     </button>
                   </div>
 
-                  <div className="mt-3 flex gap-2 text-white">
-                    <Link href={'/'}><button className="text-xl rounded-lg">Continue Shopping</button></Link>
-                    <Link href={'/'}><button className="text-xl rounded-lg">Proceed to Checkout</button></Link>
-                  </div>
+                  <button className="text-xl text-white py-1 w-60 rounded-lg mb-4">
+                    Proceed to Checkout
+                  </button>
+
+                  <Link 
+                    href={'/'}
+                    className="text-lg font-semibold text-green-600 flex gap-2 items-center hover:underline hover:text-green-800 transition duration-300"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                    </svg>
+                    Continue Shopping
+                  </Link>
                 </>
               ) : (
                 <>
-                  <div className="m-3"><h4 className="text-xl font-bold">shs. {featuredProductInfo.price}</h4></div>
+                  <div className="mb-6"><h4 className="text-2xl font-bold">shs. {featuredProductInfo.price}</h4></div>
                   <button
-                    className="addToCartButton text-xl rounded-lg text-white"
+                    className="text-xl rounded-lg text-white w-60 py-1"
                     onClick={() => {
                       setAddedToCart(true)
                       addItemToCart(featuredProductInfo._id)
                     }}
                   >
-                    <div className="flex items-center">
-                      <CartIcon className="w-5 h-5 text-white"/>&nbsp;Add to cart
+                    <div className="flex items-center justify-center">
+                      <CartIcon className="w-6 h-6 text-white mr-2" />&nbsp;Add to cart
                     </div>
                   </button>
                 </>
