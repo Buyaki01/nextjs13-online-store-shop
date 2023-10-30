@@ -88,7 +88,7 @@ const Cart = () => {
                       
                       <div className="w-32 mr-3 flex items-center justify-center">
                         <button 
-                          className="border border-none bg-gray-300 text-xl"
+                          className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
                           onClick={() => {
                             decrementItemInCart(product._id)
                           }}
@@ -97,7 +97,7 @@ const Cart = () => {
                         </button>
                         <span className="text-xl mx-2">{cartProducts.find(item => item.productId === product._id)?.quantity }</span>
                         <button 
-                          className="border border-none bg-gray-300 text-xl"
+                          className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
                           onClick={() => {
                             addItemToCart(product._id)
                           }}
@@ -127,11 +127,16 @@ const Cart = () => {
                 </div>
            
                 <div className="col-span-1 mt-3 border border-solid border-gray-400 rounded-sm p-3 h-52">
-                  <h2 className="text-2xl font-bold mb-3">Cart Summary</h2>
-                  <p className="text-xl mb-3">Total Amount: <span className="font-bold text-2xl">ksh.{totalPrice}</span></p>
-                  <button className="text-xl mt-3 py-2 text-white px-4 rounded-full">
-                    Checkout (ksh.{totalPrice})
-                  </button>
+                  <h2 className="text-2xl font-semibold mb-3">Cart Summary</h2>
+                  <p className="text-lg mb-3">Total Amount: <span className="font-semibold text-xl">ksh.{totalPrice}</span></p>
+                  <div className="text-sm text-gray-600 mb-3">
+                    (Taxes and Delivery charges will be added in the checkout page)
+                  </div>
+                  <div className="text-center">
+                    <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
+                      Checkout
+                    </button>
+                  </div>
                 </div>
               </div>
             ) 
@@ -139,7 +144,7 @@ const Cart = () => {
               <div className="flex flex-col items-center justify-center">
                 <p className="mt-5 text-2xl">Your cart is empty!</p>
                 <div className="mt-5">
-                  <Link href={'/'}><button className="text-xl text-white rounded-lg">Start Shopping</button></Link>
+                  <Link href={'/'}><button className="text-white text-lg px-4 py-2 rounded-lg focus:outline-none">Start Shopping</button></Link>
                 </div>
               </div>
             )
