@@ -9,7 +9,7 @@ const FormWrap = ({ children }) => {
     >
       <div
         className="
-          max-w-[650px]
+          max-w-[600px]
           w-full
           flex
           flex-col
@@ -18,6 +18,7 @@ const FormWrap = ({ children }) => {
           shadow-xl
           shadow-slate-200
           rounded-md
+          my-8
           p-4
           md:p-8
         "
