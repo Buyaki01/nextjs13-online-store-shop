@@ -4,6 +4,7 @@ import { useState } from "react"
 import Input from "../components/inputs/Input"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
+import { AiOutlineGoogle } from "react-icons/ai"
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -16,6 +17,15 @@ const RegisterForm = () => {
   return (
     <>
       <h1 className="text-4xl font-semibold mb-2 text-primary">Welcome to Pearls Collections</h1>
+
+      <button
+        className="custom-button-style flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
+        onClick={() => {}}
+      >
+        <AiOutlineGoogle />
+        Sign up with Google
+      </button>
+
       <Input
         id="name"
         label="Name"
@@ -43,7 +53,7 @@ const RegisterForm = () => {
       />
 
       <button
-        className="w-full text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
+        className="w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
         onClick={handleSubmit(onSubmit)}
       >
         Sign Up

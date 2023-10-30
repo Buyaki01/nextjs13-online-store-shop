@@ -36,6 +36,15 @@ button:hover{
   background-color: #a00a7c;
 }
 
+.custom-button-style{
+  background-color: #fff;
+  @apply text-slate-800;
+}
+
+.custom-button-style:hover{
+  background-color: #c0c0c0;
+}
+
 h4{
   color: #d40d9a;
 }
