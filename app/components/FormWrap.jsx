@@ -4,10 +4,7 @@ const FormWrap = ({ children }) => {
       min-h-fit
       h-full
       flex
-      items-center
       justify-center
-      pb-12
-      pt-24
     "
     >
       <div

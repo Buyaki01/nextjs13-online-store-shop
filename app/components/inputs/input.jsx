@@ -1,14 +1,6 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
-
-const input = ({ id, label, type, disabled, required, register, errors }) => {
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
+const Input = ({ id, label, type, disabled, required, register, errors }) => {
 
   return (
     <div className="w-full relative">
@@ -59,4 +51,4 @@ const input = ({ id, label, type, disabled, required, register, errors }) => {
   )
 }
 
-export default input  
+export default Input  
