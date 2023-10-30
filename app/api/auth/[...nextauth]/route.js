@@ -17,7 +17,13 @@ export const authOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        const res = await axios.post("/api/login", {data})
+        if(!credentials?.email || !credentials.password){
+          throw new Error('Invalid email or password')
+        }
+
+        console.log(credentials)
+
+        const res = await axios.post("/api/login", { credentials })
         const user = await res.json()
   
         // If no error and we have user data, return it
