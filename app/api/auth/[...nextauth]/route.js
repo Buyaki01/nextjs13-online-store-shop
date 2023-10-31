@@ -12,30 +12,17 @@ export const authOptions = {
     }),
     CredentialsProvider({
       name: 'Credentials',
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" }
-      },
+      credentials: {},
+
       async authorize(credentials, req) {
-        if(!credentials?.email || !credentials.password){
-          throw new Error('Invalid email or password')
-        }
-
-        console.log(credentials)
-
-        const res = await axios.post("/api/login", { credentials })
-        const user = await res.json()
-  
-        // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user
-        }
-        // Return null if user data could not be retrieved
-        return null
+        
       }
     })
   ],
   adapter: MongoDBAdapter(clientPromise),
+  session: {
+    strategy: "jwt",
+  },
 }
 
 const handler = NextAuth(authOptions)

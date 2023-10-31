@@ -5,13 +5,20 @@ import Input from "../components/inputs/Input"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
+import axios from "axios"
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, formState: {errors}} = useForm()
   
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    try {
+      const { name, email, password } = data
+      await axios.post('/api/register', { name, email, password })
+
+    } catch (error) {
+      console.log("Error during registration: ", error)
+    }
   }
 
   return (
