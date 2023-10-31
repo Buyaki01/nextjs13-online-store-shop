@@ -4,12 +4,38 @@ import Input from "../components/inputs/Input"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
+import { signIn } from "next-auth/react"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: {errors}} = useForm()
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const [error, setError] = useState("")
+  const router = useRouter()
+
+  const onSubmit = async (data) => {
+    try {
+      const { email, password } = data
+      
+      const response = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (response.error) {
+        setError("Invalid Credentials")
+        return
+      }
+
+      setError("")
+
+      router.push('/')
+
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
