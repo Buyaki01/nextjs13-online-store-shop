@@ -1,8 +1,11 @@
 import NextAuth from "next-auth"
 import GoogleProvider from 'next-auth/providers/google'
+import CredentialsProvider from "next-auth/providers/credentials"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
-import clientPromise from '../../../../lib/mongodb'
-import axios from "axios"
+import clientPromise from "@/lib/mongodb"
+import connectMongoDB from "@/lib/mongoose"
+import { User } from "@/models/user"
+import bcrypt from 'bcryptjs'
 
 export const authOptions = {
   providers: [
@@ -12,30 +15,41 @@ export const authOptions = {
     }),
     CredentialsProvider({
       name: 'Credentials',
-      credentials: {
-        email: { label: "Email", type: "text" },
-        password: { label: "Password", type: "password" }
-      },
+      credentials: {},
+
       async authorize(credentials, req) {
-        if(!credentials?.email || !credentials.password){
-          throw new Error('Invalid email or password')
-        }
+        const { email, password } = credentials
 
-        console.log(credentials)
+        try {
+          await connectMongoDB()
+          const user = await User.findOne({ email })
+          
+          if (!user) {
+            return null
+          }
 
-        const res = await axios.post("/api/login", { credentials })
-        const user = await res.json()
-  
-        // If no error and we have user data, return it
-        if (res.ok && user) {
+          const passwordMatch = await bcrypt.compare(password, user.password)
+
+          if (!passwordMatch) {
+            return null
+          }
+
           return user
+
+        } catch (error) {
+          console.log("Error: ", error)
         }
-        // Return null if user data could not be retrieved
-        return null
       }
     })
   ],
   adapter: MongoDBAdapter(clientPromise),
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/login",
+  },
 }
 
 const handler = NextAuth(authOptions)

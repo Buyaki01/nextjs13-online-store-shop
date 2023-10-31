@@ -5,13 +5,32 @@ import Input from "../components/inputs/Input"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
+import axios from "axios"
+import { signIn } from "next-auth/react"
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, formState: {errors}} = useForm()
   
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = async (data) => {
+    try {
+      const { name, email, password } = data
+
+      const resUserExists = await axios.post("/api/userExists", { email })
+
+      const { user } = await resUserExists.data
+
+      if (user) {
+        toast.error("User already exists")
+        return
+      }
+
+      await axios.post('/api/register', { name, email, password })
+      toast.success("Account created successfully")
+
+    } catch (error) {
+      console.log("Error during registration: ", error)
+    }
   }
 
   return (
@@ -20,10 +39,10 @@ const RegisterForm = () => {
 
       <button
         className="custom-button-style flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
-        onClick={() => {}}
+        onClick={() => {signIn('google')}}
       >
         <AiOutlineGoogle />
-        Sign up with Google
+        Continue with Google
       </button>
 
       <Input
