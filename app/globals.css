@@ -76,7 +76,7 @@ h4{
 }
 
 .avatar{
-  @apply border-[1px] rounded-lg hover:shadow-md transition;
+  @apply border-[1px] rounded-full hover:shadow-md transition;
 }
 
 .swiper {

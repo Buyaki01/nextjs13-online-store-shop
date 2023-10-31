@@ -70,7 +70,7 @@ const CartItemsCount = styled.span`
   font-size: 0.7rem;
   position: absolute;
   top: 25px;
-  right: 55px;
+  right: 130px;
   z-index: 1;
 `;
 
@@ -88,11 +88,12 @@ const Header = ({children}) => {
       </SearchInputContainer>
 
       <nav className="flex items-center gap-4">
-        <UserMenu />
         <Link className="navLinks" href={'/cart'}>
           <CartIcon/>
           {totalQuantity > 0 && <CartItemsCount>{totalQuantity}</CartItemsCount>}Cart
         </Link>
+
+        <UserMenu />
       </nav>
 
       {children}
