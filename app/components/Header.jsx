@@ -69,8 +69,8 @@ const CartItemsCount = styled.span`
   border-radius: 50%;
   font-size: 0.7rem;
   position: absolute;
-  top: 25px;
-  right: 210px;
+  top: -3px;
+  right: 35px;
   z-index: 1;
 `;
 
@@ -92,7 +92,6 @@ const Header = ({children}) => {
           <CartIcon/>
           {totalQuantity > 0 && <CartItemsCount>{totalQuantity}</CartItemsCount>}Cart
         </Link>
-
         <UserMenu />
       </nav>
 

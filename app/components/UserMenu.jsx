@@ -8,7 +8,6 @@ import BackDrop from "./BackDrop"
 
 const UserMenu = () => {
   const { data: session } = useSession()
-  console.log("Session data:", session)
 
   const [isOpen, setIsOpen] = useState(false)
 
