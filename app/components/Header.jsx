@@ -70,7 +70,7 @@ const CartItemsCount = styled.span`
   font-size: 0.7rem;
   position: absolute;
   top: 25px;
-  right: 130px;
+  right: 210px;
   z-index: 1;
 `;
 
