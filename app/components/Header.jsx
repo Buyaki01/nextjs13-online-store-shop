@@ -1,3 +1,5 @@
+'use client'
+
 import styled from "styled-components"
 import Link from "next/link"
 import CartIcon from "./CartIcon"
@@ -68,11 +70,11 @@ const CartItemsCount = styled.span`
   font-size: 0.7rem;
   position: absolute;
   top: 25px;
-  right: 73px;
+  right: 55px;
   z-index: 1;
 `;
 
-const Header = () => {
+const Header = ({children}) => {
   const { cartProducts } = useContext(CartContext)
   const totalQuantity = cartProducts.reduce((total, item) => total + item.quantity, 0)
 
@@ -92,6 +94,8 @@ const Header = () => {
           {totalQuantity > 0 && <CartItemsCount>{totalQuantity}</CartItemsCount>}Cart
         </Link>
       </nav>
+
+      {children}
     </StyledHeader>
   )
 }
