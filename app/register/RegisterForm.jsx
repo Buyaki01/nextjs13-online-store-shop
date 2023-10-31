@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
 import axios from "axios"
+import { signIn } from "next-auth/react"
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -38,10 +39,10 @@ const RegisterForm = () => {
 
       <button
         className="custom-button-style flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
-        onClick={() => {}}
+        onClick={() => {signIn('google')}}
       >
         <AiOutlineGoogle />
-        Sign up with Google
+        Continue with Google
       </button>
 
       <Input

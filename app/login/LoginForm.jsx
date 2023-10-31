@@ -42,7 +42,7 @@ const LoginForm = () => {
 
       <button
         className="custom-button-style flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
-        onClick={() => {}}
+        onClick={() => {signIn('google')}}
       >
         <AiOutlineGoogle />
         Continue with Google

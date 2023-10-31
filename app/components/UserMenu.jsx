@@ -20,7 +20,7 @@ const UserMenu = () => {
   return (
     <>
       <div className="relative z-30">
-        {session?.user?.name
+        {session?.user && session?.user?.name
           ? <div onClick={toggleOpen}>  
               <div className="navLinks avatar" href={'/account'}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
