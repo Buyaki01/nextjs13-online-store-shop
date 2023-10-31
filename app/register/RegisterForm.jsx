@@ -14,6 +14,15 @@ const RegisterForm = () => {
   const onSubmit = async (data) => {
     try {
       const { name, email, password } = data
+
+      const resUserExists = await axios.post("/api/userExists", { email })
+
+      const { user } = await resUserExists.json()
+
+      if (user) {
+        return "User already exists"
+      }
+
       await axios.post('/api/register', { name, email, password })
 
     } catch (error) {
