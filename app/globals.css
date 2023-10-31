@@ -46,6 +46,14 @@ button:hover{
   background-color: #a00a7c;
 }
 
+.bg-primary:hover, .text-primary:hover{
+  background-color: #a00a7c;
+}
+
+.bg-secondary:hover, .text-secondary:hover{
+  color: rgb(120, 180, 49);
+}
+
 .custom-button-style{
   background-color: #fff;
   @apply text-slate-800;
@@ -69,10 +77,6 @@ h4{
 
 .avatar{
   @apply border-[1px] rounded-lg hover:shadow-md transition;
-}
-
-.text-secondary:hover{
-  color: rgb(120, 180, 49);
 }
 
 .swiper {

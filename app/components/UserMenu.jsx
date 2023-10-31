@@ -1,5 +1,6 @@
 'use client'
 
+import { signOut } from "next-auth/react"
 import Link from "next/link"
 import { useCallback, useState } from "react"
 import { AiFillCaretDown } from "react-icons/ai"
@@ -43,7 +44,31 @@ const UserMenu = () => {
             "
           >
             <div>
-              <Link href={"/my-orders"}>My Orders</Link>
+              <Link href={"/my-orders"}>
+                <div 
+                  className="px-4 py-3 transition"
+                  onClick={toggleOpen}
+                >
+                  My Orders
+                </div>
+              </Link>
+              <Link href={"/login"}>
+                <div 
+                  className="px-4 py-3 transition"
+                  onClick={toggleOpen}
+                >
+                  Login
+                </div>
+              </Link>
+              <div 
+                className="px-4 py-3 transition"
+                onClick={() => {
+                  toggleOpen()
+                  signOut()
+                }}
+              >
+                Logout
+              </div>
             </div>
           </div>
         )}
