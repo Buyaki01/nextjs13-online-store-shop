@@ -10,7 +10,6 @@ import axios from "axios"
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, formState: {errors}} = useForm()
-  const [errorMessage, setErrorMessage] = useState("")
   
   const onSubmit = async (data) => {
     try {
@@ -21,13 +20,12 @@ const RegisterForm = () => {
       const { user } = await resUserExists.data
 
       if (user) {
-        setErrorMessage("User already exists")
+        toast.error("User already exists")
         return
       }
 
-      setErrorMessage("")
-
       await axios.post('/api/register', { name, email, password })
+      toast.success("Account created successfully")
 
     } catch (error) {
       console.log("Error during registration: ", error)
@@ -78,8 +76,6 @@ const RegisterForm = () => {
       >
         Sign Up
       </button>
-
-      {errorMessage && <div className="error-message">{errorMessage}</div>}
 
       <p className="text-sm">
         Already have an account? <Link className="underline" href={'/login'}>Log in</Link>

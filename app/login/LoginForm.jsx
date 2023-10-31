@@ -5,13 +5,11 @@ import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
 import { signIn } from "next-auth/react"
-import { useState } from "react"
 import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: {errors}} = useForm()
-
-  const [error, setError] = useState("")
   const router = useRouter()
 
   const onSubmit = async (data) => {
@@ -25,12 +23,12 @@ const LoginForm = () => {
       })
 
       if (response.error) {
-        setError("Invalid Credentials")
+        toast.error("Invalid Credentials")
         return
       }
 
-      setError("")
-
+      toast.success("Login successful")
+      
       router.push('/')
 
     } catch (error) {
