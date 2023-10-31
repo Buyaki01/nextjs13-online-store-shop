@@ -21,6 +21,16 @@ body {
   padding: 0;
 }
 
+.error-message {
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 button {
   @apply rounded-lg;
 }

@@ -10,6 +10,7 @@ import axios from "axios"
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, formState: {errors}} = useForm()
+  const [errorMessage, setErrorMessage] = useState("")
   
   const onSubmit = async (data) => {
     try {
@@ -17,11 +18,14 @@ const RegisterForm = () => {
 
       const resUserExists = await axios.post("/api/userExists", { email })
 
-      const { user } = await resUserExists.json()
+      const { user } = await resUserExists.data
 
       if (user) {
-        return "User already exists"
+        setErrorMessage("User already exists")
+        return
       }
+
+      setErrorMessage("")
 
       await axios.post('/api/register', { name, email, password })
 
@@ -74,6 +78,8 @@ const RegisterForm = () => {
       >
         Sign Up
       </button>
+
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
 
       <p className="text-sm">
         Already have an account? <Link className="underline" href={'/login'}>Log in</Link>
