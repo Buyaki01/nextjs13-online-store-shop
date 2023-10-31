@@ -1,12 +1,14 @@
 'use client'
 
-import { signOut } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useCallback, useState } from "react"
 import { AiFillCaretDown } from "react-icons/ai"
 import BackDrop from "./BackDrop"
 
 const UserMenu = () => {
+  const { data: session } = useSession()
+
   const [isOpen, setIsOpen] = useState(false)
 
   // useCallback is used in this case to create a memoized event handler function that remains constant between renders, reducing unnecessary re-renders of components that use this function as an event handler.
@@ -43,33 +45,45 @@ const UserMenu = () => {
               cursor-pointer
             "
           >
-            <div>
-              <Link href={"/my-orders"}>
-                <div 
-                  className="px-4 py-3 transition"
-                  onClick={toggleOpen}
-                >
-                  My Orders
+            {session?.user 
+              ? <div>
+                  <Link href={"/my-orders"}>
+                    <div 
+                      className="px-4 py-3 transition"
+                      onClick={toggleOpen}
+                    >
+                      My Orders
+                    </div>
+                  </Link>
+                  <div 
+                    className="px-4 py-3 transition"
+                    onClick={() => {
+                      toggleOpen()
+                      signOut()
+                    }}
+                  >
+                    Logout
+                  </div>
                 </div>
-              </Link>
-              <Link href={"/login"}>
-                <div 
-                  className="px-4 py-3 transition"
-                  onClick={toggleOpen}
-                >
-                  Login
+              : <div>
+                  <Link href={"/login"}>
+                    <div 
+                      className="px-4 py-3 transition"
+                      onClick={toggleOpen}
+                    >
+                      Login
+                    </div>
+                  </Link>
+                  <Link href={"/register"}>
+                    <div 
+                      className="px-4 py-3 transition"
+                      onClick={toggleOpen}
+                    >
+                      Register
+                    </div>
+                  </Link>
                 </div>
-              </Link>
-              <div 
-                className="px-4 py-3 transition"
-                onClick={() => {
-                  toggleOpen()
-                  signOut()
-                }}
-              >
-                Logout
-              </div>
-            </div>
+            }
           </div>
         )}
       </div>
