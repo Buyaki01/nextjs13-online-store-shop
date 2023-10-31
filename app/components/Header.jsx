@@ -3,6 +3,7 @@ import Link from "next/link"
 import CartIcon from "./CartIcon"
 import { useContext } from "react"
 import { CartContext } from "./CartContext"
+import UserMenu from "./UserMenu"
 
 const StyledHeader = styled.header`
   background-color: rgb(146, 212, 59);
@@ -18,15 +19,6 @@ const Logo = styled(Link)`
   text-decoration: none;
   white-space: nowrap;
   font-size: 3rem;
-`;
-
-const NavLinks = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-  margin: 0 20px;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
 `;
 
 const SearchInput = styled.input`
@@ -63,13 +55,6 @@ const SearchButton = styled.button`
   }
 `;
 
-const AvatorIcon = styled.svg`
-  width: 24px;
-  height: 24px;
-  margin-right: 5px;
-  margin-bottom: 0px;
-`;
-
 const SearchInputContainer = styled.div`
   display: flex;
   align-items: center;
@@ -100,23 +85,12 @@ const Header = () => {
         <SearchButton>Search</SearchButton>
       </SearchInputContainer>
 
-      <nav className="flex items-center">
-        <NavLinks
-          href={"/my-orders"}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M8 7l4-4m0 0l4 4m-4-4v18"></path>
-          </svg>My Orders
-        </NavLinks>
-        <NavLinks href={'/account'}>
-          <AvatorIcon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-          </AvatorIcon>Account
-        </NavLinks>
-        <NavLinks href={'/cart'}>
+      <nav className="flex items-center gap-4">
+        <UserMenu />
+        <Link className="navLinks" href={'/cart'}>
           <CartIcon/>
-          {totalQuantity > 0 && <CartItemsCount>{totalQuantity}</CartItemsCount>}<span className="ml-1">Cart</span>
-        </NavLinks>
+          {totalQuantity > 0 && <CartItemsCount>{totalQuantity}</CartItemsCount>}Cart
+        </Link>
       </nav>
     </StyledHeader>
   )
