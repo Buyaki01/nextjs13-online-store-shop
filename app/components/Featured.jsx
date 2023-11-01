@@ -115,7 +115,7 @@ const Featured = () => {
                   </StyledTitleDiv>
                   <StyledDescription>{featuredProduct[0].description}</StyledDescription>
                   <div>
-                    <ViewMoreButton href={`/featuredProduct/${featuredProduct[0]._id}`}>View More</ViewMoreButton>
+                    <ViewMoreButton href={`/featured-product/${featuredProduct[0]._id}`}>View More</ViewMoreButton>
                   </div>
                 </StyledTitleDescriptionGrid>
                 <StyledImageGrid>
