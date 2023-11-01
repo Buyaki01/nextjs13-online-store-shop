@@ -15,8 +15,6 @@ export default function Home() {
       <HotNewReleases />
       <FlashSales />
       <Products />
-      <Link href="/register">Register</Link>
-      <Link href="/login">Login</Link>
     </main>
   )
 }
