@@ -101,7 +101,6 @@ const LoadingMessage = styled.p`
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
-  color: #F8F8FF;
   padding: 15px;
   margin: 0;
   min-height: 450px;
