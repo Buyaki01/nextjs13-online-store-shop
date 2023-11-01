@@ -46,8 +46,8 @@ button:hover{
   background-color: #a00a7c;
 }
 
-.bg-primary:hover{
-  background-color: #a00a7c;
+.link-container:hover {
+  border: 2px solid #fff;
 }
 
 .bg-secondary:hover, .text-secondary:hover{

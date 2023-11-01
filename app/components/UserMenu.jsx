@@ -61,7 +61,7 @@ const UserMenu = () => {
               ? <div>
                   <Link href={"/my-orders"}>
                     <div 
-                      className="px-4 py-3 transition"
+                      className="link-container px-4 py-3 transition"
                       onClick={toggleOpen}
                     >
                       My Orders
@@ -69,7 +69,7 @@ const UserMenu = () => {
                   </Link>
                   <hr />
                   <div 
-                    className="px-4 py-3 transition"
+                    className="link-container px-4 py-3 transition"
                     onClick={() => {
                       toggleOpen()
                       signOut()
@@ -81,7 +81,7 @@ const UserMenu = () => {
               : <div>
                   <Link href={"/login"}>
                     <div 
-                      className="px-4 py-3 transition"
+                      className="link-container px-4 py-3 transition"
                       onClick={toggleOpen}
                     >
                       Login
@@ -89,7 +89,7 @@ const UserMenu = () => {
                   </Link>
                   <Link href={"/register"}>
                     <div 
-                      className="px-4 py-3 transition"
+                      className="link-container px-4 py-3 transition"
                       onClick={toggleOpen}
                     >
                       Register
