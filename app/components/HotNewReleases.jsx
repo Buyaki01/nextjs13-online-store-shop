@@ -133,12 +133,12 @@ const HotNewReleases = () => {
               <>
                 <HotNewReleaseOne>
                   <div>
-                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[0]._id}`}>
+                    <NewReleasesLinks href={`/products/${newReleases[0]._id}`}>
                       <img src={newReleases[0].uploadedImagePaths} alt={newReleases[0].productName} />
                     </NewReleasesLinks>
                   </div>
                   <div>
-                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[0]._id}`}>
+                    <NewReleasesLinks href={`/products/${newReleases[0]._id}`}>
                       <p>{newReleases[0].productName}</p>
                     </NewReleasesLinks>
                     <h4>KSh {newReleases[0].price}</h4>
@@ -147,12 +147,12 @@ const HotNewReleases = () => {
   
                 <HotNewReleaseTwo>
                     <div>
-                      <NewReleasesLinks href={`/hotNewReleases/${newReleases[1]._id}`}>
+                      <NewReleasesLinks href={`/products/${newReleases[1]._id}`}>
                         <img src={newReleases[1].uploadedImagePaths} alt={newReleases[1].productName} />
                       </NewReleasesLinks>
                     </div>
                     <div>
-                      <NewReleasesLinks href={`/hotNewReleases/${newReleases[1]._id}`}>
+                      <NewReleasesLinks href={`/products/${newReleases[1]._id}`}>
                         <p>{newReleases[1].productName}</p>
                       </NewReleasesLinks>
                       <h4>KSh {newReleases[1].price}</h4>
@@ -161,12 +161,12 @@ const HotNewReleases = () => {
 
                 <HotNewReleaseThree>
                   <div>
-                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[2]._id}`}>
+                    <NewReleasesLinks href={`/products/${newReleases[2]._id}`}>
                       <img src={newReleases[2].uploadedImagePaths} alt={newReleases[2].productName} />
                     </NewReleasesLinks>
                   </div>
                   <div>
-                    <NewReleasesLinks href={`/hotNewReleases/${newReleases[2]._id}`}>
+                    <NewReleasesLinks href={`/products/${newReleases[2]._id}`}>
                       <p>{newReleases[2].productName}</p>
                     </NewReleasesLinks>
                     <h4>KSh {newReleases[2].price}</h4>

@@ -54,6 +54,10 @@ const Cart = () => {
     setTotalPrice(cartTotalPrice)
   }, [cartProducts, fetchCartProductInfo])
 
+  const handleCheckout = () => {
+    console.log("Hello")
+  }
+
   return (
     <>
       <Header />
@@ -136,7 +140,10 @@ const Cart = () => {
                       (Taxes and Delivery charges will be added in the checkout page)
                     </div>
                     <div className="text-center">
-                      <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
+                      <button 
+                        className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
+                        onClick={handleCheckout}
+                      >
                         Checkout
                       </button>
                     </div>

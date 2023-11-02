@@ -40,6 +40,10 @@ const Product = () => {
 
   }, [cartProducts, id])
 
+  const handleCheckout = () => {
+    console.log("Hello")
+  }
+
   return (
     <>
       <Header />
@@ -129,6 +133,7 @@ const Product = () => {
 
                       <button 
                         className="text-xl text-white py-1 w-60 rounded-lg mb-4"
+                        onClick={handleCheckout}
                       >
                         Proceed to Checkout
                       </button>
