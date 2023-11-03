@@ -22,6 +22,10 @@ export const POST = async (request) => {
         },
       ],
       mode: 'payment',
+      billing_address_collection: 'auto',
+      phone_number_collection: {
+        enabled: true
+      },
       success_url: `${process.env.NEXTAUTH_URL}/success`,
       cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
       metadata: {
