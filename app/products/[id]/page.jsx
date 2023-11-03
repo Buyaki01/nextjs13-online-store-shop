@@ -13,6 +13,7 @@ import 'swiper/css/thumbs'
 import { CartContext } from "@/app/components/CartContext"
 import Link from "next/link"
 import Header from "@/app/components/Header"
+import CheckoutButton from "@/app/components/CheckoutButton"
 
 const Product = () => {
   const params = useParams()
@@ -39,10 +40,6 @@ const Product = () => {
     setAddedToCart(isProductInCart)
 
   }, [cartProducts, id])
-
-  const handleCheckout = () => {
-    console.log("Hello")
-  }
 
   return (
     <>
@@ -131,12 +128,7 @@ const Product = () => {
                         </button>
                       </div>
 
-                      <button 
-                        className="text-xl text-white py-1 w-60 rounded-lg mb-4"
-                        onClick={handleCheckout}
-                      >
-                        Proceed to Checkout
-                      </button>
+                      <CheckoutButton />
                       
                       <Link 
                         href={'/'}
