@@ -17,7 +17,8 @@ const CheckoutButton = () => {
     const userExists = session?.user?.name
     if (userExists) {
       const email = session?.user?.email
-      const response = await axios.post('/api/checkout-sessions', { email })
+      await axios.post('/api/checkout-sessions', { email })
+      //await stripePromise?.redirectToCheckout({ sessionId: response.data._id })
     }
     else{
       router.push('/login')

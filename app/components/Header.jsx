@@ -14,6 +14,7 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  width: 100%;
 `;
 
 const Logo = styled(Link)`
