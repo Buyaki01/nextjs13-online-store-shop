@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^2.0.3",
+    "@stripe/stripe-js": "^2.1.11",
     "axios": "^1.5.1",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
@@ -22,7 +23,7 @@
     "react-hook-form": "^7.47.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
-    "stripe": "^14.2.0",
+    "stripe": "^14.3.0",
     "styled-components": "^6.0.9",
     "swiper": "^10.3.1"
   },
