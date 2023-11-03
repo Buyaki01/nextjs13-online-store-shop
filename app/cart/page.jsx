@@ -61,7 +61,7 @@ const Cart = () => {
       <div className="mb-5">
         {isLoading 
           ? (
-              <p className="mt-5 text-2xl text-center">Loading...</p>
+              <p className="loadingMessage">Loading...</p>
             ) 
           : (
             cartProducts?.length > 0 

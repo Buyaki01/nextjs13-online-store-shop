@@ -16,9 +16,19 @@ export const POST = async (request) => {
             product_data: {
               name: "T-shirt",
             },
-            unit_amount: 2000,
+            unit_amount: 2000 * 100,
           },
           quantity: 2,
+        },
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: "Handbag",
+            },
+            unit_amount: 5000 * 100,
+          },
+          quantity: 1,
         },
       ],
       mode: 'payment',
@@ -32,7 +42,8 @@ export const POST = async (request) => {
         email,
       },
     })
-    return NextResponse.json({ message: "Connection is Active!" })
+
+    return NextResponse.json({ sessionId: session.id })
   } catch (err) {
     return NextResponse.json({ error: err.message})
   }
