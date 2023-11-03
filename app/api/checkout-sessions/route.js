@@ -1,7 +1,9 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 
-export const POST = async (req, res) => {
+export const POST = async (request) => {
+  const { email } = await request.json()
+
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
   try {
@@ -22,6 +24,9 @@ export const POST = async (req, res) => {
       mode: 'payment',
       success_url: `${process.env.NEXTAUTH_URL}/success`,
       cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
+      metadata: {
+        email,
+      },
     })
     return NextResponse.json({ message: "Connection is Active!" })
   } catch (err) {

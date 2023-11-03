@@ -1,6 +1,7 @@
 'use client'
 
 import { loadStripe } from '@stripe/stripe-js'
+import axios from 'axios'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
@@ -12,9 +13,12 @@ const CheckoutButton = () => {
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   )
 
-  const handleCheckout = () => {
-    if (session?.user?.name)
-      console.log("Hello")
+  const handleCheckout = async () => {
+    const userExists = session?.user?.name
+    if (userExists) {
+      const email = session?.user?.email
+      const response = await axios.post('/api/checkout-sessions', { email })
+    }
     else{
       router.push('/login')
     }

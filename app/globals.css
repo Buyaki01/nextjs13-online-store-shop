@@ -56,11 +56,11 @@ button:hover{
 
 .custom-button-style{
   background-color: #fff;
-  @apply text-slate-800;
+  background-color: #c0c0c0;
 }
 
 .custom-button-style:hover{
-  background-color: #c0c0c0;
+  @apply text-slate-800;
 }
 
 h4{
