@@ -108,7 +108,7 @@ const Product = () => {
                 {addedToCart 
                   ? (
                     <> 
-                      <div className="flex items-center justify-center space-x-4 mb-5">
+                      <div className="flex items-center justify-center space-x-3 mb-5">
                         <div><h4 className="text-2xl font-bold">shs.{product.price}</h4></div>
                         <button 
                           className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
@@ -126,9 +126,11 @@ const Product = () => {
                         >
                           +
                         </button>
-                      </div>
 
-                      <CheckoutButton />
+                        <div>
+                          <CheckoutButton />
+                        </div>
+                      </div>
                       
                       <Link 
                         href={'/'}

@@ -163,4 +163,11 @@ h4{
   margin-top: 10px;
   font-size: 1.0rem;
 }
-  
+
+.checkoutSuccessButtons{
+  background-color: #d40d9a;
+}
+
+.checkoutSuccessButtons:hover{
+  background-color: #a00a7c;
+}
