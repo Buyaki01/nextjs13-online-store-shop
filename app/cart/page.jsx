@@ -5,13 +5,21 @@ import { CartContext } from "../components/CartContext"
 import axios from "axios"
 import Link from "next/link"
 import Header from "../components/Header"
-import CheckoutButton from "../components/CheckoutButton"
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { loadStripe } from '@stripe/stripe-js'
 
 const Cart = () => {
   const { cartProducts, addItemToCart, decrementItemInCart, removeItemFromCart } = useContext(CartContext) //The cartProducts will have: productId and quantity
   const [fetchCartProductInfo, setFetchCartProductInfo] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [totalPrice, setTotalPrice] = useState(0)
+
+  const { data: session } = useSession()
+  const router = useRouter()
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  )
   
   useEffect(() => {
     // Create an array to store the fetched products
@@ -54,6 +62,24 @@ const Cart = () => {
 
     setTotalPrice(cartTotalPrice)
   }, [cartProducts, fetchCartProductInfo])
+
+  const handleCheckout = async () => {
+    const userExists = session?.user?.name
+    if (userExists) {
+      const email = session?.user?.email
+      const response = await axios.post('/api/checkout-sessions', { email, cartProducts })
+
+      const stripe = await stripePromise
+      const result = await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
+    
+      if (result.error) {
+        console.error(result.error)
+      }
+    }
+    else{
+      router.push('/login')
+    }
+  }
 
   return (
     <>
@@ -137,7 +163,12 @@ const Cart = () => {
                       (Taxes and Delivery charges will be added in the checkout page)
                     </div>
                     <div className="text-center">
-                      <CheckoutButton />
+                      <button 
+                        className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
+                        onClick={handleCheckout}
+                      >
+                        Checkout
+                      </button>
                     </div>
                   </div>
                 </div>

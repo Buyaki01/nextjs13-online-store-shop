@@ -13,7 +13,9 @@ import 'swiper/css/thumbs'
 import { CartContext } from "@/app/components/CartContext"
 import Link from "next/link"
 import Header from "@/app/components/Header"
-import CheckoutButton from "@/app/components/CheckoutButton"
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { loadStripe } from '@stripe/stripe-js'
 
 const Product = () => {
   const params = useParams()
@@ -24,6 +26,12 @@ const Product = () => {
   const [loading, setLoading] = useState(true)
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [addedToCart, setAddedToCart] = useState(false)
+
+  const { data: session } = useSession()
+  const router = useRouter()
+  const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  )
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,6 +48,24 @@ const Product = () => {
     setAddedToCart(isProductInCart)
 
   }, [cartProducts, id])
+
+  const handleCheckout = async () => {
+    const userExists = session?.user?.name
+    if (userExists) {
+      const email = session?.user?.email
+      const response = await axios.post('/api/checkout-sessions', { email, cartProducts })
+
+      const stripe = await stripePromise
+      const result = await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
+    
+      if (result.error) {
+        console.error(result.error)
+      }
+    }
+    else{
+      router.push('/login')
+    }
+  }
 
   return (
     <>
@@ -128,7 +154,12 @@ const Product = () => {
                         </button>
 
                         <div>
-                          <CheckoutButton />
+                          <button 
+                            className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
+                            onClick={handleCheckout}
+                          >
+                            Checkout
+                          </button>
                         </div>
                       </div>
                       
