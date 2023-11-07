@@ -94,6 +94,14 @@ h4{
   @apply border border-slate-200 rounded-lg;
 }
 
+.flashSalesContainer{
+  background-color: rgb(146, 212, 59);
+}
+
+.slick-slide > div {
+  margin: 0 15px;
+}
+
 .swiper {
   width: 100%;
   height: 100%;
