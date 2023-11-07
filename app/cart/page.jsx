@@ -5,20 +5,12 @@ import { CartContext } from "../components/CartContext"
 import axios from "axios"
 import Link from "next/link"
 import Header from "../components/Header"
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { loadStripe } from '@stripe/stripe-js'
+import CheckoutButton from "../components/CheckoutButton"
 
 const Cart = () => {
   const { cartProducts, addItemToCart, decrementItemInCart, removeItemFromCart } = useContext(CartContext) //The cartProducts will have: productId and quantity
   const [fetchCartProductInfo, setFetchCartProductInfo] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-
-  const { data: session } = useSession()
-  const router = useRouter()
-  const stripePromise = loadStripe(
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-  )
 
   useEffect(() => {
     const fetchCartProducts = async () => {
@@ -41,25 +33,7 @@ const Cart = () => {
 
     fetchCartProducts()
 
-  }, [cartProducts, fetchCartProductInfo])
-
-  const handleCheckout = async () => {
-    const userExists = session?.user?.name
-    if (userExists) {
-      const email = session?.user?.email
-      const response = await axios.post('/api/checkout-sessions', { email, cartProducts })
-
-      const stripe = await stripePromise
-      const result = await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
-    
-      if (result.error) {
-        console.error(result.error)
-      }
-    }
-    else{
-      router.push('/login')
-    }
-  }
+  }, [cartProducts])
 
   return (
     <>
@@ -76,7 +50,7 @@ const Cart = () => {
                     <div className="col-span-3 mt-3 border border-solid border-gray-400 rounded-sm p-3">
                       <h2 className="text-2xl font-bold mb-3">Cart</h2>
                       {fetchCartProductInfo?.length > 0 && fetchCartProductInfo.map(cartItem => (
-                        <div className="mt-3 grid grid-cols-5 gap-4 border-b-2 border-gray-400 pb-3 mb-1">
+                        <div key={cartItem.product._id} className="mt-3 grid grid-cols-5 gap-4 border-b-2 border-gray-400 pb-3 mb-1">
                           <div className="p-3 mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
                             <Link href={`/products/${cartItem.product._id}`}>
                               <img 
@@ -144,12 +118,7 @@ const Cart = () => {
                         (Taxes and Delivery charges will be added in the checkout page)
                       </div>
                       <div className="text-center">
-                        <button 
-                          className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
-                          onClick={handleCheckout}
-                        >
-                          Checkout
-                        </button>
+                        <CheckoutButton />
                       </div>
                     </div>
                     )}

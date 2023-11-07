@@ -41,7 +41,7 @@ const FlashSales = () => {
           :(
             <Slider {...settings} className="my-8 py-4">
               {flashSalesProducts.length > 0 && flashSalesProducts.map((product) => (
-                <div className="flex flex-col justify-center items-center h-[350px] rounded-lg border border-gray-200">
+                <div key={product._id} className="flex flex-col justify-center items-center h-[350px] rounded-lg border border-gray-200">
                   <div className="p-2">
                     <Link href={`/products/${product._id}`}>
                       <img 
