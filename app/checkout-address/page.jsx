@@ -13,7 +13,7 @@ const AddressForm = () => {
   const [phoneNumber, setPhoneNumber] = useState("")
   const [streetAddress, setStreetAddress] = useState("")
   const [city, setCity] = useState("")
-  const [postalAddress, setPostalAddress] = useState("")
+  const [postalCode, setPostalCode] = useState("")
   const [country, setCountry] = useState("")
 
   const { cartProducts } = useContext(CartContext)
@@ -38,7 +38,7 @@ const AddressForm = () => {
         phoneNumber,
         streetAddress,
         city,
-        postalAddress,
+        postalCode,
         country,
       })
 
@@ -95,9 +95,9 @@ const AddressForm = () => {
 
         <input
           type="text"
-          placeholder="Postal Address"
-          value={postalAddress}
-          onChange={e => setPostalAddress(e.target.value)}
+          placeholder="Postal Code"
+          value={postalCode}
+          onChange={e => setPostalCode(e.target.value)}
         />
 
         <input

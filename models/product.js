@@ -1,11 +1,11 @@
 const { Schema, model, models, default: mongoose } = require("mongoose")
 
 const ProductSchema = new Schema({
-  // user: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: "User",
-  //   required: true
-  // },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
   productName: { type: String, required: true },
   description: String,
   price: { type: Number, required: true },
