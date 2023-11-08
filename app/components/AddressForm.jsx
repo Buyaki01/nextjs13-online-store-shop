@@ -4,6 +4,10 @@ const AddressForm = () => {
   const [firstname, setFirstname] = useState("")
   const [lastname, setLastname] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [streetAddress, setStreetAddress] = useState("")
+  const [city, setCity] = useState("")
+  const [postalAddress, setPostalAddress] = useState("")
+  const [country, setCountry] = useState("")
 
   return (
     <form>
@@ -29,6 +33,38 @@ const AddressForm = () => {
         placeholder="Phone Number"
         value={phoneNumber}
         onChange={e => setPhoneNumber(e.target.value)}
+      />
+
+      <input
+        type="text"
+        name="streetAddress"
+        placeholder="Street Address"
+        value={streetAddress}
+        onChange={e => setStreetAddress(e.target.value)}
+      />
+
+      <input
+        type="text"
+        name="city"
+        placeholder="City"
+        value={city}
+        onChange={e => setCity(e.target.value)}
+      />
+
+      <input
+        type="text"
+        name="postalAddress"
+        placeholder="Postal Address"
+        value={postalAddress}
+        onChange={e => setPostalAddress(e.target.value)}
+      />
+
+      <input
+        type="text"
+        name="country"
+        placeholder="Country"
+        value={country}
+        onChange={e => setCountry(e.target.value)}
       />
 
     </form>
