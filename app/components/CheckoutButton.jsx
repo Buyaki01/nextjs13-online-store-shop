@@ -38,7 +38,7 @@ const CheckoutButton = () => {
       className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
       onClick={handleCheckout}
     >
-      Checkout
+      Proceed to Checkout
     </button>
   )
 }

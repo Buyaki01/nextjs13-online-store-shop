@@ -21,6 +21,15 @@ body {
   padding: 0;
 }
 
+input, textarea, select{
+  @apply border-2 border-slate-400 rounded-md px-1 w-full;
+  @apply mb-3;
+}
+
+input:focus, textarea:focus, select:focus{
+  @apply border-lime-800;
+}
+
 .error-message {
   background-color: #f44336;
   color: white;
