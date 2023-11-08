@@ -18,7 +18,13 @@ async function fetchProductInfo(productId) {
 }
 
 export const POST = async (request) => {
-  const { email, cartProducts } = await request.json()
+  const { email, cartProducts, firstname,
+    lastname,
+    phoneNumber,
+    streetAddress,
+    city,
+    postalAddress,
+    country } = await request.json()
 
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -59,7 +65,6 @@ export const POST = async (request) => {
     })
 
     return NextResponse.json({ sessionId: session.id })
-
   } catch (err) {
     return NextResponse.json({ error: err.message})
   }
