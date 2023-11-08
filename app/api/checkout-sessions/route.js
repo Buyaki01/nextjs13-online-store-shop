@@ -8,13 +8,11 @@ async function fetchProductInfo(productId) {
 
   try {
     const productInfo = await Product.findById(productId)
-
     return productInfo
   } catch (error) {
     console.error(`Error fetching product: ${error}`)
     return null
   }
-  
 }
 
 export const POST = async (request) => {

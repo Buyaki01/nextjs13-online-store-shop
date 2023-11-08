@@ -62,7 +62,7 @@ const Cart = () => {
                         
                           <Link 
                             href={`/products/${cartItem.product._id}`}
-                            className="w-44 mr-3 flex items-center justify-center"
+                            className="w-44 mr-3 flex items-center justify-center hover:underline"
                           >
                             <h3 className="font-bold text-xl truncate px-1">
                               {cartItem.product.productName}

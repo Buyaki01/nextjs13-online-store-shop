@@ -128,7 +128,9 @@ const Product = () => {
 
                         <div>
                           <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
-                            <Link href={'/chekout-address'}>Checkout</Link>
+                            <Link href={'/checkout-address'}>
+                              Checkout
+                            </Link>
                           </button>
                         </div>
                       </div>
