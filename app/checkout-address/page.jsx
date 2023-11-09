@@ -57,7 +57,7 @@ const AddressForm = () => {
   return (
     <form className="min-h-fit h-full flex justify-center">
       <div  className="max-w-[600px] w-full flex flex-col gap-6 items-center shadow-xl shadow-slate-400 rounded-md my-8 p-4 md:p-8">
-        <h2 className="text-4xl font-semibold mb-2">Checkout Address</h2>
+        <h2 className="text-4xl font-semibold mb-2">Shipping Address</h2>
         <input
           type="text"
           placeholder="First Name"

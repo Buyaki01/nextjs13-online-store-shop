@@ -3,7 +3,11 @@ import { NextResponse } from 'next/server'
 import connectMongoDB from '@/lib/mongoose'
 
 export const POST = async (request) => {
-  const body = await request.text()
+  //const { body } = await request.json()
+  //const { body } = await request.text()
+  const body = await request.json()
+
+  console.log("This is the request body", body)
 
   await connectMongoDB()
 
@@ -28,13 +32,13 @@ export const POST = async (request) => {
   switch (event.type) {
     case 'payment_intent.succeeded':
       const paymentIntentSucceeded = event.data.object
-      console.log(paymentIntentSucceeded)
+      console.log("This is the payment intent data", paymentIntentSucceeded)
       break;
 
-    case 'checkout.session.completed':
-      const checkoutSessionCompleted = event.data.object
-      console.log(checkoutSessionCompleted)
-      break;
+    // case 'checkout.session.completed':
+    //   const checkoutSessionCompleted = event.data.object
+    //   console.log(checkoutSessionCompleted)
+    //   break;
     default:
       console.log(`Unhandled event type ${event.type}`)
   }

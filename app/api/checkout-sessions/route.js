@@ -86,8 +86,11 @@ export const POST = async (request) => {
       cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
       metadata: {
         email,
+        cartProducts,
       },
     })
+
+    console.log("This is the session", session)
     
     return NextResponse.json({ sessionId: session.id })
   } catch (err) {
