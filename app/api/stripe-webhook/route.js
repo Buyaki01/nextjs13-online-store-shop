@@ -1,23 +1,28 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import connectMongoDB from '@/lib/mongoose'
-import { buffer } from 'micro'
 
-const endpointSecret = process.env.ENDPOINT_SECRET
+export const POST = async (request) => {
+  const body = await request.text()
 
-export const POST = async (request, response) => {
   await connectMongoDB()
 
-  const sig = request.headers['stripe-signature']
-  console.log(sig)
+  const sig = request.headers.get('stripe-signature')
+
+  if (!sig) {
+    console.log("No Signature")
+    return NextResponse.json({ error: "No signature" })
+  }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
   let event
 
   try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-    event = stripe.webhooks.constructEvent(await buffer(req), sig, endpointSecret)
+    event = stripe.webhooks.constructEvent(body, sig, process.env.ENDPOINT_SECRET)
   } catch (err) {
-    return NextResponse.json({ error: err.message})
+    console.log('Webhook signature verification failed', err.message)
+    return NextResponse.json({ error: err})
   }
 
   switch (event.type) {
@@ -25,7 +30,14 @@ export const POST = async (request, response) => {
       const paymentIntentSucceeded = event.data.object
       console.log(paymentIntentSucceeded)
       break;
+
+    case 'checkout.session.completed':
+      const checkoutSessionCompleted = event.data.object
+      console.log(checkoutSessionCompleted)
+      break;
     default:
       console.log(`Unhandled event type ${event.type}`)
   }
+
+  return NextResponse.json({ received: true })
 }
