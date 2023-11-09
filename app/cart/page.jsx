@@ -5,7 +5,6 @@ import { CartContext } from "../components/CartContext"
 import axios from "axios"
 import Link from "next/link"
 import Header from "../components/Header"
-import CheckoutButton from "../components/CheckoutButton"
 
 const Cart = () => {
   const { cartProducts, addItemToCart, decrementItemInCart, removeItemFromCart } = useContext(CartContext) //The cartProducts will have: productId and quantity
@@ -63,7 +62,7 @@ const Cart = () => {
                         
                           <Link 
                             href={`/products/${cartItem.product._id}`}
-                            className="w-44 mr-3 flex items-center justify-center"
+                            className="w-44 mr-3 flex items-center justify-center hover:underline"
                           >
                             <h3 className="font-bold text-xl truncate px-1">
                               {cartItem.product.productName}
@@ -118,7 +117,11 @@ const Cart = () => {
                         (Taxes and Delivery charges will be added in the checkout page)
                       </div>
                       <div className="text-center">
-                        <CheckoutButton />
+                        <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
+                          <Link href={'/checkout-address'}>
+                            Checkout
+                          </Link>
+                        </button>
                       </div>
                     </div>
                     )}

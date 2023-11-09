@@ -13,7 +13,6 @@ import 'swiper/css/thumbs'
 import { CartContext } from "@/app/components/CartContext"
 import Link from "next/link"
 import Header from "@/app/components/Header"
-import CheckoutButton from "@/app/components/CheckoutButton"
 
 const Product = () => {
   const params = useParams()
@@ -128,7 +127,11 @@ const Product = () => {
                         </button>
 
                         <div>
-                          <CheckoutButton />
+                          <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
+                            <Link href={'/checkout-address'}>
+                              Checkout
+                            </Link>
+                          </button>
                         </div>
                       </div>
                       

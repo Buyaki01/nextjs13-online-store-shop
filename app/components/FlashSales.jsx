@@ -36,7 +36,7 @@ const FlashSales = () => {
       <div className="flashSalesContainer px-12 py-5">
         {loading 
           ? (
-              <p className="loadingMessage">Loading...</p>
+              <p className="loadingMessage text-white">Loading...</p>
             )
           :(
             <Slider {...settings} className="my-8 py-4">
