@@ -35,6 +35,8 @@ export const POST = async (request) => {
     const productInfo = await fetchProductInfo(productId)
 
     if (productInfo) {
+      const subtotal = productInfo.price * quantity
+
       productInfoArray.push({
         id: productInfo._id,
         productName: productInfo.productName,
@@ -45,13 +47,17 @@ export const POST = async (request) => {
         properties: productInfo.properties,
         isFeatured: productInfo.isFeatured,
         cartQuantity: quantity,
+        subtotal,
       })
     }
   }
 
+  const totalPrice = productInfoArray.reduce((total, item) => total + item.subtotal, 0)
+
   await Order.create({ 
     user: user._id,
     products: productInfoArray,
+    totalPrice,
     firstname,
     lastname,
     phoneNumber,

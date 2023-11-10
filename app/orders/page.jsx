@@ -31,7 +31,7 @@ const MyOrders = () => {
               <table>
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>ORDER_ID</th>
                       <th>DATE</th>
                       <th>TOTAL</th>
                       <th>PAYMENT STATUS</th>
@@ -44,6 +44,14 @@ const MyOrders = () => {
                       <tr key={order._id}>
                         <td>{order._id}</td>
                         <td>{(new Date(order.createdAt)).toLocaleString()}</td>
+                        <td>{order.totalPrice}</td>
+                        <td>{order.paymentStatus}</td>
+                        <td>{order.deliveryStatus}</td>
+                        <td>
+                          <Link href={`/orders/${order._id}`}>
+                            View More
+                          </Link>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
