@@ -188,3 +188,15 @@ h4{
 .checkoutSuccessButtons:hover{
   background-color: #a00a7c;
 }
+
+table thead tr {
+  background-color: rgb(146, 212, 59);
+}
+
+table thead tr th{
+  @apply py-2 px-4 border-b text-white;
+}
+
+table tbody tr td{
+  @apply py-2 px-4 border-l border-r border-t border-gray-300;
+}

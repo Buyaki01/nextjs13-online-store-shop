@@ -23,12 +23,14 @@ const MyOrders = () => {
     <>
       <Header />
       <div className="mt-3">
-        <h2 className="uppercase mb-3 text-center text-xl font-bold">Orders</h2>
+        <h2 className="uppercase mb-3 text-center text-2xl font-bold text-primary">Orders</h2>
         {loading 
-          ? (<p className="text-xl text-bold text-center">Loading...</p>) 
+          ? (<div className="text-center mt-10">
+              <p className="text-xl text-bold">Loading...</p>
+          </div>) 
           : (orders.length > 0 
             ? (
-              <table>
+              <table className="min-w-full border border-gray-300">
                   <thead>
                     <tr>
                       <th>ORDER_ID</th>
@@ -48,7 +50,7 @@ const MyOrders = () => {
                         <td>{order.paymentStatus}</td>
                         <td>{order.deliveryStatus}</td>
                         <td>
-                          <Link href={`/orders/${order._id}`}>
+                          <Link className="text-primary cursor-pointer hover:underline" href={`/orders/${order._id}`}>
                             View More
                           </Link>
                         </td>
