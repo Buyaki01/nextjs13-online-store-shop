@@ -8,7 +8,7 @@ export async function GET() {
 
     const orders = await Order.find()
 
-    return NextResponse.json(orders)
+    return NextResponse.json({ orders })
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch orders" }, 500)
   }
