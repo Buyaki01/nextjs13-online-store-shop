@@ -30,38 +30,32 @@ const MyOrders = () => {
           </div>) 
           : (orders.length > 0 
             ? (
-              <table className="min-w-full border border-gray-300">
-                  <thead>
-                    <tr>
-                      <th>ORDER_ID</th>
-                      <th>DATE</th>
-                      <th>TOTAL</th>
-                      <th>PAYMENT STATUS</th>
-                      <th>DELIVERY STATUS</th>
-                      <th>ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {orders.map(order => (
-                      <tr key={order._id}>
-                        <td>{order._id}</td>
-                        <td>{(new Date(order.createdAt)).toLocaleString()}</td>
-                        <td>{order.totalPrice}</td>
-                        <td>{order.paymentStatus}</td>
-                        <td>{order.deliveryStatus}</td>
-                        <td>
-                          <Link className="text-primary cursor-pointer hover:underline" href={`/orders/${order._id}`}>
-                            View More
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-              </table>
+                orders.map(order => (
+                  <div className="mb-5 flex justify-center" key={order._id}>
+                    <div className="flex items-center gap-x-3 border border-gray-400 py-3 px-5 rounded-lg">
+                      
+                      <div>
+                        {order.paymentStatus === "completed" ? (<button className="bg-[#50d71e] text-white py-1 px-2">Paid</button>) : (<button className="bg-red-500 text-white py-1 px-2">Not Paid</button>)}
+                      </div>
+                      
+                      <div>{order._id}</div>
+
+                      <div>{(new Date(order.createdAt)).toLocaleString()}</div>
+
+                      <div>{order.totalPrice}</div>
+                     
+                      <div>
+                        <Link className="bg-primary text-white py-1 px-2 rounded-md cursor-pointer" href={`/orders/${order._id}`}>
+                          Show order
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))
             )
             : (
-                <div className="flex justify-center hover:underline bg-red-800">
-                  <p className="text-xl font-semibold"> No Orders Yet</p>
+                <div className="flex justify-center mt-10">
+                  <p className="text-xl font-semibold mb-4"> No Orders Yet</p>
                   <Link 
                     href={'/'}
                     className="text-xl font-bold text-secondary flex gap-1 items-center justify-center hover:underline"
