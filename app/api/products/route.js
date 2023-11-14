@@ -6,7 +6,7 @@ export async function GET() {
   try {
     await connectMongoDB()
 
-    const products = await Product.find()
+    const products = await Product.find().populate("selectedCategory")
 
     return NextResponse.json(products)
   } catch (error) {

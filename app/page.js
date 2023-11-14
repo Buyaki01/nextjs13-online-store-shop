@@ -6,13 +6,14 @@ import FlashSales from "./components/FlashSales"
 import Header from "./components/Header"
 import HotNewReleases from "./components/HotNewReleases"
 import Products from "./components/Products"
+import ProductsCategories from "./components/ProductsCategories"
 
 export default function Home() {
   return (
     <main>
       <Header />
       <Featured />
-      <HotNewReleases />
+      <ProductsCategories />
       <FlashSales />
       <Products />
     </main>
