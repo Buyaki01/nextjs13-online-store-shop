@@ -19,7 +19,7 @@ const OrderSchema = new Schema({
     isFeatured: { type: Boolean },
     cartQuantity: { type: Number },
   }],
-  //totalPrice: { type: Number, required: true},
+  totalPrice: { type: Number, required: true},
   deliveryStatus: { type: String, default: "Pending" },
   paymentStatus: { type: String, default: "Pending" },
   city: { type: String, required: true },
