@@ -1,8 +1,8 @@
-const { Schema, model, models, default: mongoose } = require("mongoose")
+import mongoose, { Schema, model, models } from 'mongoose'
 
 const ProductSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
+    type:mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
   },
@@ -10,7 +10,7 @@ const ProductSchema = new Schema({
   description: String,
   price: { type: Number, required: true },
   uploadedImagePaths: [{ type: String }],
-  selectedCategory: { type: mongoose.Types.ObjectId, ref: 'Category' },
+  selectedCategory: { type:mongoose.Schema.Types.ObjectId, required:true, ref: 'Category' },
   properties: {type:Object},
   isFeatured: { type: Boolean, default: false },
   //quantityInStock: { type: Number, required: true },
@@ -20,4 +20,5 @@ const ProductSchema = new Schema({
 }
 )
 
-export const Product = models.Product || model('Product', ProductSchema)
+export default models.Product || model('Product', ProductSchema)
+

@@ -1,16 +1,16 @@
-const { Schema, model, models, default: mongoose } = require("mongoose")
+import mongoose, { Schema, model, models } from 'mongoose'
 
 const BrandSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
+    type:mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
   },
   brandName: { type: String, required: true },
-  parentCategory: { type: mongoose.Types.ObjectId, ref:'Category', default: null },
+  parentCategory: { type:mongoose.Schema.Types.ObjectId, ref:'Category', default: null },
 }, {
   timestamps: true,
 }
 )
 
-export const Brand = models.Brand || model('Brand', BrandSchema)
+export default models.Brand || model('Brand', BrandSchema)
