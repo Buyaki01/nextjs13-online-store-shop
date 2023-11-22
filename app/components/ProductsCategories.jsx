@@ -14,8 +14,6 @@ const ProductsCategories = () => {
     fetchCategories()
   }, [])
 
-  console.log("These are the categories: ", categories)
-
   return (
     <div className="mt-10">
       {loading 
