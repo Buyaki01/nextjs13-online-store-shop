@@ -1,8 +1,8 @@
-const { Schema, model, models, default: mongoose } = require("mongoose")
+import mongoose, { Schema, model, models } from "mongoose"
 
 const OrderSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
+    type:mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true
   },
@@ -12,9 +12,12 @@ const OrderSchema = new Schema({
     id: { type: String },
     productName: { type: String },
     description: { type: String },
-    price: { type: String },
+    regularPrice: { type: Number },
+    productPrice: { type: Number },
     images: [{ type: String }],
-    selectedCategory: { type: mongoose.Types.ObjectId },
+    selectedCategory: { type: mongoose.Schema.Types.ObjectId },
+    quantityInStock: { type: Number },
+    brand: { type: mongoose.Types.ObjectId },
     properties: {type:Object},
     isFeatured: { type: Boolean },
     cartQuantity: { type: Number },
@@ -31,4 +34,6 @@ const OrderSchema = new Schema({
 }
 )
 
-export const Order = models.Order || model('Order', OrderSchema)
+const Order = models.Order || model('Order', OrderSchema)
+
+export default Order
