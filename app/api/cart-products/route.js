@@ -1,5 +1,5 @@
 import connectMongoDB from "@/lib/mongoose"
-import { Product } from "@/models/product"
+import Product from "@/models/product"
 import { NextResponse } from "next/server"
 
 export const POST = async (request) => {
@@ -18,7 +18,7 @@ export const POST = async (request) => {
 
       if (product) {
         // Calculate the subtotal for this item
-        const subtotal = product.price * itemQuantity
+        const subtotal = product.productPrice * itemQuantity
 
         productsInCart.push({
           product,

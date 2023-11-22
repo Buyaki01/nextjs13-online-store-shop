@@ -14,6 +14,7 @@ export default function Home() {
       <Header />
       <Featured />
       <ProductsCategories />
+      {/* <HotNewReleases /> */}
       <FlashSales />
       <Products />
     </main>

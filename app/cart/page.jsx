@@ -89,8 +89,8 @@ const Cart = () => {
                             </button>
                           </div>
                           <div className="w-32 mr-3 flex flex-col items-center justify-center">
-                            <h4 className="text-2xl font-bold">Ksh.{ cartItem.product.price * cartItem.itemQuantity }</h4>
-                            <p className="text-sm whitespace-nowrap"><span className="font-bold">Ksh.{cartItem.product.price}</span>/per item</p>
+                            <h4 className="text-2xl font-bold">Ksh.{ cartItem.product.productPrice * cartItem.itemQuantity }</h4>
+                            <p className="text-sm whitespace-nowrap"><span className="font-bold">Ksh.{cartItem.product.productPrice}</span>/per item</p>
                           </div>
                           <div className="w-32 flex items-center justify-center">
                             <button 

@@ -40,7 +40,7 @@ const Products = () => {
                 <Link href={`/products/${product._id}`}>
                   <p className="text-lg font-semibold hover:underline cursor-pointer">{product.productName}</p>
                 </Link>
-                <h4 className="text-xl font-bold mt-2 text-center">Ksh. {product.price}</h4>
+                <h4 className="text-xl font-bold mt-2 text-center">Ksh. {product.productPrice}</h4>
               </div>
             </div>
           ))

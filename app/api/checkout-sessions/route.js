@@ -1,9 +1,9 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import connectMongoDB from '@/lib/mongoose'
-import { Product } from '@/models/product'
-import { Order } from '@/models/order'
-import { User } from '@/models/user'
+import Product from '@/models/product'
+import User from '@/models/user'
+import Order from '@/models/order'
 
 async function fetchProductInfo(productId) {
   await connectMongoDB()
@@ -35,13 +35,14 @@ export const POST = async (request) => {
     const productInfo = await fetchProductInfo(productId)
 
     if (productInfo) {
-      const subtotal = productInfo.price * quantity
+      const subtotal = productInfo.productPrice * quantity
 
       productInfoArray.push({
         id: productInfo._id,
         productName: productInfo.productName,
         description: productInfo.description,
-        price: productInfo.price,
+        regularPrice: productInfo.regularPrice,
+        productPrice: productInfo.productPrice,
         images: productInfo.uploadedImagePaths,
         selectedCategory: productInfo.selectedCategory,
         properties: productInfo.properties,
@@ -77,7 +78,7 @@ export const POST = async (request) => {
           name: productInfo.productName,
           description: productInfo.description,
         },
-        unit_amount: productInfo.price * 100,
+        unit_amount: productInfo.productPrice * 100,
       },
     quantity: productInfo.cartQuantity,
     }))
