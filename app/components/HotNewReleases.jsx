@@ -141,7 +141,7 @@ const HotNewReleases = () => {
                     <NewReleasesLinks href={`/products/${newReleases[0]._id}`}>
                       <p>{newReleases[0].productName}</p>
                     </NewReleasesLinks>
-                    <h4>KSh {newReleases[0].price}</h4>
+                    <h4>KSh {newReleases[0].productPrice}</h4>
                   </div>
                 </HotNewReleaseOne>
   
@@ -155,7 +155,7 @@ const HotNewReleases = () => {
                       <NewReleasesLinks href={`/products/${newReleases[1]._id}`}>
                         <p>{newReleases[1].productName}</p>
                       </NewReleasesLinks>
-                      <h4>KSh {newReleases[1].price}</h4>
+                      <h4>KSh {newReleases[1].productPrice}</h4>
                     </div>
                 </HotNewReleaseTwo>
 
@@ -169,7 +169,7 @@ const HotNewReleases = () => {
                     <NewReleasesLinks href={`/products/${newReleases[2]._id}`}>
                       <p>{newReleases[2].productName}</p>
                     </NewReleasesLinks>
-                    <h4>KSh {newReleases[2].price}</h4>
+                    <h4>KSh {newReleases[2].productPrice}</h4>
                   </div>
                 </HotNewReleaseThree>
               </>
