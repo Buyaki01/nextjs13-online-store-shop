@@ -8,8 +8,24 @@ import { User } from "@/models/user"
 import bcrypt from 'bcryptjs'
 
 export const authOptions = {
+  adapter: MongoDBAdapter(clientPromise),
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     GoogleProvider({
+      profile(profile) {
+        let userRole = "user"
+        if (profile && profile.email ==="rittahbuyaki@gmail.com") {
+          userRole = "admin"
+        }
+
+        return {
+          ...profile,
+          id: profile?.sub,
+          role: userRole,
+        }
+      },
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }),
@@ -42,13 +58,24 @@ export const authOptions = {
       }
     })
   ],
-  adapter: MongoDBAdapter(clientPromise),
-  session: {
-    strategy: "jwt",
-  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
+  },
+
+  callbacks: {
+    async jwt({ token, user }) {
+      // console.log("JWT Callback - Token:", token)
+      // console.log("JWT Callback - User:", user)
+      return { ...token, ...user }
+    },
+    async session({ session, token }) {
+      // console.log("Session Callback - Token:", token)
+      // console.log("Session Callback - Session:", session)
+    
+      if (session?.user) session.user.role = token.role
+      return session
+    }
   },
 }
 

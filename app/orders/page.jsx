@@ -4,10 +4,20 @@ import { useEffect, useState } from "react"
 import Header from "../components/Header"
 import axios from "axios"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  if (!session) {
+    router.replace("/login")
+    return null // You can also render a message or component while redirecting
+  }
 
   useEffect(() => {
     const fetchOrders = async () => {

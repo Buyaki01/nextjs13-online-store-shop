@@ -38,7 +38,7 @@ const RegisterForm = () => {
       <h1 className="text-4xl font-semibold mb-2 text-primary">Welcome to Pearls Collections</h1>
 
       <button
-        className="custom-button-style flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
+        className="bg-[#c0c0c0] hover:bg-[#a0a0a0] flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
         onClick={() => signIn('google')}
       >
         <AiOutlineGoogle />
