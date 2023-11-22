@@ -17,7 +17,7 @@ const OrderSchema = new Schema({
     images: [{ type: String }],
     selectedCategory: { type: mongoose.Schema.Types.ObjectId },
     quantityInStock: { type: Number },
-    brand: { type: mongoose.Types.ObjectId },
+    brand: { type: mongoose.Schema.Types.ObjectId },
     properties: {type:Object},
     isFeatured: { type: Boolean },
     cartQuantity: { type: Number },
@@ -34,6 +34,6 @@ const OrderSchema = new Schema({
 }
 )
 
-const Order = models.Order || model('Order', OrderSchema)
+const Order = models?.Order || model('Order', OrderSchema)
 
 export default Order

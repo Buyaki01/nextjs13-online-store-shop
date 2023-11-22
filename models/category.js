@@ -5,6 +5,6 @@ const CategorySchema = new Schema({
   properties: [{ type: Object }]
 })
 
-const Category = models.Category || model("Category", CategorySchema)
+const Category = models?.Category || model("Category", CategorySchema)
 
 export default Category

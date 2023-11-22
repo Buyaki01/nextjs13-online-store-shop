@@ -45,6 +45,8 @@ export const POST = async (request) => {
         productPrice: productInfo.productPrice,
         images: productInfo.uploadedImagePaths,
         selectedCategory: productInfo.selectedCategory,
+        brand: productInfo.selectedBrand,
+        quantityInStock: productInfo.quantityInStock,
         properties: productInfo.properties,
         isFeatured: productInfo.isFeatured,
         cartQuantity: quantity,

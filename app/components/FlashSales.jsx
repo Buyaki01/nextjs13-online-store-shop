@@ -28,7 +28,7 @@ const FlashSales = () => {
   }
 
   return (
-    <article className="my-12">
+    <article className="my-10">
       <div className="text-center mb-1">
         <h2 className="text-3xl font-semibold mb-3">Flash Sales</h2>
       </div>

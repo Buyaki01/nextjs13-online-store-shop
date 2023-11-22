@@ -100,9 +100,14 @@ const Product = () => {
                 </Swiper>
               </div>
 
-              <div className="flex flex-col items-center justify-center h-full p-5">
-                <h2 className="text-3xl mb-4 font-semibold">{product.productName}</h2>
-                <p className="text-base text-gray-600 mb-5">{product.description}</p>
+              <div className="flex flex-col items-center justify-center h-full p-5 text-justify">
+                <div className="text-justify">
+                  <p className="text-lg text-gray-600 text-justify"><span className="font-bold">Product Name:</span> {product.productName}</p>
+                  <p className="text-lg text-gray-600"><span className="font-bold">Description:</span> {product.description}</p>
+                  <p className="text-lg text-gray-600"><span className="font-bold">Category:</span> {product.selectedCategory.name}</p>
+                  <p className="text-lg text-gray-600"><span className="font-bold">Brand:</span> {product.brand.brandName}</p>
+                  <p className="text-lg text-gray-600 text-justify mb-3"><span className="font-bold">Quantity:</span> {product.quantityInStock}</p>
+                </div>
 
                 {addedToCart 
                   ? (
