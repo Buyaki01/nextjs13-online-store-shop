@@ -6,10 +6,8 @@ export async function GET() {
   try {
     await connectMongoDB()
     
-    const products = await Product.find()
-    //const products = await Product.find().populate('selectedCategory')
-    console.log("Products: ", products)
-
+    const products = await Product.find().populate('brand').populate('selectedCategory')
+    
     if (!products || products.length === 0) {
       console.error("No products found")
       return NextResponse.json({ error: "No products found" }, 404)

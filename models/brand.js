@@ -13,6 +13,8 @@ const BrandSchema = new Schema({
 }
 )
 
-const Brand = models.Brand || model('Brand', BrandSchema)
+console.log("Before Brand model registration");
+const Brand = models?.Brand || model('Brand', BrandSchema);
+console.log("After Brand model registration")
 
 export default Brand

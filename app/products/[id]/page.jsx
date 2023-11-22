@@ -101,8 +101,11 @@ const Product = () => {
               </div>
 
               <div className="flex flex-col items-center justify-center h-full p-5">
-                <h2 className="text-3xl mb-4 font-semibold">{product.productName}</h2>
-                <p className="text-base text-gray-600 mb-5">{product.description}</p>
+                <h2 className="text-3xl mb-4 font-semibold">Product Name: {product.productName}</h2>
+                <p className="text-base text-gray-600">Description: {product.description}</p>
+                <p className="text-base text-gray-600">Category: {product.selectedCategory.name}</p>
+                <p className="text-base text-gray-600">Brand: {product.brand.brandName}</p>
+                <p className="text-base text-gray-600 mb-5">Quantity: {product.quantityInStock}</p>
 
                 {addedToCart 
                   ? (

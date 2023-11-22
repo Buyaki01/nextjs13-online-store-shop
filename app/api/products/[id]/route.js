@@ -6,7 +6,7 @@ export async function GET(request, { params }) {
   const { id } = params
 
   await connectMongoDB()
-  const product = await Product.findOne({ _id: id })
+  const product = await Product.findOne({ _id: id }).populate('selectedCategory').populate('brand')
   
   return NextResponse.json({ product }, { status: 200 })
 }
