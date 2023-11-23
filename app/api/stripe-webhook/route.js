@@ -1,13 +1,10 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import connectMongoDB from '@/lib/mongoose'
+import Order from '@/models/order'
 
 export const POST = async (request) => {
-  //const { body } = await request.json()
-  //const { body } = await request.text()
-  const body = await request.json()
-
-  console.log("This is the request body", body)
+  const body = await request.text()
 
   await connectMongoDB()
 
@@ -30,15 +27,14 @@ export const POST = async (request) => {
   }
 
   switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntentSucceeded = event.data.object
-      console.log("This is the payment intent data", paymentIntentSucceeded)
+    case 'checkout.session.completed':
+      const checkoutSessionCompleted = event.data.object
+      const orderId = checkoutSessionCompleted.metadata.orderId
+      const paymentComplete = checkoutSessionCompleted.payment_status === 'paid'
+      if (orderId && paymentComplete) {
+        await Order.findByIdAndUpdate(orderId, { paymentStatus: "Completed" }, { new: true })
+      }
       break;
-
-    // case 'checkout.session.completed':
-    //   const checkoutSessionCompleted = event.data.object
-    //   console.log(checkoutSessionCompleted)
-    //   break;
     default:
       console.log(`Unhandled event type ${event.type}`)
   }

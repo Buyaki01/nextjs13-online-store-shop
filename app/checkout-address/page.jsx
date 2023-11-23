@@ -43,6 +43,7 @@ const AddressForm = () => {
       })
 
       const stripe = await stripePromise
+      console.log("This is the response data session: ", response.data.sessionId)
       const result = await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
     
       if (result.error) {

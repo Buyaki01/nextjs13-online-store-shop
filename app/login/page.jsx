@@ -1,13 +1,23 @@
-import { getServerSession } from "next-auth"
+import { getSession, getServerSession } from "next-auth"
 import FormWrap from "../components/FormWrap"
 import LoginForm from "./LoginForm"
-import { authOptions } from "../api/auth/[...nextauth]/route"
 import { redirect } from "next/navigation"
 
-const Login = async () => {
-  const session = await getServerSession(authOptions)
+const Login = async ({ req, res }) => {
+  const session = await getServerSession({ req })
 
-  if (session) redirect("/")
+  // If session exists, redirect to the stored URL
+  if (session) {
+    redirect(session.redirectUrl || "/")
+  }
+
+  // If no session, try to get the session on the client side
+  const clientSession = await getSession()
+
+  // If session exists on the client side, redirect to the stored URL
+  if (clientSession) {
+    redirect(clientSession.redirectUrl || "/")
+  }
 
   return (
     <FormWrap>

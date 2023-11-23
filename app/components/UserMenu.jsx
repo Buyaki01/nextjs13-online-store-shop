@@ -59,7 +59,7 @@ const UserMenu = () => {
           >
             {session?.user 
               ? <div>
-                  <Link href={"/my-orders"}>
+                  <Link href={"/orders"}>
                     <div 
                       className="link-container px-4 py-3 transition"
                       onClick={toggleOpen}
