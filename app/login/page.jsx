@@ -7,7 +7,7 @@ import { redirect } from "next/navigation"
 const Login = async () => {
   const session = await getServerSession(authOptions)
 
-  if (session) redirect("/")
+  if (session) redirect("/") //I want when user tries to checkout and they are not logged in, they get redirected to the login page and the come back to the checkout-page NOT the login page
 
   return (
     <FormWrap>

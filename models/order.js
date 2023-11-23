@@ -6,7 +6,6 @@ const OrderSchema = new Schema({
     ref: "User",
     required: true
   },
-  // customerId: { type: String }, //It's from Stripe and is different from the user Id
   paymentIntentId: { type: String },
   products: [{
     id: { type: String },

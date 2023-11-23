@@ -1,12 +1,12 @@
 import connectMongoDB from "@/lib/mongoose"
-import { Order } from "@/models/order"
+import Order from "@/models/order"
 import { NextResponse } from "next/server"
 
 export async function GET() {
   try {
     await connectMongoDB()
 
-    const orders = await Order.find()
+    const orders = await Order.find().sort({ createdAt: -1 })
 
     return NextResponse.json({ orders })
   } catch (error) {

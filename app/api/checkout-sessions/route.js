@@ -27,7 +27,6 @@ export const POST = async (request) => {
     country } = await request.json()
 
   const user = await User.findOne({ email })
-
   const productInfoArray = []
 
   for (const { productId, quantity } of cartProducts) {
@@ -45,7 +44,7 @@ export const POST = async (request) => {
         productPrice: productInfo.productPrice,
         images: productInfo.uploadedImagePaths,
         selectedCategory: productInfo.selectedCategory,
-        brand: productInfo.selectedBrand,
+        brand: productInfo.brand,
         quantityInStock: productInfo.quantityInStock,
         properties: productInfo.properties,
         isFeatured: productInfo.isFeatured,
@@ -57,7 +56,7 @@ export const POST = async (request) => {
 
   const totalPrice = productInfoArray.reduce((total, item) => total + item.subtotal, 0)
 
-  await Order.create({ 
+  const orderDetails = await Order.create({ 
     user: user._id,
     products: productInfoArray,
     totalPrice,
@@ -95,11 +94,10 @@ export const POST = async (request) => {
       cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
       metadata: {
         email,
-        cartProducts,
+        orderId:orderDetails._id.toString(),
+        cartProducts: JSON.stringify(productInfoArray),
       },
     })
-
-    console.log("This is the session", session)
     
     return NextResponse.json({ sessionId: session.id })
   } catch (err) {
