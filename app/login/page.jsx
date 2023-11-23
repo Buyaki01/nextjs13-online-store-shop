@@ -1,23 +1,13 @@
-import { getSession, getServerSession } from "next-auth"
+import { getServerSession } from "next-auth"
 import FormWrap from "../components/FormWrap"
 import LoginForm from "./LoginForm"
+import { authOptions } from "../api/auth/[...nextauth]/route"
 import { redirect } from "next/navigation"
 
-const Login = async ({ req, res }) => {
-  const session = await getServerSession({ req })
+const Login = async () => {
+  const session = await getServerSession(authOptions)
 
-  // If session exists, redirect to the stored URL
-  if (session) {
-    redirect(session.redirectUrl || "/")
-  }
-
-  // If no session, try to get the session on the client side
-  const clientSession = await getSession()
-
-  // If session exists on the client side, redirect to the stored URL
-  if (clientSession) {
-    redirect(clientSession.redirectUrl || "/")
-  }
+  if (session) redirect("/") //I want when user tries to checkout and they are not logged in, they get redirected to the login page and the come back to the checkout-page NOT the login page
 
   return (
     <FormWrap>

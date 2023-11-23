@@ -1,7 +1,21 @@
+'use client'
+
 import Link from "next/link"
 import Header from "../components/Header"
+import { CartContext } from "../components/CartContext"
+import { useContext, useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 const CheckoutSuccess = () => {
+  const { clearCart } = useContext(CartContext)
+  const router = useRouter()
+
+  useEffect(() => {
+    if (router.pathname && router.pathname.includes("checkout-success")) {
+      clearCart()
+    }
+  }, [router.pathname, clearCart])
+
   return (
     <>
       <Header/>

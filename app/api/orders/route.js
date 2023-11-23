@@ -6,7 +6,7 @@ export async function GET() {
   try {
     await connectMongoDB()
 
-    const orders = await Order.find()
+    const orders = await Order.find().sort({ createdAt: -1 })
 
     return NextResponse.json({ orders })
   } catch (error) {

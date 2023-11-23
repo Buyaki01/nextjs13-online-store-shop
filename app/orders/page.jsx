@@ -4,20 +4,11 @@ import { useEffect, useState } from "react"
 import Header from "../components/Header"
 import axios from "axios"
 import Link from "next/link"
-import { useSession } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { format, isToday, isYesterday } from 'date-fns'
 
-const MyOrders = () => {
+const Orders = () => {
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
-
-  const { data: session } = useSession()
-  const router = useRouter()
-
-  if (!session) {
-    router.replace("/login")
-    return null // You can also render a message or component while redirecting
-  }
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -29,10 +20,20 @@ const MyOrders = () => {
     fetchOrders()
   }, [])
 
+  const customDateFormat = (date) => {
+    if (isToday(date)) {
+      return `Today ${format(date, 'h:mm a')}`;
+    } else if (isYesterday(date)) {
+      return `Yesterday ${format(date, 'h:mm a')}`;
+    } else {
+      return format(date, 'MM/dd/yyyy hh:mm a');
+    }
+  }
+
   return (
     <>
       <Header />
-      <div className="mt-3">
+      <div className="my-5">
         <h2 className="uppercase mb-3 text-center text-2xl font-bold text-primary">Orders</h2>
         {loading 
           ? (<div className="text-center mt-10">
@@ -40,28 +41,44 @@ const MyOrders = () => {
           </div>) 
           : (orders.length > 0 
             ? (
-                orders.map(order => (
-                  <div className="mb-5 flex justify-center" key={order._id}>
-                    <div className="flex items-center gap-x-3 border border-gray-400 py-3 px-5 rounded-lg">
-                      
-                      <div>
-                        {order.paymentStatus === "completed" ? (<button className="bg-[#50d71e] text-white py-1 px-2">Paid</button>) : (<button className="bg-red-500 text-white py-1 px-2">Not Paid</button>)}
-                      </div>
-                      
-                      <div>{order._id}</div>
+                <div className="flex justify-center">
+                  <div className="p-2 mb-5">
+                    {orders.map(order => (
+                      <div className="my-2" key={order._id}>
+                        <div className="flex items-center gap-x-8 border border-gray-400 py-3 px-5 rounded-lg">
+                          <div className="justify-center border-r pr-2">
+                            <button className={`w-[80px] py-1 px-2 whitespace-nowrap 
+                              ${order.paymentStatus === "Completed" 
+                                ? "bg-secondary" 
+                                : "bg-red-500"
+                              } text-white rounded-md`}
+                            >
+                              {order.paymentStatus === "Completed" ? "Paid" : "Not Paid"}
+                            </button>
+                          </div>
 
-                      <div>{(new Date(order.createdAt)).toLocaleString()}</div>
+                          <div className="justify-center border-r pr-2 flex">
+                            <time className="font-semibold whitespace-nowrap">
+                              {customDateFormat(new Date(order.createdAt))}
+                            </time>
+                          </div>
 
-                      <div>{order.totalPrice}</div>
-                     
-                      <div>
-                        <Link className="bg-primary text-white py-1 px-2 rounded-md cursor-pointer" href={`/orders/${order._id}`}>
-                          Show order
-                        </Link>
-                      </div>
+                          <div className="font-bold flex border-r pr-2">
+                            <h3 className="justify-center whitespace-nowrap p-1">Ksh. {order.totalPrice}</h3>
+                          </div>
+                        
+                          <div className="justify-center">
+                            <button>
+                              <Link className="bg-primary text-white py-1 px-2 rounded-md cursor-pointer whitespace-nowrap" href={`/orders/${order._id}`}>
+                                Show order
+                              </Link>
+                            </button>
+                          </div>
+                        </div>
                     </div>
+                  ))}
                   </div>
-                ))
+                </div>
             )
             : (
                 <div className="flex justify-center mt-10">
@@ -82,4 +99,4 @@ const MyOrders = () => {
   )
 }
 
-export default MyOrders
+export default Orders

@@ -64,7 +64,7 @@ const UserMenu = () => {
                       className="link-container px-4 py-3 transition"
                       onClick={toggleOpen}
                     >
-                      My Orders
+                      Orders
                     </div>
                   </Link>
                   <hr />
