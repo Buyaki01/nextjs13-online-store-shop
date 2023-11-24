@@ -11,7 +11,7 @@ const CheckoutSuccess = () => {
   const pathname = usePathname()
 
   useEffect(() => {
-    if (pathname && pathname.includes("checkout-success")) {
+    if (pathname && pathname.includes("/checkout-success")) {
       clearCart()
     }
   }, [pathname, clearCart])
