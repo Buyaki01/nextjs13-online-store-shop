@@ -3,18 +3,18 @@
 import Link from "next/link"
 import Header from "../components/Header"
 import { CartContext } from "../components/CartContext"
-import { useContext, useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useContext, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 const CheckoutSuccess = () => {
   const { clearCart } = useContext(CartContext)
-  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
-    if (router.pathname && router.pathname.includes("checkout-success")) {
+    if (pathname && pathname.includes("checkout-success")) {
       clearCart()
     }
-  }, [router.pathname, clearCart])
+  }, [pathname, clearCart])
 
   return (
     <>
