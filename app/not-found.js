@@ -18,7 +18,7 @@ const NotFoundPage = () => {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Go back
+             Go back {/* I would want that if user was on http://localhost:3000/cart and then they entered a URL that does not exist i.e http://localhost:3000/checkout-success, when user clicks on the Go Back button they should be taken back to the http://localhost:3000/cart page instead of the homepage.  */}
           </Link>
         </p>
       </div>

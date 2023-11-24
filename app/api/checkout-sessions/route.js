@@ -90,7 +90,7 @@ export const POST = async (request) => {
       phone_number_collection: {
         enabled: true
       },
-      success_url: `${process.env.NEXTAUTH_URL}/checkout-success`,
+      success_url: `${process.env.NEXTAUTH_URL}/checkout-success/${orderDetails._id.toString()}`,
       cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
       metadata: {
         email,
