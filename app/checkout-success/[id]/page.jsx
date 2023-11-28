@@ -76,19 +76,10 @@ const CheckoutSuccess = () => {
                 </>
               )
               : (
-                <div>
+                <div className="text-center">
                   <h3 className="text-4xl font-bold my-2">No payment done yet...</h3>
-                  <p className="text-base my-2">Please click the button below to complete your payment or continue with shopping</p>
-                  <div className="flex gap-2">
-                    <button className="bg-primary text-white text-lg py-2 px-4 rounded-md focus:outline-none">
-                      <Link 
-                        href={'/checkout-address'}
-                        className="flex gap-2 items-center justify-center"
-                      >
-                        Checkout
-                      </Link>
-                    </button>
-
+                  <p className="text-base my-2">Please click the button below to complete your payment or continue shopping</p>
+                  <div className="flex gap-2 justify-center">
                     <button className="bg-secondary text-white text-lg py-2 px-4 rounded-md focus:outline-none">
                       <Link 
                         href={"/"}
@@ -98,6 +89,15 @@ const CheckoutSuccess = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
                         </svg>
                         Continue Shopping
+                      </Link>
+                    </button>
+                    
+                    <button className="bg-primary text-white text-lg py-2 px-4 rounded-md focus:outline-none">
+                      <Link 
+                        href={'/checkout-address'}
+                        className="flex gap-2 items-center justify-center"
+                      >
+                        Checkout
                       </Link>
                     </button>
                   </div>
