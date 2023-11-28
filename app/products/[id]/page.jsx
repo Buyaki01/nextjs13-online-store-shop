@@ -106,7 +106,7 @@ const Product = () => {
                   <p className="text-lg text-gray-600"><span className="font-bold">Description:</span> {product.description}</p>
                   <p className="text-lg text-gray-600"><span className="font-bold">Category:</span> {product.selectedCategory.name}</p>
                   <p className="text-lg text-gray-600"><span className="font-bold">Brand:</span> {product.brand.brandName}</p>
-                  <p className="text-lg text-gray-600 text-justify mb-3"><span className="font-bold">Quantity:</span> {product.quantityInStock}</p>
+                  {/* <p className="text-lg text-gray-600 text-justify mb-3"><span className="font-bold">Quantity:</span> {product.quantityInStock}</p> */}
                 </div>
 
                 {addedToCart 
