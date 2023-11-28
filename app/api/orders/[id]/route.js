@@ -2,14 +2,13 @@ import connectMongoDB from "@/lib/mongoose"
 import Order from "@/models/order"
 import { NextResponse } from "next/server"
 
-export async function GET({ params }) {
-  const { orderId } = params
-  console.log("This is the orderID: ", orderId)
-
+export async function GET(request, { params }) {
+  const { id } = params
+  
   try {
     await connectMongoDB()
 
-    const order = await Order.findOne({ _id: orderId })
+    const order = await Order.findOne({ _id: id })
 
     return NextResponse.json({ order })
   } catch (error) {

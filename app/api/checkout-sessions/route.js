@@ -81,7 +81,7 @@ export const POST = async (request) => {
         },
         unit_amount: productInfo.productPrice * 100,
       },
-    quantity: productInfo.cartQuantity,
+      quantity: productInfo.cartQuantity,
     }))
 
     const session = await stripe.checkout.sessions.create({
@@ -93,14 +93,13 @@ export const POST = async (request) => {
       success_url: `${process.env.NEXTAUTH_URL}/checkout-success/${orderDetails._id.toString()}`,
       cancel_url: `${process.env.NEXTAUTH_URL}/cart`,
       metadata: {
-        email,
         orderId:orderDetails._id.toString(),
-        cartProducts: JSON.stringify(productInfoArray),
       },
     })
     
     return NextResponse.json({ sessionId: session.id })
   } catch (err) {
+    console.error("Error in creating checkout session:", err)
     return NextResponse.json({ error: err.message})
   }
 }

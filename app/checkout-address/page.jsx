@@ -6,6 +6,7 @@ import { useContext, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { CartContext } from "../components/CartContext"
+import toast from "react-hot-toast"
 
 const AddressForm = () => {
   const [firstname, setFirstname] = useState("")
@@ -30,24 +31,34 @@ const AddressForm = () => {
     const userExists = session?.user?.name
     if (userExists) {
       const email = session?.user?.email
-      const response = await axios.post('/api/checkout-sessions', { 
-        email, 
-        cartProducts,
-        firstname,
-        lastname,
-        phoneNumber,
-        streetAddress,
-        city,
-        postalCode,
-        country,
-      })
-
-      const stripe = await stripePromise
-      console.log("This is the response data session: ", response.data.sessionId)
-      const result = await stripe?.redirectToCheckout({ sessionId: response.data.sessionId })
+      
+      try {
+        const response = await axios.post('/api/checkout-sessions', { 
+          email, 
+          cartProducts,
+          firstname,
+          lastname,
+          phoneNumber,
+          streetAddress,
+          city,
+          postalCode,
+          country,
+        })
+  
+        const stripe = await stripePromise
+        const sessionIdData = await response.data.sessionId
+        const result = await stripe?.redirectToCheckout({ sessionId: sessionIdData })
     
-      if (result.error) {
-        console.error(result.error)
+        if (result.error) {
+          console.error(result.error)
+  
+          if (result.error.message.includes('Request aborted due to timeout being reached')) {
+            toast.error('Request timed out. Please refresh the page and try again.')
+          }
+        }
+      } catch (error) {
+        console.error('An error occurred during checkout:', error)
+        toast.error('An error occurred during checkout. Please try again.')
       }
     }
     else{

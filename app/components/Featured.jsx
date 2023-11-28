@@ -27,10 +27,12 @@ const Featured = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
   }
 
   return (
-    <div className="bg-secondary pt-5 px-12">
+    <div className="bg-secondary pt-5 px-12 mb-3">
       {loading 
         ? ( <p className="loadingMessage text-white">Loading...</p> ) 
         : products.length > 0 
@@ -38,7 +40,7 @@ const Featured = () => {
             <div>
               <Slider {...settings}>
                 {products.map(product => (
-                  <div className="h-[300px]">
+                  <div key={product._id} className="h-[300px]">
                     <Link 
                       href={`/products/${product._id}`}
                       className="flex justify-center"
