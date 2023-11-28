@@ -8,7 +8,15 @@ export async function GET(request, { params }) {
   try {
     await connectMongoDB()
 
-    const order = await Order.findOne({ _id: id })
+    const order = await Order.findOne({ _id: id }).populate({
+      path: 'products.selectedCategory',
+      model: 'Category',
+    })
+    .populate({
+      path: 'products.brand',
+      model: 'Brand',
+    })
+    .exec()
 
     return NextResponse.json({ order })
   } catch (error) {

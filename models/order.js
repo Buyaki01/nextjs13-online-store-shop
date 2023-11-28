@@ -14,9 +14,15 @@ const OrderSchema = new Schema({
     regularPrice: { type: Number },
     productPrice: { type: Number },
     images: [{ type: String }],
-    selectedCategory: { type: mongoose.Schema.Types.ObjectId },
+    selectedCategory: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
     quantityInStock: { type: Number },
-    brand: { type: mongoose.Schema.Types.ObjectId },
+    brand: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Brand",
+    },
     properties: {type:Object},
     isFeatured: { type: Boolean },
     cartQuantity: { type: Number },
@@ -28,6 +34,9 @@ const OrderSchema = new Schema({
   postalCode: { type: String, required: true },
   streetAddress: { type: String, required: true },
   country: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
 }, {
   timestamps: true,
 }

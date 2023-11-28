@@ -3,19 +3,21 @@
 import { loadStripe } from '@stripe/stripe-js'
 import axios from 'axios'
 import { useContext, useState } from "react"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { CartContext } from "../components/CartContext"
 import toast from "react-hot-toast"
 
-const AddressForm = () => {
-  const [firstname, setFirstname] = useState("")
-  const [lastname, setLastname] = useState("")
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [streetAddress, setStreetAddress] = useState("")
-  const [city, setCity] = useState("")
-  const [postalCode, setPostalCode] = useState("")
-  const [country, setCountry] = useState("")
+const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNumber: editPhoneNumber, streetAddress: editStreetAddress, city: editCity, postalCode: editPostalCode, country: editCountry }) => {
+  const [firstname, setFirstname] = useState(editFirstname || "")
+  const [lastname, setLastname] = useState(editLastname || "")
+  const [phoneNumber, setPhoneNumber] = useState(editPhoneNumber || "")
+  const [streetAddress, setStreetAddress] = useState(editStreetAddress || "")
+  const [city, setCity] = useState(editCity || "")
+  const [postalCode, setPostalCode] = useState(editPostalCode || "")
+  const [country, setCountry] = useState(editCountry || "")
+
+  const pathname = usePathname()
 
   const { cartProducts } = useContext(CartContext)
 
@@ -85,7 +87,7 @@ const AddressForm = () => {
         />
 
         <input
-          type="text"
+          type="tel"
           placeholder="Phone Number"
           value={phoneNumber}
           onChange={e => setPhoneNumber(e.target.value)}
@@ -120,12 +122,24 @@ const AddressForm = () => {
         />
 
         <div className="mt-[-25px]">
-          <button
-            onClick={handleCheckout}
-            className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
-          >
-            Proceed to Checkout
-          </button>
+          {pathname.includes("/checkout-address") 
+            ? (
+              <button
+                onClick={handleCheckout}
+                className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
+              >
+                Proceed to Checkout
+              </button>
+            ) 
+            : (
+              <button
+                // onClick={handleEditAddress}
+                className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
+              >
+                Update Address
+              </button>
+            )}
+          
         </div>
       </div>
     </form>

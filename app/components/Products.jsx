@@ -3,6 +3,7 @@
 import axios from "axios"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -10,9 +11,19 @@ const Products = () => {
   
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await axios('/api/products')
-      setProducts(response.data)
-      setLoading(false)
+      try {
+        const response = await axios('/api/products')
+        setProducts(response.data)
+        setLoading(false)
+      } catch (error) {
+        console.error("Error fetching products:", error)
+        if (error.response && error.response.status === 500) {
+          toast.error("Internal server error. Please try again later.")
+        } else {
+          toast.error("Error fetching products. Please try again later.")
+        }
+        setLoading(false)
+      }
     }
 
     fetchProducts()
