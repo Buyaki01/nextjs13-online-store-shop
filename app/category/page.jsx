@@ -25,10 +25,12 @@ const category = () => {
     fetchSelectedCategoryResults()
   }, [searchQuery])
 
+  const uniqueBrands = new Set(categoryProducts.map((product) => product.brand.brandName))
+
   return (
     <div>
       <Header />
-      <div className="my-3">
+      <div className="my-5">
         {loading 
           ? (
             <p className="text-center text-2xl">Loading...</p>
@@ -37,16 +39,35 @@ const category = () => {
             categoryProducts.length > 0 
             ? (
               <div className="grid grid-cols-4 gap-x-6">
-                <div className="col-1 border h-fit p-2">
-                  <h2 className="font-bold mb-3">Filter</h2>
+                <div className="col-1 border h-fit px-2 pb-5 mb-5">
+                  <h2 className="text-3xl font-bold mb-3 pt-2">Filter</h2>
                   <div>
-                    <div>
-                      <h3>Brands</h3>
-                      {/* Add checkboxes with all the brands */}
+                    <div className="my-5">
+                      <h3 className="text-xl mb-2 font-bold">Brands</h3>
+                      <div className="mb-2">
+                        {[...uniqueBrands].map((brandName) => (
+                          <div className="flex gap-2 mb-2 items-center">
+                            <div className="items-center">
+                              <input
+                                type="checkbox"
+                                id={brandName}
+                                value={brandName}
+                                className="mb-0"
+                              />
+                            </div>
+                            <label 
+                              htmlFor={brandName}
+                              className="whitespace-nowrap"
+                            >
+                              {brandName}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     <div>
-                      <h3>Price</h3>
+                      <h3 className="text-xl mb-2 font-bold">Price</h3>
                       {/* Filter by Price */}
                     </div>
                   </div>
@@ -72,7 +93,7 @@ const category = () => {
                               ? (
                                   <>
                                     <h4>Ksh. {product.productPrice}</h4>
-                                    <h6 className="line-through">Ksh. {product.regularPrice}</h6>
+                                    <h6 className="line-through text-gray-500">Ksh. {product.regularPrice}</h6>
                                   </>
                                 ) 
                               : (
