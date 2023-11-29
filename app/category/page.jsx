@@ -15,6 +15,8 @@ const category = () => {
   const [categoryProducts, setCategoryProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedBrands, setSelectedBrands] = useState([])
+  const [minPrice, setMinPrice] = useState('')
+  const [maxPrice, setMaxPrice] = useState('')
 
   useEffect(() => {
     const fetchSelectedCategoryResults = async () => {
@@ -49,6 +51,19 @@ const category = () => {
       ? true
       : selectedBrands.includes(product.brand.brandName)
   )
+
+  const handleFilterByPrice = (e) => {
+    e.preventDefault()
+    const filteredByPrice = categoryProducts.filter((product) => {
+      const productPrice = parseFloat(product.productPrice)
+      return (
+        (!minPrice || productPrice >= parseFloat(minPrice)) &&
+        (!maxPrice || productPrice <= parseFloat(maxPrice))
+      )
+    })
+
+    setCategoryProducts(filteredByPrice)
+  }
 
   return (
     <div>
@@ -92,7 +107,39 @@ const category = () => {
 
                     <div>
                       <h3 className="text-xl mb-2 font-bold">Price</h3>
-                      {/* Filter by Price */}
+                      <div className="flex gap-1">
+                        <div>
+                          <label htmlFor="minPrice">Min Price:</label>
+                          <input
+                            type="number"
+                            id="minPrice"
+                            value={minPrice}
+                            onChange={e => setMinPrice(e.target.value)}
+                            className="mb-0"
+                            placeholder="Min"
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="maxPrice">Max Price:</label>
+                          <input
+                            type="number"
+                            id="maxPrice"
+                            value={maxPrice}
+                            onChange={e => setMaxPrice(e.target.value)}
+                            className="mb-0"
+                            placeholder="Max"
+                          />
+                        </div>
+                        <div className="flex items-end">
+                          <button
+                            className="text-white px-2"
+                            onClick={handleFilterByPrice}
+                          >
+                            Go
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
