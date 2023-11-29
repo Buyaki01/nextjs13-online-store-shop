@@ -1,9 +1,11 @@
 import axios from "axios"
+import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 const ProductsCategories = () => {
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
   
   useEffect(() => {
     const fetchCategories = async () => {
@@ -13,6 +15,10 @@ const ProductsCategories = () => {
     }
     fetchCategories()
   }, [])
+
+  const filterByCategory = (category) => {
+    router.push(`/category?query=${category}`)
+  }
 
   return (
     <div className="mt-10">
@@ -29,6 +35,7 @@ const ProductsCategories = () => {
                   <li
                     key={category._id}
                     className="flex justify-center items-center border border-gray-400 rounded-md h-32 overflow-hidden bg-white hover:shadow-lg transition duration-300"
+                    onClick={() => filterByCategory(category.name)}
                   >
                     <div className="p-4">
                       <h3 className="text-lg font-semibold mb-2">{category.name}</h3>
