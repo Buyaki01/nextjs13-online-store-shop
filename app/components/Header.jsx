@@ -1,103 +1,63 @@
 'use client'
 
-import styled from "styled-components"
 import Link from "next/link"
 import CartIcon from "./CartIcon"
 import { useContext } from "react"
 import { CartContext } from "./CartContext"
 import UserMenu from "./UserMenu"
 
-const StyledHeader = styled.header`
-  background-color: rgb(146, 212, 59);
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  width: 100%;
-`;
-
-const Logo = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 3rem;
-`;
-
-const SearchInput = styled.input`
-  padding: 10px 15px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  margin-right: 10px;
-  width: 200px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: 10px center;
-  background-size: 20px 20px;
-  padding-left: 35px;
-  font-size: 1.2rem;
-  color: #333;
-  width: 300px;
-
-  ::placeholder {
-    font-size: 1.2rem;
-  }
-`;
-
-const SearchButton = styled.button`
-  padding: 10px 15px;
-  background-color: #d40d9a;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.0rem;
-  color: black;
-  cursor: pointer;
-  
-  &:hover {
-    background-color: #a00a7c;
-  }
-`;
-
-const SearchInputContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const CartItemsCount = styled.span`
-  background-color: #d40d9a;
-  color: white;
-  padding: 1px 6px;
-  border-radius: 50%;
-  font-size: 0.7rem;
-  position: absolute;
-  top: -3px;
-  right: 35px;
-  z-index: 1;
-`;
-
 const Header = ({children}) => {
   const { cartProducts } = useContext(CartContext)
   const totalQuantity = cartProducts.reduce((total, item) => total + item.quantity, 0)
 
   return (
-    <StyledHeader>
-      <Logo href={'/'}>Pearls Collections</Logo>
+    <header className="bg-secondary text-white flex justify-between items-center px-4 py-2 w-full">
+      <Link 
+        href={'/'}
+        className="no-underline text-white whitespace-nowrap text-5xl"
+      >
+        Pearls Collections
+      </Link>
 
-      <SearchInputContainer>
-        <SearchInput type="text" placeholder="Search products and categories" />
-        <SearchButton>Search</SearchButton>
-      </SearchInputContainer>
+      <div className="relative inline-flex items-center">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          strokeWidth={1.5} 
+          stroke="currentColor"
+          className="w-8 h-8 absolute left-3 text-gray-500 py-2"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+        </svg>
+
+        <input 
+          type="text" 
+          placeholder="Search products and categories"
+          className="px-4 py-2 pl-10 border-2 border-gray-300 rounded mr-2 w-72 mb-0"
+        />
+        <button
+          className="bg-primary text-white px-4 py-2"
+        >
+          Search
+        </button>
+      </div>
 
       <nav className="flex items-center gap-4">
         <Link className="navLinks" href={'/cart'}>
           <CartIcon/>
-          {totalQuantity > 0 && <CartItemsCount>{totalQuantity}</CartItemsCount>}Cart
+          {totalQuantity > 0 && 
+            <span
+              className="bg-primary text-white px-1 text-center rounded-full text-xs absolute top-0 right-10 z-10"
+            >
+              {totalQuantity}
+            </span>}Cart
         </Link>
         <UserMenu />
       </nav>
 
       {children}
-    </StyledHeader>
+    </header>
   )
 }
 

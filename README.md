@@ -29,7 +29,6 @@ Check out our live demo [here](link-to-demo) to explore the features and functio
 - **next-auth**
 - **React**
 - **MongoDB**
-- **Styled Components**
 - **Taiwind CSS**
 - **Stripe**
 - **Stripe Webhooks**
