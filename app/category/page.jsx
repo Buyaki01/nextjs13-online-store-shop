@@ -14,6 +14,7 @@ const category = () => {
   
   const [categoryProducts, setCategoryProducts] = useState([])
   const [loading, setLoading] = useState(true)
+  const [selectedBrands, setSelectedBrands] = useState([])
 
   useEffect(() => {
     const fetchSelectedCategoryResults = async () => {
@@ -26,6 +27,28 @@ const category = () => {
   }, [searchQuery])
 
   const uniqueBrands = new Set(categoryProducts.map((product) => product.brand.brandName))
+
+  const handleBrandCheckboxChange = (brandName) => {
+    // Check if the brand is already selected, then toggle its state
+    if (selectedBrands.includes(brandName)) {
+      setSelectedBrands((prevSelectedBrands) =>
+        // If selected, unselect it (remove from the list)
+        prevSelectedBrands.filter((brand) => brand !== brandName)
+      )
+    } else {
+      setSelectedBrands((prevSelectedBrands) => [
+        // If not selected, select it (add to the list)
+        ...prevSelectedBrands,
+        brandName,
+      ])
+    }
+  }
+
+  const filteredProducts = categoryProducts.filter((product) =>
+    selectedBrands.length === 0
+      ? true
+      : selectedBrands.includes(product.brand.brandName)
+  )
 
   return (
     <div>
@@ -52,6 +75,7 @@ const category = () => {
                                 type="checkbox"
                                 id={brandName}
                                 value={brandName}
+                                onChange={() => handleBrandCheckboxChange(brandName)}
                                 className="mb-0"
                               />
                             </div>
@@ -74,7 +98,7 @@ const category = () => {
                 </div>
                 <div className="col-span-3 border p-2">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
-                    {categoryProducts.map((product) => (
+                    {filteredProducts.map((product) => (
                       <div className="col-1">
                         <Link
                           href={`/products/${product._id}`}
