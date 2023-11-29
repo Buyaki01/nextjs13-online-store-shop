@@ -77,7 +77,7 @@ const category = () => {
             categoryProducts.length > 0 
             ? (
               <div className="grid grid-cols-4 gap-x-6">
-                <div className="col-1 border h-fit px-2 pb-5 mb-5">
+                <div className="col-1 border h-fit px-2 pb-5 mb-5 border-gray-300">
                   <h2 className="text-3xl font-bold mb-3 pt-2">Filter</h2>
                   <div>
                     <div className="my-5">
@@ -143,7 +143,7 @@ const category = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-span-3 border p-2">
+                <div className="col-span-3 border p-2 border-gray-300">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
                     {filteredProducts.map((product) => (
                       <div className="col-1">
@@ -180,7 +180,9 @@ const category = () => {
               </div>
             ) 
             : (
-              <p>No products matching <span className="font-bold">{searchQuery}</span> category</p>
+              <p className="text-center mt-5 text-xl text-gray-600">
+                No available products in the <span className="font-bold text-black">{searchQuery}</span> category
+              </p>
             )
           )
         }
