@@ -1,71 +1,46 @@
-import Link from "next/link"
-import { useContext } from "react"
-import { CartContext } from "./CartContext"
+import { useMediaQuery } from "react-responsive"
+import CartProductImage from "./cart/CartProductImage"
+import CartProductName from "./cart/CartProductName"
+import IncrementDecrementButtons from "./cart/IncrementDecrementButtons"
+import CartProductPrice from "./cart/CartProductPrice"
+import RemoveCartItemButton from "./cart/RemoveCartItemButton"
 
 const CartItems = ({fetchCartProductInfo}) => {
-  const { addItemToCart, decrementItemInCart, removeItemFromCart } = useContext(CartContext)
+  const isSmallScreen = useMediaQuery({ maxDeviceWidth: 576 })
+
   return (
     <div className="mb-5">
       {fetchCartProductInfo.length > 0 && <div>
         <div className="mt-3 border border-solid border-gray-400 rounded-sm p-3">
           <h2 className="text-2xl font-bold mb-3">Cart</h2>
           {fetchCartProductInfo.map(cartItem => (
-            <div key={cartItem.product._id} className="mt-3 grid grid-cols-5 gap-4 border-b-2 border-gray-400 pb-3 mb-1">
-              <div className="p-3 mr-3 border border-r-2 border-solid border-gray-300 flex items-center justify-center"> 
-                <Link href={`/products/${cartItem.product._id}`}>
-                  <img 
-                    src={cartItem.product.uploadedImagePaths[0]} 
-                    alt={cartItem.product.productName} 
-                    className="w-full h-32 object-contain"
-                  />
-                </Link>
-              </div>
-            
-              <Link 
-                href={`/products/${cartItem.product._id}`}
-                className="w-44 mr-3 flex items-center justify-center hover:underline"
-              >
-                <h3 className="font-bold text-xl truncate px-1">
-                  {cartItem.product.productName}
-                </h3>
-              </Link>
-              
-              <div className="w-32 mr-3 flex items-center justify-center">
-                <button 
-                  className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
-                  onClick={() => {
-                    decrementItemInCart(cartItem.product._id)
-                  }}
-                >
-                  -
-                </button>
-                <span className="text-xl mx-2">{cartItem.itemQuantity}</span>
-                <button 
-                  className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
-                  onClick={() => {
-                    addItemToCart(cartItem.product._id)
-                  }}
-                >
-                  +
-                </button>
-              </div>
-              <div className="w-32 mr-3 flex flex-col items-center justify-center">
-                <h4 className="text-2xl font-bold">Ksh.{ cartItem.product.productPrice * cartItem.itemQuantity }</h4>
-                <p className="text-sm whitespace-nowrap"><span className="font-bold">Ksh.{cartItem.product.productPrice}</span>/per item</p>
-              </div>
-              <div className="w-32 flex items-center justify-center">
-                <button 
-                  className="bg-red-500 text-white py-2 px-4 rounded-full flex gap-2"
-                  onClick={() => {
-                    removeItemFromCart(cartItem.product._id)
-                  }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                  </svg>
-                  Remove
-                </button>
-              </div>
+            <div key={cartItem.product._id} className="mt-3 grid grid-cols-2 md:grid-cols-5 gap-4 border-b-2 border-gray-400 pb-3 mb-1">
+              {!isSmallScreen 
+                ? (
+                  <>
+                    <CartProductImage cartItem={cartItem}/>
+                    <CartProductName cartItem={cartItem}/>
+                    <IncrementDecrementButtons cartItem={cartItem}/>
+                    <CartProductPrice cartItem={cartItem}/>
+                    <RemoveCartItemButton cartItem={cartItem}/>
+                  </>
+                ) 
+                : (
+                  <>
+                    <div>
+                      <CartProductImage cartItem={cartItem}/>
+                    </div>
+                    <div className="flex items-center justify-center">
+                      <div>
+                        <CartProductName cartItem={cartItem}/>
+                        <IncrementDecrementButtons cartItem={cartItem}/>
+                        <CartProductPrice cartItem={cartItem}/>
+                        <RemoveCartItemButton cartItem={cartItem}/>
+                      </div>
+                    </div>
+                  </>
+                )
+              }
             </div>
           ))}
         </div> 

@@ -8,11 +8,14 @@ import toast from "react-hot-toast"
 import EmptyCart from "../components/EmptyCart"
 import CartItems from "../components/CartItems"
 import CartSummary from "../components/CartSummary"
+import { useMediaQuery } from "react-responsive"
 
 const Cart = () => {
   const { cartProducts } = useContext(CartContext) //The cartProducts will have: productId and quantity
   const [fetchCartProductInfo, setFetchCartProductInfo] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+
+  const isSmallScreen = useMediaQuery({ maxDeviceWidth: 768 })
 
   useEffect(() => {
     const fetchCartProducts = async () => {
@@ -40,14 +43,30 @@ const Cart = () => {
       ) : cartProducts.length === 0 ? (
         <EmptyCart />
       ) : (
-        <div className="grid grid-cols-4 gap-4 mb-5">
-          <div className="col-span-3">
-            <CartItems fetchCartProductInfo={fetchCartProductInfo} />
-          </div>
-          
-          <div className="col-span-1">
-            <CartSummary fetchCartProductInfo={fetchCartProductInfo} />
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-5">
+          {!isSmallScreen 
+            ? (
+              <>
+                <div className="lg:col-span-3">
+                  <CartItems fetchCartProductInfo={fetchCartProductInfo} />
+                </div>
+                <div className="lg:col-span-1">
+                  <CartSummary fetchCartProductInfo={fetchCartProductInfo} />
+                </div>
+              </>
+            ) 
+            : (
+              <>
+                <div className="text-center">
+                  <CartSummary fetchCartProductInfo={fetchCartProductInfo} />
+                </div>
+                <div>
+                  <CartItems fetchCartProductInfo={fetchCartProductInfo} />
+                </div>
+              </>
+            )
+          }
+         
         </div>
       )}
     </>
