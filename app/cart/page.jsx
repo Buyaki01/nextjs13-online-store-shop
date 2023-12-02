@@ -119,7 +119,7 @@ const Cart = () => {
                       <div className="text-center">
                         <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
                           <Link href={'/checkout-address'}>
-                            Checkout
+                            Checkout (<span className="font-semibold text-xl">ksh. {fetchCartProductInfo.reduce((total, item) => total + item.subtotal, 0)}</span>)
                           </Link>
                         </button>
                       </div>

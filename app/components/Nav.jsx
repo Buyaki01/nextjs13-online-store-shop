@@ -9,7 +9,7 @@ const Nav = () => {
   const totalQuantity = cartProducts.reduce((total, item) => total + item.quantity, 0)
 
   return (
-    <nav className="flex items-center gap-4">
+    <nav className="flex items-center gap-1 lg:gap-4">
       <Link className="navLinks" href={'/cart'}>
         <CartIcon />
         {totalQuantity > 0 && 

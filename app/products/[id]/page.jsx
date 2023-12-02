@@ -50,7 +50,7 @@ const Product = () => {
               <h1 className="mt-3 text-xl text-center">Loading...</h1>
             ) 
           : (
-            <div className="grid grid-cols-2 gap-4 p-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5">
               <div className="border-solid border border-gray-400 rounded-sm">
                 <Swiper
                   loop={true}
@@ -92,7 +92,7 @@ const Product = () => {
                         <img
                           src={imagePath}
                           alt={product.productName}
-                          className='flex justify-center'
+                          className='w-full h-full object-contain'
                         />
                       </div>
                     </SwiperSlide>
@@ -106,34 +106,39 @@ const Product = () => {
                   <p className="text-lg text-gray-600"><span className="font-bold">Description:</span> {product.description}</p>
                   <p className="text-lg text-gray-600"><span className="font-bold">Category:</span> {product.selectedCategory.name}</p>
                   <p className="text-lg text-gray-600"><span className="font-bold">Brand:</span> {product.brand.brandName}</p>
+                  <p className="text-lg text-gray-600 font-bold mb-2">Price: <span className="text-primary">shs.{product.productPrice}</span></p>
                   {/* <p className="text-lg text-gray-600 text-justify mb-3"><span className="font-bold">Quantity:</span> {product.quantityInStock}</p> */}
                 </div>
 
                 {addedToCart 
                   ? (
                     <> 
-                      <div className="flex items-center justify-center space-x-3 mb-5">
-                        <div><h4 className="text-2xl font-bold">shs.{product.productPrice}</h4></div>
-                        <button 
-                          className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
-                          onClick={() => {
-                            decrementItemInCart(product._id)
-                          }}
-                        >-
-                        </button>
-                        <span className="text-2xl">{cartProducts.find(item => item.productId === product._id)?.quantity }</span>
-                        <button 
-                          className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
-                          onClick={() => {
-                            addItemToCart(product._id)
-                          }}
-                        >
-                          +
-                        </button>
+                      <div className="flex gap-2 mb-5">
+                        <div className="flex mb-3">
+                          <button 
+                            className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
+                            onClick={() => {
+                              decrementItemInCart(product._id)
+                            }}
+                          >-
+                          </button>
+                          <span className="text-2xl px-2">{cartProducts.find(item => item.productId === product._id)?.quantity }</span>
+                          <button 
+                            className="border text-2xl px-2 text-white w-9 h-9 flex justify-center rounded"
+                            onClick={() => {
+                              addItemToCart(product._id)
+                            }}
+                          >
+                            +
+                          </button>
+                        </div>
 
                         <div>
-                          <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
-                            <Link href={'/checkout-address'}>
+                          <button className="text-white text-lg px-4 py-1 rounded-md focus:outline-none">
+                            <Link 
+                              href={'/checkout-address'}
+                              className="whitespace-nowrap"
+                            >
                               Checkout
                             </Link>
                           </button>
@@ -151,20 +156,19 @@ const Product = () => {
                     </>
                   ) 
                   : (
-                    <>
-                      <div className="mb-6"><h4 className="text-2xl font-bold">shs. {product.productPrice}</h4></div>
+                    <div>
                       <button
-                        className="text-xl rounded-lg text-white w-60 py-1"
+                        className="text-xl rounded-lg text-white py-2 px-4 w-full"
                         onClick={() => {
                           setAddedToCart(true)
                           addItemToCart(product._id)
                         }}
                       >
-                        <div className="flex items-center justify-center gap-1">
+                        <div className="flex gap-1">
                           <CartIcon className="w-6 h-6 text-white"/>&nbsp;Add to cart
                         </div>
                       </button>
-                    </>
+                    </div>
                   )
                 }
             </div>
