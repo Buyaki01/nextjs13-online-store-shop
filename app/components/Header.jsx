@@ -1,10 +1,5 @@
 'use client'
 
-import Link from "next/link"
-import CartIcon from "./CartIcon"
-import { useContext } from "react"
-import { CartContext } from "./CartContext"
-import UserMenu from "./UserMenu"
 import Logo from "./Logo"
 import SearchInput from "./SearchInput"
 import Nav from "./Nav"
