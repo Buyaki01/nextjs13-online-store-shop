@@ -81,7 +81,7 @@ h4{
 }
 
 .navLinks {
-  @apply flex gap-1 items-center p-1 cursor-pointer;
+  @apply flex items-center p-1 cursor-pointer gap-0 sm:gap-1 mr-1 sm:mr-0;
 
   color: #fff;
   text-decoration: none;
