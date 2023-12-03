@@ -92,7 +92,7 @@ const Product = () => {
                         <img
                           src={imagePath}
                           alt={product.productName}
-                          className='w-full h-full object-contain'
+                          className='w-full h-full'
                         />
                       </div>
                     </SwiperSlide>

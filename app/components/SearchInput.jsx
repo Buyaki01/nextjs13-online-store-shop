@@ -1,3 +1,5 @@
+'use client'
+
 const SearchInput = () => {
   return (
     <div className="relative inline-flex items-center gap-2 sm:gap-0 mb-2 lg:mb-0">

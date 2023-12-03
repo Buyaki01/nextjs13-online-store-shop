@@ -30,7 +30,7 @@ const Products = () => {
   }, [])
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center justify-center">
+    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center justify-center mb-5">
       {loading 
         ? (
             <p className="loadingMessage">Loading...</p>
@@ -42,7 +42,7 @@ const Products = () => {
                   <img 
                     src={product.uploadedImagePaths[0]} 
                     alt={product.productName}
-                    className="w-40 h-40 object-cover cursor-pointer mx-auto"
+                    className="w-40 h-40 cursor-pointer mx-auto"
                   />
                 </Link>
               </div>

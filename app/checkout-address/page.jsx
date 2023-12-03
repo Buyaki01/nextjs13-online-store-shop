@@ -69,7 +69,7 @@ const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNu
   }
 
   return (
-    <form className="min-h-fit h-full flex justify-center">
+    <form className="flex justify-center">
       <div  className="max-w-[600px] w-full flex flex-col gap-6 items-center shadow-xl shadow-slate-400 rounded-md my-8 p-4 md:p-8">
         <h2 className="text-4xl font-semibold mb-2">Shipping Address</h2>
         <input
@@ -121,12 +121,12 @@ const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNu
           onChange={e => setCountry(e.target.value)}
         />
 
-        <div className="mt-[-25px]">
+        <div>
           {pathname.includes("/checkout-address") 
             ? (
               <button
                 onClick={handleCheckout}
-                className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
+                className="text-white text-lg py-2 px-4 rounded-lg focus:outline-none"
               >
                 Proceed to Checkout
               </button>
@@ -134,7 +134,7 @@ const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNu
             : (
               <button
                 // onClick={handleEditAddress}
-                className="text-white text-lg py-2 px-4 rounded-md focus:outline-none"
+                className="text-white text-lg py-2 px-4 rounded-lg focus:outline-none"
               >
                 Update Address
               </button>

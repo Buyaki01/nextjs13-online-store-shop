@@ -25,6 +25,22 @@ const FlashSales = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024, // Medium devices (tablets)
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768, // Small devices (phones)
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   }
 
   return (
@@ -49,7 +65,7 @@ const FlashSales = () => {
                           <img 
                             src={product.uploadedImagePaths[0]} 
                             alt={product.productName}
-                            className="w-48 h-48 object-cover cursor-pointer mx-auto p-2"
+                            className="w-48 h-48 cursor-pointer mx-auto p-2"
                           />
                         </Link>
                       </div>
