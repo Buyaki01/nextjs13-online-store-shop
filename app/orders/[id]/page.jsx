@@ -1,10 +1,9 @@
 'use client'
 
-import AddressForm from "@/app/checkout-address/page"
 import Header from "@/app/components/Header"
 import axios from "axios"
 import Link from "next/link"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
@@ -13,6 +12,7 @@ const OrderDetailsPage = () => {
   const { id } = params
   const [order, setOrder] = useState(null)
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -33,8 +33,10 @@ const OrderDetailsPage = () => {
     fetchOrder()
   }, [id])
 
-  const handleEditShippingAddress = () => {
-    
+  const handleShippingAddressInfo = () => {
+    router.push(
+      `/checkout-address?order=${order._id}&firstname=${order.firstname}&lastname=${order.lastname}&phoneNumber=${order.phoneNumber}&streetAddress=${order.streetAddress}&city=${order.city}&postalCode=${order.postalCode}&country=${order.country}`
+    )
   }
 
   return (
@@ -61,13 +63,10 @@ const OrderDetailsPage = () => {
                   <div>
                     <button 
                       className="bg-primary text-white px-4 py-2 rounded-lg"
-                      onClick={handleEditShippingAddress}
+                      onClick={handleShippingAddressInfo}
+                      disabled={order.deliveryStatus === "Delivered"}
                     >
-                      <Link 
-                        href={'/checkout-address'}
-                      >
-                        Change Address
-                      </Link>
+                      Change Address
                     </button>
                   </div>
                 </div>

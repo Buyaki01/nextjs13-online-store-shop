@@ -2,13 +2,24 @@
 
 import { loadStripe } from '@stripe/stripe-js'
 import axios from 'axios'
-import { useContext, useState } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { useContext, useEffect, useState } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useSession } from "next-auth/react"
 import { CartContext } from "../components/CartContext"
 import toast from "react-hot-toast"
 
-const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNumber: editPhoneNumber, streetAddress: editStreetAddress, city: editCity, postalCode: editPostalCode, country: editCountry }) => {
+const AddressForm = () => {
+  const shippingInfoParams = useSearchParams()
+
+  const editFirstname = shippingInfoParams.get('firstname')
+  const editLastname = shippingInfoParams.get('lastname')
+  const editPhoneNumber = shippingInfoParams.get('phoneNumber')
+  const editStreetAddress = shippingInfoParams.get('streetAddress')
+  const editCity = shippingInfoParams.get('city')
+  const editPostalCode = shippingInfoParams.get('postalCode')
+  const editCountry = shippingInfoParams.get('country')
+  const orderId = shippingInfoParams.get('order')
+
   const [firstname, setFirstname] = useState(editFirstname || "")
   const [lastname, setLastname] = useState(editLastname || "")
   const [phoneNumber, setPhoneNumber] = useState(editPhoneNumber || "")
@@ -18,6 +29,7 @@ const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNu
   const [country, setCountry] = useState(editCountry || "")
 
   const pathname = usePathname()
+  const isUpdateAddress = /^\/checkout-address(?:\/.*)?$/.test(pathname)
 
   const { cartProducts } = useContext(CartContext)
 
@@ -30,10 +42,10 @@ const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNu
 
   const handleCheckout = async (e) => {
     e.preventDefault()
-    const userExists = session?.user?.name
-    if (userExists) {
-      const email = session?.user?.email
-      
+    const userExists = session?.user?.email
+
+    if (userExists) { 
+      const email = session?.user?.email 
       try {
         const response = await axios.post('/api/checkout-sessions', { 
           email, 
@@ -64,6 +76,54 @@ const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNu
       }
     }
     else{
+      router.push('/login')
+    }
+  }
+
+  useEffect(() => {
+    if (isUpdateAddress) {
+      setFirstname(editFirstname)
+      setLastname(editLastname)
+      setPhoneNumber(editPhoneNumber)
+      setStreetAddress(editStreetAddress)
+      setCity(editCity)
+      setPostalCode(editPostalCode)
+      setCountry(editCountry)
+    }
+  }, [isUpdateAddress])
+
+  const handleEditAddress = async (e) => {
+    e.preventDefault()
+
+    const userExists = session?.user?.email
+
+    if (userExists) {
+      const email = session?.user?.email
+      try {
+        const response = await axios.put('/api/update-shipping-address', {
+          email,
+          orderId,
+          firstname,
+          lastname,
+          phoneNumber,
+          streetAddress,
+          city,
+          postalCode,
+          country
+        })
+
+        const updatedAddress = response.data.updatedAddress
+
+        if (updatedAddress) {
+          toast.success('Shipping Address updated successfully!')
+          router.push(`/orders/${orderId}`)
+        } else {
+          toast.error('Failed to update address. Please try again.')
+        }
+      } catch (error) {
+        toast.error('An error occurred while updating the address. Please try again.')
+      }
+    } else {
       router.push('/login')
     }
   }
@@ -122,24 +182,24 @@ const AddressForm = ({ firstname: editFirstname, lastname: editLastname, phoneNu
         />
 
         <div>
-          {pathname.includes("/checkout-address") 
+          {isUpdateAddress
             ? (
+              <button
+                onClick={handleEditAddress}
+                className="text-white text-lg py-2 px-4 rounded-lg focus:outline-none"
+              >
+                Update Address
+              </button>
+            ) 
+            : (
               <button
                 onClick={handleCheckout}
                 className="text-white text-lg py-2 px-4 rounded-lg focus:outline-none"
               >
                 Proceed to Checkout
               </button>
-            ) 
-            : (
-              <button
-                // onClick={handleEditAddress}
-                className="text-white text-lg py-2 px-4 rounded-lg focus:outline-none"
-              >
-                Update Address
-              </button>
-            )}
-          
+            )
+          }
         </div>
       </div>
     </form>
