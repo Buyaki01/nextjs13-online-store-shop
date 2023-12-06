@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import Header from "../components/Header"
 import axios from "axios"
 import Link from "next/link"
 import { format, isToday, isYesterday } from 'date-fns'
@@ -32,7 +31,6 @@ const Orders = () => {
 
   return (
     <>
-      <Header />
       <div className="my-5">
         <h2 className="uppercase mb-3 text-center text-2xl font-bold text-primary">Orders</h2>
         {loading 

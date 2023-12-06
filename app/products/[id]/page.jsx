@@ -12,7 +12,6 @@ import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 import { CartContext } from "@/app/components/CartContext"
 import Link from "next/link"
-import Header from "@/app/components/Header"
 
 const Product = () => {
   const params = useParams()
@@ -42,8 +41,6 @@ const Product = () => {
 
   return (
     <>
-      <Header />
-
       <div>
         {loading 
           ? (

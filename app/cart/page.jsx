@@ -3,7 +3,6 @@
 import { useContext, useEffect, useState } from "react"
 import { CartContext } from "../components/CartContext"
 import axios from "axios"
-import Header from "../components/Header"
 import toast from "react-hot-toast"
 import EmptyCart from "../components/EmptyCart"
 import CartItems from "../components/CartItems"
@@ -37,7 +36,6 @@ const Cart = () => {
 
   return (
     <>
-      <Header />
       {isLoading ? (
         <p className="text-center text-2xl mt-5">Loading...</p>
       ) : cartProducts.length === 0 ? (

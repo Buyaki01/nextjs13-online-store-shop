@@ -3,7 +3,6 @@
 import axios from "axios"
 import { useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
-import Header from "../components/Header"
 import Link from "next/link"
 
 const category = () => {
@@ -67,7 +66,6 @@ const category = () => {
 
   return (
     <div>
-      <Header />
       <div className="my-5">
         {loading 
           ? (

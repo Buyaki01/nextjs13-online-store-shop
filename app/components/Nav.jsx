@@ -6,7 +6,10 @@ import { CartContext } from "./CartContext"
 
 const Nav = () => {
   const { cartProducts } = useContext(CartContext)
-  const totalQuantity = cartProducts.reduce((total, item) => total + item.quantity, 0)
+  const totalQuantity =
+    cartProducts && cartProducts.length
+      ? cartProducts.reduce((total, item) => total + item.quantity, 0)
+      : 0
 
   return (
     <nav className="flex items-center gap-1 lg:gap-4">

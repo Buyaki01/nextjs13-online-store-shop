@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link"
-import Header from "../../components/Header"
 import { CartContext } from "../../components/CartContext"
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "next/navigation"
@@ -39,7 +38,6 @@ const CheckoutSuccess = () => {
 
   return (
     <>
-      <Header/>
       <div className='min-h-[400px] flex flex-col items-center justify-center'>
         {loading 
           ? (<p>Loading...</p>) 

@@ -1,6 +1,5 @@
 'use client'
 
-import Header from "@/app/components/Header"
 import axios from "axios"
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
@@ -41,7 +40,6 @@ const OrderDetailsPage = () => {
 
   return (
     <div>
-      <Header />
       <div className="my-3">
         {loading 
           ? (<p className="text-center text-2xl">Loading...</p>) 

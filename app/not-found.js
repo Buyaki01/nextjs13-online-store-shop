@@ -1,12 +1,10 @@
 'use client'
 
 import Link from "next/link"
-import Header from "./components/Header"
 
 const NotFoundPage = () => {
   return (
     <>
-      <Header />
       <div className='min-h-[400px] flex flex-col items-center justify-center gap-y-5'>
         <h2 className="text-4xl font-bold">Page Not Found</h2>
         <p className="text-base my-2">Could not find requested resource</p>
