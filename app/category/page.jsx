@@ -178,7 +178,7 @@ const category = () => {
               </div>
             ) 
             : (
-              <p className="text-center mt-5 text-xl text-gray-600">
+              <p className="text-center mt-8 text-xl text-gray-600">
                 No available products in the <span className="font-bold text-black">{searchQuery}</span> category
               </p>
             )

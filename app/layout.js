@@ -13,15 +13,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body> 
+      <body className="min-h-screen"> 
         <Toaster position="top-left" />
         <AuthProvider>
           <CartContextProvider>
-            <Header />
-            {children}
+            <div className="flex flex-col min-h-full">
+              <Header />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </CartContextProvider>
         </AuthProvider>
-        <Footer />
       </body>
     </html>
   )
