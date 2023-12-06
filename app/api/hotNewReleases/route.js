@@ -10,6 +10,6 @@ export async function GET() {
 
     return NextResponse.json(hotNewReleaseProducts)
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch hot new releases" }, 500)
+    return NextResponse.json({ error: "Failed to fetch hot new releases" }, { status: 500 })
   }
 }

@@ -10,12 +10,14 @@ export async function GET() {
     
     if (!products || products.length === 0) {
       console.error("No products found")
-      return NextResponse.json({ error: "No products found" }, 404)
+      return NextResponse.json({ error: "No products found" }, { status: 404 })
     }
+
+    console.log("These are the products from GET server side: ", products)
 
     return NextResponse.json(products)
   } catch (error) {
     console.error("Error fetching products:", error)
-    return NextResponse.json({ error: "Failed to fetch products" }, 500)
+    return NextResponse.json({ message: "Failed to fetch products" }, { status: 500 })
   }
 }

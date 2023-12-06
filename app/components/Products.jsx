@@ -13,6 +13,9 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios('/api/products')
+        if(response.status === 500){
+          toast.error("Internal server error. Please try again later.")
+        }
         setProducts(response.data)
         setLoading(false)
       } catch (error) {
