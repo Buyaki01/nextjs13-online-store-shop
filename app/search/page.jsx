@@ -83,7 +83,7 @@ const searchFunctionality = () => {
           <>
             { searchedProduct.length > 0 
               ? (
-                <div className="grid grid-cols-4 gap-x-6">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6">
                   <div className="col-1 border h-fit px-2 pb-5 mb-5 border-gray-300">
                     <h2 className="text-3xl font-bold mb-3 pt-2">Filter</h2>
                     <div>
@@ -151,7 +151,7 @@ const searchFunctionality = () => {
                     </div>
                   </div>
 
-                  <div className="col-span-3 border p-2 border-gray-300">
+                  <div className="col-1 lg:col-span-3 border p-2 border-gray-300">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
                       {filteredProducts.map((product) => (
                         <div className="col-1">
