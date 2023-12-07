@@ -6,7 +6,7 @@ import { AiOutlineGoogle } from "react-icons/ai"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
-import Input from "../components/inputs/input"
+import Input from "../components/Input"
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: {errors}} = useForm()
