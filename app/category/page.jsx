@@ -92,7 +92,7 @@ const Category = () => {
                       <h3 className="text-xl mb-2 font-bold">Brands</h3>
                       <div className="mb-2">
                         {[...uniqueBrands].map((brandName) => (
-                          <div className="flex gap-2 mb-2 items-center">
+                          <div key={brandName} className="flex gap-2 mb-2 items-center">
                             <div className="items-center">
                               <input
                                 type="checkbox"
@@ -154,7 +154,7 @@ const Category = () => {
                 <div className="col-1 lg:col-span-3 border p-2 border-gray-300">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
                     {filteredProducts.map((product) => (
-                      <div className="col-1">
+                      <div key={product._id} className="col-1">
                         <Link
                           href={`/products/${product._id}`}
                           className="hover:text-gray-500"

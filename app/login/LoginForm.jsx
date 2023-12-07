@@ -16,7 +16,7 @@ const LoginForm = () => {
     try {
       const { email, password } = data
       
-      const response = await signIn('credentials', {
+      const response = await signIn("credentials", {
         email,
         password,
         redirect: false,
@@ -29,7 +29,7 @@ const LoginForm = () => {
 
       toast.success("Login successful")
       
-      router.push('/')
+      router.push("/")
 
     } catch (error) {
       console.log(error)
@@ -42,7 +42,7 @@ const LoginForm = () => {
 
       <button
         className="bg-[#c0c0c0] hover:bg-[#a0a0a0] flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
-        onClick={() => signIn('google')}
+        onClick={() => signIn("google")}
       > 
         <AiOutlineGoogle />
         Continue with Google
@@ -72,7 +72,7 @@ const LoginForm = () => {
       </button>
 
       <p className="text-sm">
-        Don't have an account? <Link className="underline" href={'/register'}>Sign Up</Link>
+        Have an account? <Link className="underline" href={"/register"}>Sign Up</Link>
       </p>
     </>
   )
