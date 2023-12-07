@@ -1,9 +1,10 @@
 'use client'
 
 import axios from "axios"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import Link from "next/link"
+import toast from "react-hot-toast"
 
 const category = () => {
   
@@ -16,10 +17,13 @@ const category = () => {
   const [selectedBrands, setSelectedBrands] = useState([])
   const [minPrice, setMinPrice] = useState('')
   const [maxPrice, setMaxPrice] = useState('')
+  const [originalResults, setOriginalResults] = useState([])
+  const router = useRouter()
 
   useEffect(() => {
     const fetchSelectedCategoryResults = async () => {
       const response = await axios.get(`/api/products/category?query=${searchQuery}`)
+      setOriginalResults(response.data.filteredCategoryProducts)
       setCategoryProducts(response.data.filteredCategoryProducts)
       setLoading(false)
     }
@@ -53,7 +57,8 @@ const category = () => {
 
   const handleFilterByPrice = (e) => {
     e.preventDefault()
-    const filteredByPrice = categoryProducts.filter((product) => {
+
+    const filteredByPrice = originalResults.filter((product) => {
       const productPrice = parseFloat(product.productPrice)
       return (
         (!minPrice || productPrice >= parseFloat(minPrice)) &&
@@ -61,7 +66,12 @@ const category = () => {
       )
     })
 
-    setCategoryProducts(filteredByPrice)
+    if (filteredByPrice.length === 0) {
+      toast.error(`No ${searchQuery} available with the price between ${minPrice} and ${maxPrice}. How about you try another price?`)
+      router.push(`/category?query=${searchQuery}`)
+    } else {
+      setSearchedProduct(filteredByPrice)
+    }
   }
 
   return (
@@ -74,7 +84,7 @@ const category = () => {
           : (
             categoryProducts.length > 0 
             ? (
-              <div className="grid grid-cols-4 gap-x-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6">
                 <div className="col-1 border h-fit px-2 pb-5 mb-5 border-gray-300">
                   <h2 className="text-3xl font-bold mb-3 pt-2">Filter</h2>
                   <div>
@@ -141,7 +151,7 @@ const category = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-span-3 border p-2 border-gray-300">
+                <div className="col-1 lg:col-span-3 border p-2 border-gray-300">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-3">
                     {filteredProducts.map((product) => (
                       <div className="col-1">
@@ -178,9 +188,20 @@ const category = () => {
               </div>
             ) 
             : (
-              <p className="text-center mt-8 text-xl text-gray-600">
-                No available products in the <span className="font-bold text-black">{searchQuery}</span> category
-              </p>
+              <>
+                <p className="text-center mt-8 text-xl text-gray-600">
+                  No available products in the <span className="font-bold text-black">{searchQuery}</span> category
+                </p>
+                <Link 
+                  href={"/"}
+                  className="flex gap-1 items-center justify-center mt-3 text-secondary text-xl"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                  </svg>
+                  Continue Shopping
+                </Link>
+              </>
             )
           )
         }
