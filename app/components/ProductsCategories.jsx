@@ -1,6 +1,10 @@
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import Link from "next/link"
 
 const ProductsCategories = () => {
   const [categories, setCategories] = useState([])
@@ -20,29 +24,59 @@ const ProductsCategories = () => {
     router.push(`/category?query=${category}`)
   }
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024, // Medium devices (tablets)
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 768, // Small devices (phones)
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  }
+
   return (
-    <div className="mt-10">
+    <div className="px-12 py-12 shadow-2xl border-t-2">
       {loading 
           ? (
-              <div className="text-center mt-10">
+              <div className="text-center mt-8">
                 <p className="text-xl text-bold">Loading...</p>
               </div>
             ) 
           : (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-              {categories.length > 0 &&
-                categories.map((category) => (
-                  <li
-                    key={category._id}
-                    className="flex justify-center items-center border border-gray-400 rounded-md h-32 overflow-hidden bg-white hover:shadow-lg transition duration-300"
-                    onClick={() => filterByCategory(category.name)}
-                  >
-                    <div className="p-4">
-                      <h3 className="text-lg font-semibold mb-2">{category.name}</h3>
-                    </div>
-                  </li>
-                ))}
-            </ul>
+            <Slider {...settings} className="pt-3 pb-8">
+              {categories.length > 0 && categories.map((category) => (
+                <div
+                  key={category._id}
+                  className="p-2"
+                  onClick={() => filterByCategory(category.name)}
+                >
+                  <div className="flex justify-center border border-gray-400 rounded-md h-32">
+                    <img
+                      src={category.categoryImage}
+                      alt={category.name}
+                      className="w-32 h-32"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <h3 className="text-lg font-semibold">{category.name}</h3>
+                  </div>
+                </div>
+              ))}
+            </Slider>
           )}
     </div>
   )

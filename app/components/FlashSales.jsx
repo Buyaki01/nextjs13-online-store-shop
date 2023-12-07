@@ -49,7 +49,7 @@ const FlashSales = () => {
         <h2 className="text-3xl font-semibold mb-3">Flash Sales</h2>
       </div>
 
-      <div className="flashSalesContainer px-12 py-5">
+      <div className="bg-secondary px-12 py-5">
         {loading 
           ? (
               <p className="loadingMessage text-white">Loading...</p>

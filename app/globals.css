@@ -107,10 +107,6 @@ h4{
   @apply border border-slate-200 rounded-lg;
 }
 
-.flashSalesContainer{
-  background-color: rgb(146, 212, 59);
-}
-
 .slick-slide > div {
   margin: 0 15px;
   display: flex;
@@ -122,10 +118,19 @@ h4{
   height: 100%;
 }
 
+.swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .swiper-slide {
   text-align: center;
   font-size: 18px;
   background: #fff;
+  background-size: cover;
+  background-position: center;
 
   /* Center slide text vertically */
   display: flex;
@@ -138,18 +143,6 @@ h4{
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.swiper {
-  width: 100%;
-  height: 300px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.swiper-slide {
-  background-size: cover;
-  background-position: center;
 }
 
 .mySwiper2 {
@@ -173,11 +166,12 @@ h4{
   opacity: 1;
 }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.slick-prev:before {
+  color: #a00a7c !important;
+}
+
+.slick-next:before {
+  color: #a00a7c !important;
 }
 
 .priceAddToCartButton{
