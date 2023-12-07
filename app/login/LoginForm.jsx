@@ -1,12 +1,12 @@
 'use client'
 
-import Input from "../components/inputs/Input"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
+import Input from "../components/inputs/Input"
 
 const LoginForm = () => {
   const { register, handleSubmit, formState: {errors}} = useForm()
