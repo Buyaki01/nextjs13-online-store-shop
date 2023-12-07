@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import Input from "../components/inputs/Input"
+import Input from "../components/inputs/input"
 import { useForm } from "react-hook-form"
 import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
