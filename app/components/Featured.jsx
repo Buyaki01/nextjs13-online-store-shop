@@ -32,7 +32,7 @@ const Featured = () => {
   }
 
   return (
-    <div className="bg-secondary pt-5 px-12 mb-3">
+    <div className="bg-secondary pt-5 px-12 pb-10 mb-3">
       {loading 
         ? ( <p className="loadingMessage text-white">Loading...</p> ) 
         : products.length > 0 

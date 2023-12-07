@@ -166,11 +166,11 @@ h4{
   opacity: 1;
 }
 
-.slick-prev:before {
+.productCategories .slick-prev:before {
   color: #a00a7c !important;
 }
 
-.slick-next:before {
+.productCategories .slick-next:before {
   color: #a00a7c !important;
 }
 
