@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 
-const searchFunctionality = () => {
+const SearchFunctionality = () => {
   const searchParams = useSearchParams()
  
   const searchQuery = searchParams.get('query')
@@ -211,4 +211,4 @@ const searchFunctionality = () => {
   )
 }
 
-export default searchFunctionality
+export default SearchFunctionality

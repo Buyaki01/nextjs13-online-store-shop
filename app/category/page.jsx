@@ -6,7 +6,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import toast from "react-hot-toast"
 
-const category = () => {
+const Category = () => {
   
   const searchParams = useSearchParams()
  
@@ -210,4 +210,4 @@ const category = () => {
   )
 }
 
-export default category
+export default Category
