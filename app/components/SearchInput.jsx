@@ -1,8 +1,22 @@
 'use client'
 
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+
 const SearchInput = () => {
+  const [query, setQuery] = useState('')
+  const router = useRouter()
+
+  const searchProduct = async (e) => {
+    e.preventDefault()
+    router.push(`/search?query=${query}`)
+  }
+
   return (
-    <div className="relative inline-flex items-center gap-2 sm:gap-0 mb-2 lg:mb-0">
+    <form
+      onSubmit={searchProduct}
+      className="relative inline-flex items-center gap-2 sm:gap-0 mb-2 lg:mb-0"
+    >
       <svg 
         xmlns="http://www.w3.org/2000/svg" 
         fill="none" 
@@ -18,16 +32,19 @@ const SearchInput = () => {
         <input 
           type="text" 
           placeholder="Search products and categories"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           className="px-4 py-2 pl-10 border-2 border-gray-300 rounded mr-2 w-full mb-0"
         />
       </div>
           
       <button
+        type="submit"
         className="bg-primary text-white px-4 py-2"
       >
         Search
       </button>
-    </div>
+    </form>
   )
 }
 

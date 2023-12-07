@@ -9,7 +9,7 @@ export async function GET(request) {
 
     const products = await Product.find().populate('selectedCategory').populate('brand')
     const { searchParams } = new URL(request.url)
-    const query = searchParams.get('query')
+    let query = searchParams.get('query')
 
     // Sanitize and validate the query parameter
     query = validator.escape(query)
@@ -20,8 +20,6 @@ export async function GET(request) {
         product.selectedCategory.name.toLowerCase().includes(query.toLowerCase())
       )
     })
-
-    console.log("This is the filteredSearchProducts: ", filteredSearchProducts)
 
     return NextResponse.json({ filteredSearchProducts })
   } catch (error) {
