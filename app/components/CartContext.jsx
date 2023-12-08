@@ -34,7 +34,7 @@ const CartContextProvider = ({ children }) => {
     }
   }
 
-  function decrementItemInCart(productId) {
+  const decrementItemInCart = (productId) => {
     const existingProductIndex = cartProducts.findIndex((item) => item.productId === productId);
   
     if (existingProductIndex !== -1) {

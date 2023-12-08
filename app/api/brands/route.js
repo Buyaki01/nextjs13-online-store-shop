@@ -2,7 +2,7 @@ import connectMongoDB from "@/lib/mongoose"
 import Brand from "@/models/brand"
 import { NextResponse } from "next/server"
 
-export async function GET() {
+export const GET = async () => {
   await connectMongoDB()
   
   const brands = await Brand.find().populate('parentCategory')

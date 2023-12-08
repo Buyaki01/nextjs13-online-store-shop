@@ -3,7 +3,7 @@ import Order from "@/models/order"
 import User from "@/models/user"
 import { NextResponse } from "next/server"
 
-export async function PUT(request) {
+export const PUT = async (request) => {
   const {
     email,
     orderId,

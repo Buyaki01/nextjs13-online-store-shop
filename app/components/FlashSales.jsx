@@ -12,7 +12,7 @@ const FlashSales = () => {
   useEffect(() => {
     const fetchFlashSalesProducts = async () => {
       const response = await axios('/api/products')
-      setFlashSalesProducts(response.data)
+      setFlashSalesProducts(response.data.products)
       setLoading(false)
     }
 

@@ -10,7 +10,7 @@ export const metadata = {
   description: 'Created by Ritta Sweta',
 }
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body className="min-h-screen"> 
@@ -30,3 +30,5 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
+
+export default RootLayout

@@ -2,7 +2,7 @@ import connectMongoDB from "@/lib/mongoose"
 import Category from "@/models/category"
 import { NextResponse } from "next/server"
 
-export async function GET() {
+export const GET = async () => {
   await connectMongoDB()
   
   const categories = await Category.find()

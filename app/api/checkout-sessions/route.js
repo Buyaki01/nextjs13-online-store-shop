@@ -5,7 +5,7 @@ import Product from '@/models/product'
 import User from '@/models/user'
 import Order from '@/models/order'
 
-async function fetchProductInfo(productId) {
+const fetchProductInfo = async (productId) => {
   await connectMongoDB()
 
   try {

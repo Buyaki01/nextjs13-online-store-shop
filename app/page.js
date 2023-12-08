@@ -5,7 +5,7 @@ import FlashSales from "./components/FlashSales"
 import Products from "./components/Products"
 import ProductsCategories from "./components/ProductsCategories"
 
-export default function Home() {
+const Home = () => {
   return (
     <main>
       <Featured />
@@ -15,3 +15,5 @@ export default function Home() {
     </main>
   )
 }
+
+export default Home

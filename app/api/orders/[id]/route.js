@@ -2,7 +2,7 @@ import connectMongoDB from "@/lib/mongoose"
 import Order from "@/models/order"
 import { NextResponse } from "next/server"
 
-export async function GET(request, { params }) {
+export const GET = async ({ params }) => {
   const { id } = params
   
   try {

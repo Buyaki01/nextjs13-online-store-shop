@@ -2,7 +2,7 @@ import connectMongoDB from "@/lib/mongoose"
 import Product from "@/models/product"
 import { NextResponse } from "next/server"
 
-export async function GET() {
+export const GET = async () => {
   try {
     await connectMongoDB()
 

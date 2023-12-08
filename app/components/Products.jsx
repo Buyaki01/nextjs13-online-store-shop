@@ -13,7 +13,7 @@ const Products = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios('/api/products')
-        setProducts(response.data)
+        setProducts(response.data.products)
         setLoading(false)
       } catch (error) {
         console.error("Error fetching products:", error)
