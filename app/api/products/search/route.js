@@ -4,21 +4,20 @@ import { NextResponse } from "next/server"
 import validator from "validator"
 
 export const GET = async (request) => {
+  const url = await request.url
   try {
+    let queryValue = new URLSearchParams(url.split('?')[1]).get("query")
     await connectMongoDB()
-
     const products = await Product.find().populate('selectedCategory').populate('brand')
-    const { searchParams } = new URL(request.url)
-    let query = searchParams.get('query')
 
     // Sanitize and validate the query parameter
-    query = validator.escape(query)
+    queryValue = validator.escape(queryValue)
 
     const filteredSearchProducts = products.filter((product) => {
       return (
-        product.productName.toLowerCase().includes(query.toLowerCase()) || 
-        product.selectedCategory.name.toLowerCase().includes(query.toLowerCase()) ||
-        product.brand.brandName.toLowerCase().includes(query.toLowerCase())
+        product.productName.toLowerCase().includes(queryValue.toLowerCase()) || 
+        product.selectedCategory.name.toLowerCase().includes(queryValue.toLowerCase()) ||
+        product.brand.brandName.toLowerCase().includes(queryValue.toLowerCase())
       )
     })
 

@@ -1,16 +1,18 @@
 import connectMongoDB from "@/lib/mongoose"
 import Product from "@/models/product"
 import { NextResponse } from "next/server"
+import validator from "validator"
 
 export const GET = async (request) => {
-  await connectMongoDB()
+  const url = await request.url
 
   try {
+    let queryValue = new URLSearchParams(url.split('?')[1]).get("query")
+    await connectMongoDB()
     const products = await Product.find().populate('selectedCategory').populate('brand')
-    const { searchParams } = new URL(request.url)
-    const query = searchParams.get('query')
+    queryValue = validator.escape(queryValue)
     const filteredCategoryProducts = products.filter((product) => {
-      return product.selectedCategory && product.selectedCategory.name === query
+      return product.selectedCategory && product.selectedCategory.name === queryValue
     })
 
     return NextResponse.json({ filteredCategoryProducts })
