@@ -18,6 +18,6 @@ export const GET = async (request) => {
     return NextResponse.json({ filteredCategoryProducts })
   } catch (error) {
     console.error("Error fetching and filtering products:", error)
-    return NextResponse.error({ status: 500, message: "Internal Server Error" })
+    return NextResponse.error({ message: "Internal Server Error" }, { status: 500 })
   }
 }

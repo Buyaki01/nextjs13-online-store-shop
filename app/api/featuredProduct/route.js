@@ -10,6 +10,6 @@ export const GET = async () => {
 
     return NextResponse.json(featuredProduct)
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch featured product" }, 500)
+    return NextResponse.json({ error: "Failed to fetch featured product" }, { status: 500 })
   }
 }

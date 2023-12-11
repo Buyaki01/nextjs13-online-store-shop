@@ -20,6 +20,6 @@ export const GET = async ({ params }) => {
 
     return NextResponse.json({ order })
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch order" }, 500)
+    return NextResponse.json({ error: "Failed to fetch order" }, { status: 500 })
   }
 }
