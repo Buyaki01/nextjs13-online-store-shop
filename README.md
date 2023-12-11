@@ -25,7 +25,7 @@ Welcome to the NextJs 13  Online Store Shop, an e-commerce web application desig
 This application is deployed using Vercel, providing a scalable and efficient hosting solution. Vercel makes it easy to deploy and manage Next.js applications with built-in features like automatic deployments, serverless functions, and more.
 
 ## Live Demo
-Check out our live demo [here](link-to-demo) to explore the features and functionality of the application.
+Check out our live demo [Pearls Collections Online Store Shop](https://pearls-collections-online-store-shop.vercel.app) to explore the features and functionality of the application.
 
 ## Technologies Used
 - **NextJs 13**
