@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import toast from "react-hot-toast"
+import Image from "next/image"
 
 const Category = () => {
   
@@ -160,10 +161,12 @@ const Category = () => {
                           className="hover:text-gray-500"
                         >
                           <div>
-                            <img
+                            <Image
                               src={product.uploadedImagePaths[0]}
                               alt={product.productName}
-                              className="w-40 h-40 object-cover cursor-pointer mx-auto"
+                              width={160}
+                              height={160}
+                              className="object-cover cursor-pointer mx-auto"
                             />
                           </div>
                           <div className="text-center">

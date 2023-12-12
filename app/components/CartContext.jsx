@@ -18,7 +18,7 @@ const CartContextProvider = ({ children }) => {
     if (ls && ls.getItem('cart')) {
       setCartProducts(JSON.parse(ls.getItem('cart')))
     }
-  }, [])
+  }, [ls])
 
   const addItemToCart = (productId) => {
     const existingProductIndex = cartProducts.findIndex((item) => item.productId === productId)

@@ -56,7 +56,7 @@ const ProductsCategories = () => {
               </div>
             ) 
           : (
-            <Slider {...settings} className="productCategories pt-3 pb-8">
+            <Slider {...settings} className="productCategories pt-3">
               {categories.length > 0 && categories.map((category) => (
                 <div
                   key={category._id}

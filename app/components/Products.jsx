@@ -1,6 +1,7 @@
 'use client'
 
 import axios from "axios"
+import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
@@ -39,10 +40,12 @@ const Products = () => {
             <div key={product._id} className="border p-4 rounded-lg text-center">
               <div>
                 <Link href={`/products/${product._id}`}>
-                  <img 
+                  <Image 
                     src={product.uploadedImagePaths[0]} 
                     alt={product.productName}
-                    className="w-40 h-40 cursor-pointer mx-auto"
+                    width={160}
+                    height={160}
+                    className="cursor-pointer mx-auto"
                   />
                 </Link>
               </div>

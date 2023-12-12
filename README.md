@@ -67,6 +67,17 @@ To get started with this app, follow these steps:
     ```bash 
     npm run dev
     ``` 
+7. Build the application for production:
+    ```bash
+    npm run build
+    ```
+
+8. Start the application in production mode:
+    ```bash
+    npm start
+    ```
+
+The application should now be running in production mode. Visit [http://localhost:3000](http://localhost:3000) to explore the deployed application.
 
 ## Configuration
 

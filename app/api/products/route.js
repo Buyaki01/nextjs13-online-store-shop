@@ -7,8 +7,8 @@ import { NextResponse } from "next/server"
 export const GET = async () => {
   try {
     await connectMongoDB()
-    const categories = await Category.find()
-    const brands = await Brand.find().populate('parentCategory')
+    await Category.find()
+    await Brand.find().populate('parentCategory')
     const products = await Product.find().populate('brand').populate('selectedCategory')
     
     if (!products || products.length === 0) {
@@ -16,7 +16,7 @@ export const GET = async () => {
       return NextResponse.json({ error: "No products found" }, { status: 404 })
     }
 
-    return NextResponse.json({ categories, brands, products })
+    return NextResponse.json({ products })
   } catch (error) {
     console.error("Error fetching products:", error)
     return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 })

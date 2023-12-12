@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import Image from "next/image"
 
 const FlashSales = () => {
   const [flashSalesProducts, setFlashSalesProducts] = useState([])
@@ -62,10 +63,12 @@ const FlashSales = () => {
                     <div key={product._id} className="flex flex-col justify-center items-center h-[350px] rounded-lg border border-gray-200">
                       <div className="p-2">
                         <Link href={`/products/${product._id}`}>
-                          <img 
+                          <Image
                             src={product.uploadedImagePaths[0]} 
                             alt={product.productName}
-                            className="w-48 h-48 cursor-pointer mx-auto p-2"
+                            width={192}
+                            height={192}
+                            className="cursor-pointer mx-auto p-2"
                           />
                         </Link>
                       </div>

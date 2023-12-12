@@ -8,6 +8,8 @@ export const GET = async (request) => {
   try {
     let queryValue = new URLSearchParams(url.split('?')[1]).get("query")
     await connectMongoDB()
+    await Category.find()
+    await Brand.find().populate('parentCategory')
     const products = await Product.find().populate('selectedCategory').populate('brand')
 
     // Sanitize and validate the query parameter
