@@ -1,4 +1,6 @@
 import connectMongoDB from "@/lib/mongoose"
+import Brand from "@/models/brand"
+import Category from "@/models/category"
 import Product from "@/models/product"
 import { NextResponse } from "next/server"
 import validator from "validator"
