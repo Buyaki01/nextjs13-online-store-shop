@@ -15,9 +15,9 @@ export const authOptions = {
   providers: [
     GoogleProvider({
       profile(profile) {
-        let userRole = "user"
+        let userRole = ["User"]
         if (profile && profile.email ==="rittahbuyaki@gmail.com") {
-          userRole = "admin"
+          userRole = ["Admin", "User"]
         }
 
         return {

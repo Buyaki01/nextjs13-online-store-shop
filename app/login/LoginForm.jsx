@@ -47,7 +47,7 @@ const LoginForm = () => {
 
       <button
         className="bg-[#c0c0c0] hover:bg-[#a0a0a0] flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
-        onClick={() => signIn("google")}
+        onClick={() => signIn('google')}
       > 
         <AiOutlineGoogle />
         Continue with Google
