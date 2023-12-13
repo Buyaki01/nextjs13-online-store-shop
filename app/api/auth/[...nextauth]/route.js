@@ -34,8 +34,9 @@ export const authOptions = {
       credentials: {},
 
       async authorize(credentials, req) {
+        // const { email, password, role = 'user' } = credentials
+        //console.log("This is the credentials object: ", credentials)
         const { email, password } = credentials
-
         try {
           await connectMongoDB()
           const user = await User.findOne({ email })
@@ -54,6 +55,7 @@ export const authOptions = {
 
         } catch (error) {
           console.log("Error: ", error)
+          throw error
         }
       }
     })
