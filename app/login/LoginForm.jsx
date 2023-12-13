@@ -12,6 +12,23 @@ const LoginForm = () => {
   const { register, handleSubmit, formState: {errors}} = useForm()
   const router = useRouter()
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const response = await signIn('google')
+
+      console.log("This is the response from Google client side: ", response)
+
+      if (response.status === undefined || response.status === 200) {
+        toast.success("Google Login successful")
+        router.back()
+        // router.push("/")
+      }
+    } catch (error) {
+      console.error('Error during Google login:', error)
+      toast.error('Google login failed. Please try again.')
+    }
+  }
+
   const onSubmit = async (data) => {
     try {
       const { email, password } = data
@@ -47,7 +64,7 @@ const LoginForm = () => {
 
       <button
         className="bg-[#c0c0c0] hover:bg-[#a0a0a0] flex gap-2 items-center justify-center w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
-        onClick={() => signIn('google')}
+        onClick={handleGoogleSignIn} 
       > 
         <AiOutlineGoogle />
         Continue with Google
