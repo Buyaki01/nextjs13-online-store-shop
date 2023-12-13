@@ -15,9 +15,9 @@ export const authOptions = {
   providers: [
     GoogleProvider({
       profile(profile) {
-        let userRole = "user"
+        let userRole = ["User"]
         if (profile && profile.email ==="rittahbuyaki@gmail.com") {
-          userRole = "admin"
+          userRole = ["Admin", "User"]
         }
 
         return {
@@ -34,8 +34,9 @@ export const authOptions = {
       credentials: {},
 
       async authorize(credentials, req) {
+        // const { email, password, role = 'user' } = credentials
+        //console.log("This is the credentials object: ", credentials)
         const { email, password } = credentials
-
         try {
           await connectMongoDB()
           const user = await User.findOne({ email })
@@ -54,6 +55,7 @@ export const authOptions = {
 
         } catch (error) {
           console.log("Error: ", error)
+          throw error
         }
       }
     })

@@ -7,7 +7,7 @@ const CartProductName = ({cartItem}) => {
         href={`/products/${cartItem.product._id}`}
         className="hover:underline w-full"
       >
-        <h3 className="font-bold text-xl px-1 text-center truncate">
+        <h3 className="italic text-xl px-1 text-center truncate">
           {cartItem.product.productName}
         </h3>
       </Link>

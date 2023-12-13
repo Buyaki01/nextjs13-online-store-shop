@@ -7,7 +7,7 @@ const CartProductImage = ({cartItem}) => {
         <img 
           src={cartItem.product.uploadedImagePaths[0]} 
           alt={cartItem.product.productName} 
-          className="w-full h-full object-contain"
+          className="w-24 h-24 object-contain"
         />
       </Link>
     </div>
