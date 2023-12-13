@@ -15,6 +15,10 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       const { email, password } = data
+
+      if (!email || !password) {
+        toast.error("All Fields are required!")
+      }
       
       const response = await signIn("credentials", {
         email,
@@ -22,15 +26,15 @@ const LoginForm = () => {
         redirect: false,
       })
 
-      if (response.error) {
-        toast.error("Invalid Credentials")
-        return
+      if(response.status === 200 ) {
+        toast.success("Login successful")
+        router.push("/")
       }
 
-      toast.success("Login successful")
-      
-      router.push("/")
-
+      if (response.status === 401) {
+        toast.error("Invalid Credentials! Try again!")
+        return
+      }
     } catch (error) {
       console.log(error)
     }

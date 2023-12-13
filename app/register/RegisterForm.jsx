@@ -7,10 +7,13 @@ import Link from "next/link"
 import { AiOutlineGoogle } from "react-icons/ai"
 import axios from "axios"
 import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { register, handleSubmit, formState: {errors}} = useForm()
+  const router = useRouter()
   
   const onSubmit = async (data) => {
     try {
@@ -25,8 +28,12 @@ const RegisterForm = () => {
         return
       }
 
-      await axios.post('/api/register', { name, email, password })
-      toast.success("Account created successfully")
+      const response = await axios.post('/api/register', { name, email, password })
+
+      if(response.data.user) {
+        toast.success("Account created successfully")
+        router.push('/login')
+      }
 
     } catch (error) {
       console.log("Error during registration: ", error)
@@ -73,9 +80,12 @@ const RegisterForm = () => {
 
       <button
         className="w-full outline text-white text-lg px-4 py-2 rounded-lg focus:outline-none"
-        onClick={handleSubmit(onSubmit)}
+        onClick={async () => {
+          setIsLoading(true)
+          await handleSubmit(onSubmit)()
+        }}
       >
-        Sign Up
+        {isLoading ? 'Processing...' : 'Sign Up'}
       </button>
 
       <p className="text-sm">
