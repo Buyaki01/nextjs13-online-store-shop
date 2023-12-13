@@ -28,7 +28,8 @@ const LoginForm = () => {
 
       if(response.status === 200 ) {
         toast.success("Login successful")
-        router.push("/")
+        router.back()
+        // router.push("/")
       }
 
       if (response.status === 401) {

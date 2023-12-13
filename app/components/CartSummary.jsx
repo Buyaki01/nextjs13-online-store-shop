@@ -1,6 +1,8 @@
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
 const CartSummary = ({fetchCartProductInfo}) => {
+  const { data: session } = useSession()
   return (
     <>
       {fetchCartProductInfo.length > 0 && 
@@ -13,7 +15,7 @@ const CartSummary = ({fetchCartProductInfo}) => {
 
           <div className="text-center">
             <button className="text-white text-lg py-2 px-4 rounded-md focus:outline-none">
-              <Link href={'/checkout-address'}>
+              <Link href={!session ? "/login" : "/checkout-address"}>
                 Checkout
               </Link>
             </button>
